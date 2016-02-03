@@ -1,6 +1,4 @@
-// app/models/bear.js
-
-var mongoose     = require('mongoose');
+var mongoose     = require('../admin/mongoConnect.js');
 var Schema       = mongoose.Schema;
 
 var UserSchema   = new Schema({
