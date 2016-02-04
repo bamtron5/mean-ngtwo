@@ -1,4 +1,4 @@
-System.register(['angular2/platform/browser', './app.component'], function(exports_1) {
+System.register(['angular2/platform/browser', './app.component', 'rxjs/Rx'], function(exports_1) {
     var browser_1, app_component_1;
     return {
         setters:[
@@ -7,7 +7,8 @@ System.register(['angular2/platform/browser', './app.component'], function(expor
             },
             function (app_component_1_1) {
                 app_component_1 = app_component_1_1;
-            }],
+            },
+            function (_1) {}],
         execute: function() {
             browser_1.bootstrap(app_component_1.AppComponent);
         }

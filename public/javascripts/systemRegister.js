@@ -1,5 +1,5 @@
 System.config({
-  packages: {        
+  packages: {
     app: {
       format: 'register',
       defaultExtension: 'js'
