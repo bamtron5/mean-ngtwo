@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node_modules/typescript/bin/tsc && node ./bin/www"
+    "start": "node_modules/typescript/bin/tsc -outDir appBuilt && node ./bin/www"
   },
   "dependencies": {
     "angular2": "^2.0.0-beta.2",

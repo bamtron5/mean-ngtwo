@@ -1,10 +1,10 @@
 System.config({
   packages: {
-    app: {
+    appBuilt: {
       format: 'register',
       defaultExtension: 'js'
     }
   }
 });
-System.import('app/main')
+System.import('appBuilt/main')
       .then(null, console.error.bind(console));
