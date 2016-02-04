@@ -30,7 +30,6 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                 userService.prototype.getUsers = function () {
                     return this.http.get('/api/users')
                         .map(function (res) { return res.json(); })
-                        .do(function (data) { return console.log(data); })
                         .catch(this.handleError);
                 };
                 userService.prototype.handleError = function (error) {
