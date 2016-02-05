@@ -23,13 +23,8 @@ export class AppComponent implements OnInit{
 	constructor (private _userService: userService) {}
 	users: Array<Object>;
 	errorMessage: String;
-	data: String;
 
 	ngOnInit() { this.getUsers(); }
-
-	postUser(data){
-		console.log(data);
-	}
 
 	getUsers() {
 		this._userService.getUsers().subscribe(

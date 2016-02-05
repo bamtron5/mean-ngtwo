@@ -27,9 +27,6 @@ System.register(['angular2/core', './service/user.service', 'angular2/http'], fu
                     this._userService = _userService;
                 }
                 AppComponent.prototype.ngOnInit = function () { this.getUsers(); };
-                AppComponent.prototype.postUser = function (data) {
-                    console.log(data);
-                };
                 AppComponent.prototype.getUsers = function () {
                     var _this = this;
                     this._userService.getUsers().subscribe(function (users) { return _this.users = users; }, function (error) { return _this.errorMessage = error; });

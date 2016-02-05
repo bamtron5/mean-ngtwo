@@ -15,11 +15,14 @@ router.route('/')
             res.json(users);
         });
     })
-    .put(function(req, res) {
-        User.post('save', function(doc){
+    .post(function(req, res) {
+        var newUser = new User();
+        newUser.name = req.body.name;
+        newUser.save(function(err, user){
             if (err)
                 res.send(err);
-            res.json(201, doc)
+            res.json(user);
+            res.end();
         });
     });
 
@@ -27,7 +30,7 @@ router.route('/:id')
 
     // get the user with that id (accessed at GET http://localhost:8080/api/users/:user_id)
     .get(function(req, res) {
-      User.findById(req.params.id, function(err, users) {
+        User.findById(req.params.id, function(err, users) {
             if (err)
                 res.send(err);
             res.json(users);
@@ -37,11 +40,21 @@ router.route('/:id')
 
     // update the user with this id (accessed at PUT http://localhost:8080/api/users/:user_id)
     .put(function(req, res) {
-        User.post('save', function(doc){
-            if (err)
+        User.findById(req.params.id, function(err, oldUser) {
+            if (err){
                 res.send(err);
-            res.json(201, doc)
-        });
+            }
+
+            oldUser.name = req.query.name;  //or body.name  header issues
+
+            oldUser.save(function(err, newUser){
+                if(!err){
+                    res.json(newUser);
+                } else{
+                    res.send(err);
+                }
+            });
+        })
     });
 
 module.exports = router;

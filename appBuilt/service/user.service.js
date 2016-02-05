@@ -26,11 +26,22 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                 function userService(http) {
                     this.http = http;
                     this._usersUrl = 'api/users';
+                    this.fetch = new XMLHttpRequest();
                 }
                 userService.prototype.getUsers = function () {
-                    return this.http.get('/api/users')
+                    return this.http.get(this._usersUrl)
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
+                };
+                userService.prototype.postUser = function (user) {
+                    var params = "name=" + user.name;
+                    this.fetch.open("POST", this._usersUrl, true);
+                    this.fetch.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    this.fetch.setRequestHeader("Connection", "close");
+                    this.fetch.send(params);
+                    // return this.http.post('/api/users/', JSON.stringify(id))
+                    // .map(res => res.json())
+                    // .catch(this.handleError);
                 };
                 userService.prototype.handleError = function (error) {
                     // in a real world app, we may send the server to some remote logging infrastructure
