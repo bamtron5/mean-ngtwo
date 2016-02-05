@@ -27,6 +27,9 @@ System.register(['angular2/core', './service/user.service', 'angular2/http'], fu
                     this._userService = _userService;
                 }
                 AppComponent.prototype.ngOnInit = function () { this.getUsers(); };
+                AppComponent.prototype.postUser = function (data) {
+                    console.log(data);
+                };
                 AppComponent.prototype.getUsers = function () {
                     var _this = this;
                     this._userService.getUsers().subscribe(function (users) { return _this.users = users; }, function (error) { return _this.errorMessage = error; });
@@ -34,10 +37,10 @@ System.register(['angular2/core', './service/user.service', 'angular2/http'], fu
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'user',
-                        template: "\n    \t<ul>\n\t\t    <li *ngFor=\"#user of users\">\n\t\t      {{ user.name }}\n\t\t    </li>\n\t    </ul>\n    ",
+                        template: "\n\t<ul>\n\t    <li *ngFor=\"#user of users\">\n\t      {{ user.name }}\n\t    </li>\n    </ul>\n\t",
                         providers: [
                             http_1.HTTP_PROVIDERS,
-                            user_service_1.userService,
+                            user_service_1.userService
                         ]
                     }), 
                     __metadata('design:paramtypes', [user_service_1.userService])

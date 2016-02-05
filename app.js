@@ -14,10 +14,6 @@ if(env === 'development'){
   var seed = require('./seeds/index.js');
 }
 
-//((what mongo models are available))
-console.log('Mongo collections:');
-console.log(Object.keys(db.connections[0].collections));
-
 //((pull in your apis))
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -32,6 +28,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//static paths
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/modules', express.static(__dirname + '/node_modules/'));
 app.use('/appBuilt', express.static(__dirname + '/appBuilt/'));
@@ -49,9 +47,12 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+//Server output
+//((what mongo models are available))
+console.log('Mongo collections:');
+console.log(Object.keys(db.connections[0].collections));
 
 // error handlers
-
 // development error handler
 // will print stacktrace
 if (env === 'development') {

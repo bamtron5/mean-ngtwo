@@ -9,16 +9,18 @@ router.route('/')
 
     // get the user with that id (accessed at GET http://localhost:8080/api/users/:user_id)
     .get(function(req, res) {
-      User.find(function(err, users) {
+        User.find(function(err, users) {
             if (err)
                 res.send(err);
             res.json(users);
         });
     })
-
-    // update the user with this id (accessed at PUT http://localhost:8080/api/users/:user_id)
     .put(function(req, res) {
-        res.send('put send ' + req.params.id);
+        User.post('save', function(doc){
+            if (err)
+                res.send(err);
+            res.json(201, doc)
+        });
     });
 
 router.route('/:id')
@@ -35,7 +37,11 @@ router.route('/:id')
 
     // update the user with this id (accessed at PUT http://localhost:8080/api/users/:user_id)
     .put(function(req, res) {
-        res.send('put send id ' + req.params.id);
+        User.post('save', function(doc){
+            if (err)
+                res.send(err);
+            res.json(201, doc)
+        });
     });
 
 module.exports = router;
