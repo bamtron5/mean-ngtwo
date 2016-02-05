@@ -1,5 +1,5 @@
-System.register(['angular2/platform/browser', './app.component', './hero-form.component', 'rxjs/Rx'], function(exports_1) {
-    var browser_1, app_component_1, hero_form_component_1;
+System.register(['angular2/platform/browser', './app.component', './user.form.component', 'rxjs/Rx'], function(exports_1) {
+    var browser_1, app_component_1, user_form_component_1;
     return {
         setters:[
             function (browser_1_1) {
@@ -8,13 +8,14 @@ System.register(['angular2/platform/browser', './app.component', './hero-form.co
             function (app_component_1_1) {
                 app_component_1 = app_component_1_1;
             },
-            function (hero_form_component_1_1) {
-                hero_form_component_1 = hero_form_component_1_1;
+            function (user_form_component_1_1) {
+                user_form_component_1 = user_form_component_1_1;
             },
             function (_1) {}],
         execute: function() {
             browser_1.bootstrap(app_component_1.AppComponent);
-            browser_1.bootstrap(hero_form_component_1.HeroFormComponent);
+            // bootstrap(HeroFormComponent);
+            browser_1.bootstrap(user_form_component_1.UserFormComponent);
         }
     }
 });

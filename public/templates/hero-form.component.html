@@ -1,5 +1,5 @@
 <div class="container">
-  <div  [hidden]="submitted">
+  <div [hidden]="submitted">
     <h1>Hero Form</h1>
     <!-- the form -->
     <form *ngIf="active" (ngSubmit)="onSubmit()" #heroForm="ngForm">
@@ -34,7 +34,7 @@
 
       <button type="submit" class="btn btn-default" [disabled]="!heroForm.form.valid">Submit</button>
       <button type="button" class="btn btn-default" (click)="newHero()">New Hero</button>
-      
+
     </form>
   </div>
   <!-- the result -->

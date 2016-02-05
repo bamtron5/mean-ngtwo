@@ -4,8 +4,7 @@ System.register([], function(exports_1) {
         setters:[],
         execute: function() {
             User = (function () {
-                function User(id, name) {
-                    this.id = id;
+                function User(name) {
                     this.name = name;
                 }
                 return User;
