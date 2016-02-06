@@ -26,7 +26,7 @@ System.register(['angular2/core', './service/user.service', 'angular2/http'], fu
                 function UserListComponent(_userService) {
                     var _this = this;
                     this._userService = _userService;
-                    this._userService.users$.subscribe(function (updatedUsers) { _this.users = updatedUsers; }, function (updatedUsers) { console.log(updatedUsers); });
+                    this._userService.users$.subscribe(function (updatedUsers) { _this.users = updatedUsers; });
                 }
                 UserListComponent.prototype.ngOnInit = function () {
                     this._userService.getUsers();

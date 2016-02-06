@@ -20,7 +20,7 @@ export class userService {
   private _usersUrl = 'api/users/';
 
   getUsers() {
-     return this.http.get(this._usersUrl)
+     this.http.get(this._usersUrl)
       .map(res => res.json())
       .subscribe(data => {
         this._dataStore.users = data;
@@ -30,7 +30,7 @@ export class userService {
 
   postUser(user) {
     var query = "?name=" + user.name;
-    return this.http.post(this._usersUrl + query, JSON.stringify(user))
+    this.http.post(this._usersUrl + query, JSON.stringify(user))
       .map(res => res.json())
       .subscribe(
         data => {

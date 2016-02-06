@@ -27,15 +27,19 @@ System.register(['angular2/core', './service/models/user', './service/user.servi
         execute: function() {
             UserFormComponent = (function () {
                 function UserFormComponent(_userService) {
+                    var _this = this;
                     this._userService = _userService;
                     this.model = new user_1.User("");
                     this.submitted = false;
                     this.active = true;
-                    this._userService.users$.subscribe();
+                    this._userService.users$.subscribe(function (updatedUsers) { _this.users = updatedUsers; });
                 }
                 UserFormComponent.prototype.onSubmit = function () {
                     this.submitted = true;
                     this._userService.postUser(this.model);
+                };
+                UserFormComponent.prototype.ngOnInit = function () {
+                    this._userService.getUsers();
                 };
                 UserFormComponent.prototype.newUser = function () {
                     var _this = this;
