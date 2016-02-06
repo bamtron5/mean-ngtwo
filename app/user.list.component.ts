@@ -4,13 +4,13 @@ import {User} from './service/models/user'
 import {UserFormComponent} from './user.form.component'
 
 @Component({
-    selector: 'user-list',
-    template: `
+	selector: 'user-list',
+	template: `
 	<ul>
-	    <li *ngFor="#user of users">
-	      {{ user.name }}
-	    </li>
-    </ul>
+		<li *ngFor="#user of users">
+		{{ user.name }} <button name="{{ user._id }}">Edit</button>
+		</li>
+	</ul>
 	`
 })
 
@@ -20,7 +20,7 @@ export class UserListComponent{
 	}
 
 	ngOnInit() {
-    	this._userService.getUsers();
+		this._userService.getUsers();
 	}
 
 	users: Array<User>;

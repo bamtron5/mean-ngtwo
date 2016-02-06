@@ -12,8 +12,11 @@ import {UserListComponent} from './user.list.component'
 })
 
 export class UserFormComponent {
-  constructor (public _userService: userService) {}
+  constructor (public _userService: userService) {
+    this._userService.users$.subscribe(updatedUsers => { this.users = updatedUsers });
+  }
 
+  users: Array<User>;
   model = new User("");
 
   submitted = false;
@@ -21,6 +24,7 @@ export class UserFormComponent {
   onSubmit() { 
     this.submitted = true;
     this._userService.postUser(this.model);
+    this.model = this.users[this.users.length - 1];
   }
 
   active = true;
