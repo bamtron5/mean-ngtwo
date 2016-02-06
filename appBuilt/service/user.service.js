@@ -30,6 +30,8 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                     this._usersUrl = 'api/users/';
                     this.users$ = new Observable_1.Observable(function (observer) { return _this._usersObserver = observer; }).share();
                     this.user$ = new Observable_1.Observable(function (observer) { return _this._userObserver = observer; }).share();
+                    this.editForm$ = new Observable_1.Observable(function (observer) { return _this._editObserver = observer; }).share();
+                    this.submitted$ = new Observable_1.Observable(function (observer) { return _this._submittedObserver = observer; }).share();
                     this._dataStore = { users: [] };
                 }
                 userService.prototype.getUsers = function () {
@@ -41,15 +43,34 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                         _this._usersObserver.next(_this._dataStore.users);
                     }, function (error) { return _this.handleError(error); });
                 };
+                userService.prototype.getUser = function (user) {
+                    var _this = this;
+                    var query = user._id;
+                    this.http.get(this._usersUrl + query)
+                        .map(function (res) { return res.json(); })
+                        .subscribe(function (data) {
+                        _this._userObserver.next(data);
+                    }, function (error) { return _this.handleError(error); });
+                };
                 userService.prototype.postUser = function (user) {
                     var _this = this;
                     var query = "?name=" + user.name;
                     this.http.post(this._usersUrl + query, JSON.stringify(user))
                         .map(function (res) { return res.json(); })
                         .subscribe(function (data) {
-                        _this._dataStore.users.push(data);
+                        _this._dataStore.users.unshift(data);
                         _this._userObserver.next(data);
                         _this._usersObserver.next(_this._dataStore.users);
+                    }, function (error) { return _this.handleError(error); });
+                };
+                userService.prototype.editUser = function (user) {
+                    var _this = this;
+                    var query = user._id + "?name=" + user.name;
+                    this.http.put(this._usersUrl + query, JSON.stringify(user))
+                        .map(function (res) { return res.json(); })
+                        .subscribe(function (data) {
+                        _this._userObserver.next(data);
+                        _this.getUsers();
                     }, function (error) { return _this.handleError(error); });
                 };
                 userService.prototype.handleError = function (error) {

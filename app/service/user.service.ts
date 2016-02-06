@@ -16,10 +16,18 @@ export class userService {
   user$: Observable<User>;
   _userObserver: any;
 
+  editForm$: Observable<Boolean>;
+  _editObserver: any;
+
+  submitted$: Observable<Boolean>;
+  _submittedObserver: any;
+
 
   constructor(private http: Http) { 
     this.users$ = new Observable(observer => this._usersObserver = observer).share();
     this.user$ = new Observable(observer => this._userObserver = observer).share();
+    this.editForm$ = new Observable(observer => this._editObserver = observer).share();
+    this.submitted$ = new Observable(observer => this._submittedObserver = observer).share();
     this._dataStore = { users: [] };
   }
 
@@ -34,15 +42,36 @@ export class userService {
       }, error => this.handleError(error));
   }
 
+  getUser(user){
+      var query = user._id;
+      this.http.get(this._usersUrl + query)
+        .map(res => res.json())
+        .subscribe(data => {
+          this._userObserver.next(data);
+        }, error => this.handleError(error));
+  }
+
   postUser(user) {
     var query = "?name=" + user.name;
     this.http.post(this._usersUrl + query, JSON.stringify(user))
       .map(res => res.json())
       .subscribe(
         data => {
-          this._dataStore.users.push(data);
+          this._dataStore.users.unshift(data);
           this._userObserver.next(data);
           this._usersObserver.next(this._dataStore.users);
+        }, error => this.handleError(error)
+      );
+  }
+
+  editUser(user){
+    var query = user._id + "?name=" + user.name;
+    this.http.put(this._usersUrl + query, JSON.stringify(user))
+      .map(res => res.json())
+      .subscribe(
+        data => {
+          this._userObserver.next(data);
+          this.getUsers();
         }, error => this.handleError(error)
       );
   }

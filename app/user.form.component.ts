@@ -13,24 +13,44 @@ import {UserListComponent} from './user.list.component'
 export class UserFormComponent {
   constructor (public _userService: userService) {
     this._userService.user$.subscribe(updatedUser => { this.model = updatedUser });
+    this._userService.editForm$.subscribe(updatedEdit => { this.editForm = updatedEdit });
+    this._userService.submitted$.subscribe(updatedSubmission => { this.submitted = updatedSubmission });
   }
 
   model = new User("");
-  submitted = false;
+  submitted: Boolean;
   active = true;
+  editForm: Boolean;
+
+  ngOnInit(){
+    this._userService._submittedObserver.next(false);
+  }
 
   onSubmit() { 
-    return Promise.all([this._userService.postUser(this.model)])
-      .then(() => this.submitted = true)
+    var userMethod;
+    if(!this.editForm){
+      userMethod = this._userService.postUser(this.model);
+    } else {
+      userMethod = this._userService.editUser(this.model);
+    }
+
+    return Promise.all([userMethod])
+      .then(() => this._userService._submittedObserver.next(true))
       .catch(function(err){
-        console.log(err);
-      });
+          console.log(err);
+        });
   }
 
   newUser() {
     this.model = new User("");
     this.active = false;
-    this.submitted = false;
+    this._userService._submittedObserver.next(false);
+    this._userService._editObserver.next(false);
     setTimeout(() => this.active = true, 0);
+  }
+
+  editUser(){
+    this._userService._editObserver.next(true);
+    this._userService._submittedObserver.next(false);
   }
 }

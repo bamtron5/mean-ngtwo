@@ -24,14 +24,20 @@ System.register(['angular2/core', './service/user.service'], function(exports_1)
                     var _this = this;
                     this._userService = _userService;
                     this._userService.users$.subscribe(function (updatedUsers) { _this.users = updatedUsers; });
+                    this._userService.editForm$.subscribe(function (updatedEdit) { _this.editForm = updatedEdit; });
                 }
                 UserListComponent.prototype.ngOnInit = function () {
                     this._userService.getUsers();
                 };
+                UserListComponent.prototype.editUserForm = function (user) {
+                    this._userService._userObserver.next(user[0]);
+                    this._userService._editObserver.next(true);
+                    this._userService._submittedObserver.next(false);
+                };
                 UserListComponent = __decorate([
                     core_1.Component({
                         selector: 'user-list',
-                        template: "\n\t<ul>\n\t\t<li *ngFor=\"#user of users\">\n\t\t{{ user.name }} <button name=\"{{ user._id }}\">Edit</button>\n\t\t</li>\n\t</ul>\n\t"
+                        template: "\n\t<ul>\n\t\t<li *ngFor=\"#user of users\">\n\t\t{{ user.name }} <button (click)=\"editUserForm([(user)])\">Edit</button>\n\t\t</li>\n\t</ul>\n\t"
                     }), 
                     __metadata('design:paramtypes', [user_service_1.userService])
                 ], UserListComponent);
