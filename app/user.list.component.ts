@@ -1,14 +1,15 @@
 import {Component} from 'angular2/core'
 import {userService} from './service/user.service'
 import {User} from './service/models/user'
-import {UserFormComponent} from './user.form.component'
 
 @Component({
 	selector: 'user-list',
 	template: `
 	<ul>
 		<li *ngFor="#user of users">
-		{{ user.name }} <button (click)="editUserForm([(user)])">Edit</button>
+		{{ user.name }} 
+		<button (click)="editUserForm([(user)])">Edit</button>
+		<button (click)="deleteUser([(user)])">Delete</button>
 		</li>
 	</ul>
 	`
@@ -20,8 +21,17 @@ export class UserListComponent{
 		this._userService.editForm$.subscribe(updatedEdit => { this.editForm = updatedEdit });
 	}
 
+	users: Array<User>;
+	editForm: Boolean;
+
 	ngOnInit() {
 		this._userService.getUsers();
+	}
+
+	deleteUser(user){
+		if(confirm('Are you sure you want to delete ' + user.name)){
+			this._userService.deleteUser(user[0]);
+		}
 	}
 
 	editUserForm(user){
@@ -29,7 +39,4 @@ export class UserListComponent{
 		this._userService._editObserver.next(true);
 		this._userService._submittedObserver.next(false);
 	}
-
-	users: Array<User>;
-	editForm: Boolean;
 };

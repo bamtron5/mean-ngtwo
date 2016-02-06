@@ -76,6 +76,17 @@ export class userService {
       );
   }
 
+  deleteUser(user){
+    var query = user._id;
+    this.http.delete(this._usersUrl + query, {})
+      .map(res => res.json())
+      .subscribe(
+        data => {
+          this.getUsers();
+        }, error => this.handleError(error)
+      );
+  }
+
   private handleError(error: Response) {
     console.error(error);
     return Observable.throw(error.json().error || 'Server error');

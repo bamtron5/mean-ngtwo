@@ -15,6 +15,7 @@ router.route('/')
             res.json(users);
         });
     })
+    
     .post(function(req, res) {
         var newUser = new User();
         newUser.name = req.query.name;
@@ -52,6 +53,22 @@ router.route('/:id')
                     res.json(newUser);
                 } else{
                     res.send(err);
+                }
+            });
+        })
+    })
+
+    .delete(function(req, res){
+        User.findById(req.params.id, function(err, user){
+            if(err){
+                res.send(err);
+            }
+
+            User.remove({_id: req.params.id}, function(err, user){
+                if(err){
+                    res.send(err);
+                } else {
+                    res.json({message: 'Deleted'})
                 }
             });
         })

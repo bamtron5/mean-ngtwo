@@ -29,6 +29,11 @@ System.register(['angular2/core', './service/user.service'], function(exports_1)
                 UserListComponent.prototype.ngOnInit = function () {
                     this._userService.getUsers();
                 };
+                UserListComponent.prototype.deleteUser = function (user) {
+                    if (confirm('Are you sure you want to delete ' + user.name)) {
+                        this._userService.deleteUser(user[0]);
+                    }
+                };
                 UserListComponent.prototype.editUserForm = function (user) {
                     this._userService._userObserver.next(user[0]);
                     this._userService._editObserver.next(true);
@@ -37,7 +42,7 @@ System.register(['angular2/core', './service/user.service'], function(exports_1)
                 UserListComponent = __decorate([
                     core_1.Component({
                         selector: 'user-list',
-                        template: "\n\t<ul>\n\t\t<li *ngFor=\"#user of users\">\n\t\t{{ user.name }} <button (click)=\"editUserForm([(user)])\">Edit</button>\n\t\t</li>\n\t</ul>\n\t"
+                        template: "\n\t<ul>\n\t\t<li *ngFor=\"#user of users\">\n\t\t{{ user.name }} \n\t\t<button (click)=\"editUserForm([(user)])\">Edit</button>\n\t\t<button (click)=\"deleteUser([(user)])\">Delete</button>\n\t\t</li>\n\t</ul>\n\t"
                     }), 
                     __metadata('design:paramtypes', [user_service_1.userService])
                 ], UserListComponent);
