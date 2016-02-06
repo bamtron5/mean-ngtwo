@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', './models/user', 'rxjs/Observable'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/operator/share'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/http', './models/user', 'rxjs/Observ
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, user_1, Observable_1;
+    var core_1, http_1, Observable_1;
     var userService;
     return {
         setters:[
@@ -18,29 +18,37 @@ System.register(['angular2/core', 'angular2/http', './models/user', 'rxjs/Observ
             function (http_1_1) {
                 http_1 = http_1_1;
             },
-            function (user_1_1) {
-                user_1 = user_1_1;
-            },
             function (Observable_1_1) {
                 Observable_1 = Observable_1_1;
-            }],
+            },
+            function (_1) {}],
         execute: function() {
             userService = (function () {
                 function userService(http) {
+                    var _this = this;
                     this.http = http;
                     this._usersUrl = 'api/users/';
+                    this.users$ = new Observable_1.Observable(function (observer) { return _this._userObserver = observer; }).share();
+                    this._dataStore = { users: [] };
                 }
                 userService.prototype.getUsers = function () {
+                    var _this = this;
                     return this.http.get(this._usersUrl)
                         .map(function (res) { return res.json(); })
-                        .catch(this.handleError);
+                        .subscribe(function (data) {
+                        _this._dataStore.users = data;
+                        _this._userObserver.next(_this._dataStore.users);
+                    }, function (error) { return _this.handleError(error); });
                 };
                 userService.prototype.postUser = function (user) {
                     var _this = this;
                     var query = "?name=" + user.name;
                     return this.http.post(this._usersUrl + query, JSON.stringify(user))
                         .map(function (res) { return res.json(); })
-                        .subscribe(function (data) { return new user_1.User(data.name); }, function (err) { return _this.handleError(err); }, function () { return _this.getUsers(); });
+                        .subscribe(function (data) {
+                        _this._dataStore.users.push(data);
+                        _this._userObserver.next(_this._dataStore.users);
+                    }, function (error) { return _this.handleError(error); });
                 };
                 userService.prototype.handleError = function (error) {
                     // in a real world app, we may send the server to some remote logging infrastructure

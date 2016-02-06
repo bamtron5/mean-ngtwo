@@ -1,36 +1,21 @@
-import {HeroFormComponent} from './hero-form.component'
-import {Component, View, OnInit} from 'angular2/core';
+import {bootstrap}    from 'angular2/platform/browser'
+import {Component} from 'angular2/core';
 import {userService} from './service/user.service';
-import {HTTP_PROVIDERS} from 'angular2/http';
-import {User} from './service/models/user';
+import {UserListComponent} from './user.list.component'
+import {UserFormComponent} from './user.form.component'
+import 'rxjs/Rx' //operators for es6 ... wtf
 
 @Component({
-    selector: 'user',
+    selector: 'app',
+    directives: [UserListComponent, UserFormComponent],
     template: `
-	<ul>
-	    <li *ngFor="#user of users">
-	      {{ user.name }}
-	    </li>
-    </ul>
+		<user-list></user-list>
+		<user-form></user-form>
 	`,
-	providers: [
-		HTTP_PROVIDERS,
-		userService
-	]
 })
 
-export class AppComponent implements OnInit{ 
-	constructor (private _userService: userService) {}
-	users: Array<Object>;
-	errorMessage: String;
+export class AppComponent{};
 
-	ngOnInit() { this.getUsers(); }
-
-	getUsers() {
-		this._userService.getUsers().subscribe(
-			users => this.users = users,
-			error => this.errorMessage = <any>error
-		);
-	}
-};
+bootstrap(AppComponent, [userService])
+	.catch(err => console.log(err));
 

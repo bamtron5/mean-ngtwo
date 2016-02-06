@@ -2,7 +2,7 @@
   <div [hidden]="submitted">
     <h1>User Form</h1>
     <!-- the form -->
-    <form *ngIf="active" (ngSubmit)="onSubmit()" #heroForm="ngForm">
+    <form *ngIf="active" (ngSubmit)="onSubmit()" #userForm="ngForm">
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" required
@@ -13,7 +13,7 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-default" [disabled]="!heroForm.form.valid">Submit</button>
+      <button type="submit" class="btn btn-default" [disabled]="!userForm.form.valid">Submit</button>
       <button type="button" class="btn btn-default" (click)="newUser()">New Hero</button>
 
     </form>
