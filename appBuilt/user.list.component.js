@@ -31,7 +31,7 @@ System.register(['angular2/core', './service/user.service'], function(exports_1)
                 UserListComponent = __decorate([
                     core_1.Component({
                         selector: 'user-list',
-                        template: "\n\t<ul>\n\t    <li *ngFor=\"#user of users\">\n\t      {{ user.name }}\n\t    </li>\n    </ul>\n\t"
+                        template: "\n\t<ul>\n\t\t<li *ngFor=\"#user of users\">\n\t\t{{ user.name }} <button name=\"{{ user._id }}\">Edit</button>\n\t\t</li>\n\t</ul>\n\t"
                     }), 
                     __metadata('design:paramtypes', [user_service_1.userService])
                 ], UserListComponent);
