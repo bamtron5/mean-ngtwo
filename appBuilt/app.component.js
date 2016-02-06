@@ -1,4 +1,4 @@
-System.register(['angular2/platform/browser', 'angular2/core', './service/user.service', './user.list.component', './user.form.component', 'rxjs/Rx'], function(exports_1) {
+System.register(['angular2/platform/browser', 'angular2/core', './service/user.service', './user.form.component', 'angular2/http', 'rxjs/Rx'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/platform/browser', 'angular2/core', './service/user.s
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var browser_1, core_1, user_service_1, user_list_component_1, user_form_component_1;
+    var browser_1, core_1, user_service_1, user_form_component_1, http_1;
     var AppComponent;
     return {
         setters:[
@@ -21,11 +21,11 @@ System.register(['angular2/platform/browser', 'angular2/core', './service/user.s
             function (user_service_1_1) {
                 user_service_1 = user_service_1_1;
             },
-            function (user_list_component_1_1) {
-                user_list_component_1 = user_list_component_1_1;
-            },
             function (user_form_component_1_1) {
                 user_form_component_1 = user_form_component_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
             },
             function (_1) {}],
         execute: function() {
@@ -36,8 +36,12 @@ System.register(['angular2/platform/browser', 'angular2/core', './service/user.s
                     //operators for es6 ... wtf
                     core_1.Component({
                         selector: 'app',
-                        directives: [user_list_component_1.UserListComponent, user_form_component_1.UserFormComponent],
+                        directives: [user_form_component_1.UserFormComponent],
                         template: "\n\t\t<user-form></user-form>\n\t",
+                        providers: [
+                            http_1.HTTP_PROVIDERS,
+                            user_service_1.userService
+                        ]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

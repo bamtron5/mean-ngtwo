@@ -1,7 +1,7 @@
 var User = require('../models/users');
 
 //move to populator... used to remove test data
-User.remove({testData:true}, function(err){
+User.remove({}, function(err){
 	if(err){
 		console.log(err);
 	}

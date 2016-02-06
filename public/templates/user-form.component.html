@@ -1,10 +1,7 @@
 <div class="container">
-  <ul>
-      <li *ngFor="#user of users">
-        {{ user.name }}
-      </li>
-    </ul>
-  
+  <h1>User Names</h1>
+  <user-list></user-list>
+
   <div [hidden]="submitted">
     <h1>User Form</h1>
     <!-- the form -->

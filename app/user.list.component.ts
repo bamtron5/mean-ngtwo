@@ -1,7 +1,7 @@
-import {Component} from 'angular2/core';
-import {userService} from './service/user.service';
-import {HTTP_PROVIDERS} from 'angular2/http';
-import {User} from './service/models/user';
+import {Component} from 'angular2/core'
+import {userService} from './service/user.service'
+import {User} from './service/models/user'
+import {UserFormComponent} from './user.form.component'
 
 @Component({
     selector: 'user-list',
@@ -11,11 +11,7 @@ import {User} from './service/models/user';
 	      {{ user.name }}
 	    </li>
     </ul>
-	`,
-	providers: [
-		HTTP_PROVIDERS,
-		userService
-	]
+	`
 })
 
 export class UserListComponent{ 
@@ -23,9 +19,9 @@ export class UserListComponent{
 		this._userService.users$.subscribe(updatedUsers => { this.users = updatedUsers });
 	}
 
-	users: Array<User>;
-
 	ngOnInit() {
-		this._userService.getUsers();
+    	this._userService.getUsers();
 	}
+
+	users: Array<User>;
 };
