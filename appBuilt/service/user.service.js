@@ -28,7 +28,8 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                     var _this = this;
                     this.http = http;
                     this._usersUrl = 'api/users/';
-                    this.users$ = new Observable_1.Observable(function (observer) { return _this._userObserver = observer; }).share();
+                    this.users$ = new Observable_1.Observable(function (observer) { return _this._usersObserver = observer; }).share();
+                    this.user$ = new Observable_1.Observable(function (observer) { return _this._userObserver = observer; }).share();
                     this._dataStore = { users: [] };
                 }
                 userService.prototype.getUsers = function () {
@@ -37,7 +38,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                         .map(function (res) { return res.json(); })
                         .subscribe(function (data) {
                         _this._dataStore.users = data;
-                        _this._userObserver.next(_this._dataStore.users);
+                        _this._usersObserver.next(_this._dataStore.users);
                     }, function (error) { return _this.handleError(error); });
                 };
                 userService.prototype.postUser = function (user) {
@@ -47,12 +48,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                         .map(function (res) { return res.json(); })
                         .subscribe(function (data) {
                         _this._dataStore.users.push(data);
-                        _this._userObserver.next(_this._dataStore.users);
+                        _this._userObserver.next(data);
+                        _this._usersObserver.next(_this._dataStore.users);
                     }, function (error) { return _this.handleError(error); });
                 };
                 userService.prototype.handleError = function (error) {
-                    // in a real world app, we may send the server to some remote logging infrastructure
-                    // instead of just logging it to the console
                     console.error(error);
                     return Observable_1.Observable.throw(error.json().error || 'Server error');
                 };

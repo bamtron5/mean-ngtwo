@@ -7,13 +7,19 @@ import 'rxjs/add/operator/share'
 @Injectable()
 export class userService {
   users$: Observable<Array<User>>;
-  _userObserver: any;
+  _usersObserver: any;
+
   private _dataStore: {
     users: Array<User>
-  } 
+  }
+
+  user$: Observable<User>;
+  _userObserver: any;
+
 
   constructor(private http: Http) { 
-    this.users$ = new Observable(observer => this._userObserver = observer).share();
+    this.users$ = new Observable(observer => this._usersObserver = observer).share();
+    this.user$ = new Observable(observer => this._userObserver = observer).share();
     this._dataStore = { users: [] };
   }
 
@@ -24,7 +30,7 @@ export class userService {
       .map(res => res.json())
       .subscribe(data => {
         this._dataStore.users = data;
-        this._userObserver.next(this._dataStore.users);
+        this._usersObserver.next(this._dataStore.users);
       }, error => this.handleError(error));
   }
 
@@ -35,14 +41,13 @@ export class userService {
       .subscribe(
         data => {
           this._dataStore.users.push(data);
-          this._userObserver.next(this._dataStore.users);
+          this._userObserver.next(data);
+          this._usersObserver.next(this._dataStore.users);
         }, error => this.handleError(error)
       );
   }
 
   private handleError(error: Response) {
-    // in a real world app, we may send the server to some remote logging infrastructure
-    // instead of just logging it to the console
     console.error(error);
     return Observable.throw(error.json().error || 'Server error');
   }

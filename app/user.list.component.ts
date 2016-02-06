@@ -1,7 +1,6 @@
 import {Component} from 'angular2/core'
 import {userService} from './service/user.service'
 import {User} from './service/models/user'
-import {UserFormComponent} from './user.form.component'
 
 @Component({
 	selector: 'user-list',
