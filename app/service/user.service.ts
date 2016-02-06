@@ -1,8 +1,8 @@
-import {Injectable}     from 'angular2/core';
-import {Http, Response} from 'angular2/http';
-import {User}           from './models/user';
-import {Observable}     from 'rxjs/Observable';
-import 'rxjs/add/operator/share';
+import {Injectable}     from 'angular2/core'
+import {Http, Response} from 'angular2/http'
+import {User}           from './models/user'
+import {Observable}     from 'rxjs/Observable'
+import 'rxjs/add/operator/share'
 
 @Injectable()
 export class userService {
