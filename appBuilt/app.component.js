@@ -37,7 +37,7 @@ System.register(['angular2/platform/browser', 'angular2/core', './service/user.s
                     core_1.Component({
                         selector: 'app',
                         directives: [user_list_component_1.UserListComponent, user_form_component_1.UserFormComponent],
-                        template: "\n\t\t<user-list></user-list>\n\t\t<user-form></user-form>\n\t",
+                        template: "\n\t\t<user-form></user-form>\n\t",
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

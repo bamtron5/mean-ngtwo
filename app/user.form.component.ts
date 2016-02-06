@@ -15,8 +15,10 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 
 export class UserFormComponent {
   constructor (private _userService: userService) {
-    this._userService.users$.subscribe();
+    this._userService.users$.subscribe(updatedUsers => { this.users = updatedUsers });
   }
+
+  users: Array<User>;
   
   model = new User("");
 
@@ -25,6 +27,10 @@ export class UserFormComponent {
   onSubmit() { 
     this.submitted = true;
     this._userService.postUser(this.model);
+  }
+
+  ngOnInit() {
+    this._userService.getUsers();
   }
 
   active = true;

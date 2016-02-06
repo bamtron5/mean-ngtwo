@@ -22,7 +22,7 @@ export class UserListComponent{
 	constructor (private _userService: userService) {
 		this._userService.users$.subscribe(updatedUsers => { this.users = updatedUsers });
 	}
-	
+
 	users: Array<User>;
 
 	ngOnInit() {

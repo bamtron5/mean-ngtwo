@@ -33,7 +33,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                 }
                 userService.prototype.getUsers = function () {
                     var _this = this;
-                    return this.http.get(this._usersUrl)
+                    this.http.get(this._usersUrl)
                         .map(function (res) { return res.json(); })
                         .subscribe(function (data) {
                         _this._dataStore.users = data;
@@ -43,7 +43,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                 userService.prototype.postUser = function (user) {
                     var _this = this;
                     var query = "?name=" + user.name;
-                    return this.http.post(this._usersUrl + query, JSON.stringify(user))
+                    this.http.post(this._usersUrl + query, JSON.stringify(user))
                         .map(function (res) { return res.json(); })
                         .subscribe(function (data) {
                         _this._dataStore.users.push(data);

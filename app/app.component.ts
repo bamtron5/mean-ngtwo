@@ -9,7 +9,6 @@ import 'rxjs/Rx' //operators for es6 ... wtf
     selector: 'app',
     directives: [UserListComponent, UserFormComponent],
     template: `
-		<user-list></user-list>
 		<user-form></user-form>
 	`,
 })
