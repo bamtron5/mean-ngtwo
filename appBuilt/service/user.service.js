@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', './models/user', 'rxjs/Observable'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, Observable_1;
+    var core_1, http_1, user_1, Observable_1;
     var userService;
     return {
         setters:[
@@ -18,6 +18,9 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
             function (http_1_1) {
                 http_1 = http_1_1;
             },
+            function (user_1_1) {
+                user_1 = user_1_1;
+            },
             function (Observable_1_1) {
                 Observable_1 = Observable_1_1;
             }],
@@ -25,8 +28,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
             userService = (function () {
                 function userService(http) {
                     this.http = http;
-                    this._usersUrl = 'api/users';
-                    this.fetch = new XMLHttpRequest();
+                    this._usersUrl = 'api/users/';
                 }
                 userService.prototype.getUsers = function () {
                     return this.http.get(this._usersUrl)
@@ -34,14 +36,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                         .catch(this.handleError);
                 };
                 userService.prototype.postUser = function (user) {
-                    var params = "name=" + user.name;
-                    this.fetch.open("POST", this._usersUrl, true);
-                    this.fetch.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    this.fetch.setRequestHeader("Connection", "close");
-                    this.fetch.send(params);
-                    // return this.http.post('/api/users/', JSON.stringify(id))
-                    // .map(res => res.json())
-                    // .catch(this.handleError);
+                    var _this = this;
+                    var query = "?name=" + user.name;
+                    return this.http.post(this._usersUrl + query, JSON.stringify(user))
+                        .map(function (res) { return res.json(); })
+                        .subscribe(function (data) { return new user_1.User(data.name); }, function (err) { return _this.handleError(err); }, function () { return _this.getUsers(); });
                 };
                 userService.prototype.handleError = function (error) {
                     // in a real world app, we may send the server to some remote logging infrastructure

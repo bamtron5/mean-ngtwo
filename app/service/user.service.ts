@@ -9,25 +9,23 @@ export class userService {
     
   }
 
-  private _usersUrl = 'api/users';
-  private fetch = new XMLHttpRequest();
+  private _usersUrl = 'api/users/';
 
   getUsers() {
     return this.http.get(this._usersUrl)
-                   .map(res => res.json())
-                   .catch(this.handleError);
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
   postUser(user) {
-    var params = "name=" + user.name;
-    this.fetch.open("POST", this._usersUrl, true);
-    this.fetch.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    this.fetch.setRequestHeader("Connection", "close");
-    this.fetch.send(params);
-
-    // return this.http.post('/api/users/', JSON.stringify(id))
-    // .map(res => res.json())
-    // .catch(this.handleError);
+    var query = "?name=" + user.name;
+    return this.http.post(this._usersUrl + query, JSON.stringify(user))
+      .map(res => res.json())
+      .subscribe(
+        err => this.handleError(err),
+        () => this.getUsers()
+      );
+      
   }
 
   private handleError(error: Response) {

@@ -17,7 +17,7 @@ router.route('/')
     })
     .post(function(req, res) {
         var newUser = new User();
-        newUser.name = req.body.name;
+        newUser.name = req.query.name;
         newUser.save(function(err, user){
             if (err)
                 res.send(err);
