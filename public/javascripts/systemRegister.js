@@ -6,5 +6,5 @@ System.config({
     }
   }
 });
-System.import('appBuilt/main')
+System.import('appBuilt/app.component')
       .then(null, console.error.bind(console));
