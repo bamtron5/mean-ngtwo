@@ -32,17 +32,21 @@ System.register(['angular2/core', './service/models/user', './service/user.servi
                     this.model = new user_1.User("");
                     this.submitted = false;
                     this.active = true;
-                    this._userService.users$.subscribe(function (updatedUsers) { _this.users = updatedUsers; });
+                    this._userService.user$.subscribe(function (updatedUser) { _this.model = updatedUser; });
                 }
                 UserFormComponent.prototype.onSubmit = function () {
-                    this.submitted = true;
-                    this._userService.postUser(this.model);
-                    this.model = this.users[this.users.length - 1];
+                    var _this = this;
+                    return Promise.all([this._userService.postUser(this.model)])
+                        .then(function () { return _this.submitted = true; })
+                        .catch(function (err) {
+                        console.log(err);
+                    });
                 };
                 UserFormComponent.prototype.newUser = function () {
                     var _this = this;
                     this.model = new user_1.User("");
                     this.active = false;
+                    this.submitted = false;
                     setTimeout(function () { return _this.active = true; }, 0);
                 };
                 UserFormComponent = __decorate([

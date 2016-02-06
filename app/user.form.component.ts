@@ -4,7 +4,6 @@ import { User }    from './service/models/user'
 import {userService} from './service/user.service'
 import {UserListComponent} from './user.list.component'
 
-
 @Component({
   selector: 'user-form',
   directives: [UserListComponent],
@@ -13,25 +12,25 @@ import {UserListComponent} from './user.list.component'
 
 export class UserFormComponent {
   constructor (public _userService: userService) {
-    this._userService.users$.subscribe(updatedUsers => { this.users = updatedUsers });
+    this._userService.user$.subscribe(updatedUser => { this.model = updatedUser });
   }
 
-  users: Array<User>;
   model = new User("");
-
   submitted = false;
+  active = true;
 
   onSubmit() { 
-    this.submitted = true;
-    this._userService.postUser(this.model);
-    this.model = this.users[this.users.length - 1];
+    return Promise.all([this._userService.postUser(this.model)])
+      .then(() => this.submitted = true)
+      .catch(function(err){
+        console.log(err);
+      });
   }
-
-  active = true;
 
   newUser() {
     this.model = new User("");
     this.active = false;
+    this.submitted = false;
     setTimeout(() => this.active = true, 0);
   }
 }
