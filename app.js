@@ -30,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //((pull in your apis))
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var todo = require('./routes/todo');
 var login = require('./routes/login');
 
 //static paths
@@ -43,6 +44,7 @@ app.use('/', routes);
 //api routes
 app.use('/api/users', users);
 app.use('/api/login', login);
+app.use('/api/todos', todo);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -53,7 +55,7 @@ app.use(expressJWT({secret: jwtSecret})
   .unless({
     path:[
       "/api/login",
-      "/api/users"
+      "/api/todos"
     ]
   })
 );
@@ -92,6 +94,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

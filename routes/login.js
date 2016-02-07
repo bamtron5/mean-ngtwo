@@ -24,7 +24,7 @@ router.route('/')
                     }
 
                     if(!isMatch){
-                        res.send("Your login is not valid, please try again");
+                        res.json({message:"Your login is not valid, please try again"});
                         console.log('Password:', isMatch);
                     } else {
                         console.log('Password:', isMatch);

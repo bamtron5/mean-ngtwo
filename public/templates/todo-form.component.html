@@ -1,11 +1,11 @@
 <div class="container">
-  <h1>User Names</h1>
-  <user-list></user-list>
+  <h1>Todo Names</h1>
+  <todo-list></todo-list>
 
   <div [hidden]="submitted">
-    <h1>User Form</h1>
+    <h1>Todo Form</h1>
     <!-- the form -->
-    <form *ngIf="active" (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <form *ngIf="active" (ngSubmit)="onSubmit()" #todoForm="ngForm">
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" required
@@ -16,8 +16,8 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-default" [disabled]="!userForm.form.valid">Submit</button>
-      <button type="button" class="btn btn-default" (click)="newUser()">New User</button>
+      <button type="submit" class="btn btn-default" [disabled]="!todoForm.form.valid">Submit</button>
+      <button type="button" class="btn btn-default" (click)="newTodo()">New todo</button>
 
     </form>
   </div>
@@ -29,7 +29,7 @@
       <div class="col-xs-9  pull-left">{{ model.name }}</div>
     </div>
     <br>
-    <button type="button" class="btn btn-default" (click)="newUser()">New User</button>
-    <button class="btn btn-default" (click)="editUser()" name="{{ model._id }}">Edit</button>
+    <button type="button" class="btn btn-default" (click)="newTodo()">New todo</button>
+    <button class="btn btn-default" (click)="editTodo()" name="{{ model._id }}">Edit</button>
   </div>
 </div>

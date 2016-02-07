@@ -13,4 +13,5 @@ switch (document.location.pathname){
 		break;
 	case '/login':
 		System.import('appBuilt/login.form.component').then(null, console.error.bind(console));
+    break;
 }
