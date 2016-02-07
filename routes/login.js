@@ -12,24 +12,28 @@ router.route('/')
     .post(function(req, res) {
         userModel.findOne({name:req.body.name}).select('+password').exec(function(err, user){
             console.log(req.body);
-            if(err)
+            if(err){
                 res.send(err);
+            }
+
             if(user){
                 user.comparePassword(req.body.password, function(err, isMatch) {
-                    if (err) 
-                        throw err;
-                    if(!isMatch)
-                        res.json({message:"Your login is not valid, please try again"});
+                    if (err) {
+                        console.log(err);
+                        res.end();
+                    }
+
+                    if(!isMatch){
+                        res.send("Your login is not valid, please try again");
                         console.log('Password:', isMatch);
-
-                    console.log('Password:', isMatch);
-
-                    //do jwt here
-                    var token = jwt.sign({name: req.body.name}, jwtSecret);
-
-                    //set cookie
-                    res.cookie('claimBook', {jwt: token});
-                    res.status(200).json(token);
+                    } else {
+                        console.log('Password:', isMatch);
+                        //do jwt here
+                        var token = jwt.sign({name: req.body.name}, jwtSecret);
+                        //set cookie
+                        res.cookie('claimBook', {jwt: token}, { maxAge: 1440000, httpOnly: true });
+                        res.end();
+                    }
                 });
             } else {
                 res.json({message:"Your login is not valid, please try again"});
