@@ -11,11 +11,13 @@ User.remove({}, function(err){
 var newUser = [
 	new User({
 		'name':'Flip',
-		'testData':true
+		'testData':true,
+		'password':'Password'
 	}),
 	new User({
 		'name':'Kev',
-		'testData':true
+		'testData':true,
+		'password':'Password'
 	})
 ];
 

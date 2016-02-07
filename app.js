@@ -8,26 +8,29 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var db = require('./admin/mongoConnect.js');
+var expressJWT = require('express-jwt');
+var jwtSecret = require('./admin/jwtSecret');
+var cookieHandler = require('./admin/cookieHandler');
 var router = express.Router(); 
 
 if(env === 'development'){
   var seed = require('./seeds/index.js');
 }
 
-//((pull in your apis))
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+
+//your POST body settings should be set to Content-Type
+//application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false })); 
+//set your headers foo
+
+//((pull in your apis))
+var routes = require('./routes/index');
+var users = require('./routes/users');
+var login = require('./routes/login');
 
 //static paths
 app.use(express.static(path.join(__dirname, 'public')));
@@ -39,6 +42,22 @@ app.use('/', routes);
 
 //api routes
 app.use('/api/users', users);
+app.use('/api/login', login);
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+//JWT ONLY
+app.use(expressJWT({secret: jwtSecret})
+  .unless({
+    path:[
+      "/api/login"
+    ]
+  })
+);
+
+app.use(cookieParser());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -57,6 +76,16 @@ console.log(Object.keys(db.connections[0].collections));
 // will print stacktrace
 if (env === 'development') {
   app.use(function(err, req, res, next) {
+
+    if(req.cookies === undefined || req.cookies.claimBook === undefined){
+      //3 days
+      //todo - domain specific
+      //secure cookie
+      var randomNumber=Math.random().toString();
+      randomNumber=randomNumber.substring(2,randomNumber.length);
+      res.cookie('claimBook',randomNumber, { maxAge: 1440000, httpOnly: true });
+    }
+
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -68,6 +97,15 @@ if (env === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
+  if(req.cookies === undefined || req.cookies.claimBook === undefined){
+    //3 days
+    //todo - domain specific
+    //secure cookie
+    var randomNumber=Math.random().toString();
+    randomNumber=randomNumber.substring(2,randomNumber.length);
+    res.cookie('claimBook',randomNumber, { maxAge: 1440000, httpOnly: true });
+  }
+  
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
