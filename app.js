@@ -10,7 +10,6 @@ var bodyParser = require('body-parser');
 var db = require('./admin/mongoConnect.js');
 var expressJWT = require('express-jwt');
 var jwtSecret = require('./admin/jwtSecret');
-var cookieHandler = require('./admin/cookieHandler');
 var router = express.Router(); 
 
 if(env === 'development'){
@@ -105,7 +104,7 @@ app.use(function(err, req, res, next) {
     randomNumber=randomNumber.substring(2,randomNumber.length);
     res.cookie('claimBook',randomNumber, { maxAge: 1440000, httpOnly: true });
   }
-  
+
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
