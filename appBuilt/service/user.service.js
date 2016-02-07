@@ -54,8 +54,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                 };
                 userService.prototype.postUser = function (user) {
                     var _this = this;
-                    var query = "?name=" + user.name;
-                    this.http.post(this._usersUrl + query, JSON.stringify(user))
+                    this.http.post(this._usersUrl, JSON.stringify(user))
                         .map(function (res) { return res.json(); })
                         .subscribe(function (data) {
                         _this._dataStore.users.unshift(data);
@@ -72,6 +71,15 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                         _this._userObserver.next(data);
                         _this.getUsers();
                     }, function (error) { return _this.handleError(error); });
+                };
+                userService.prototype.login = function (user) {
+                    var _this = this;
+                    var strUser = JSON.stringify(user);
+                    var headers = new http_1.Headers();
+                    headers.append('Content-Type', 'application/json');
+                    this.http.post('/api/login', strUser, { headers: headers })
+                        .map(function (res) { return res.json(); })
+                        .subscribe(function (data) { }, function (error) { return _this.handleError(error); });
                 };
                 userService.prototype.deleteUser = function (user) {
                     var _this = this;

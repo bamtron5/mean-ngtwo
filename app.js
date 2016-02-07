@@ -51,7 +51,8 @@ app.set('view engine', 'jade');
 app.use(expressJWT({secret: jwtSecret})
   .unless({
     path:[
-      "/api/login"
+      "/api/login",
+      "/api/users"
     ]
   })
 );

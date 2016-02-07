@@ -11,6 +11,7 @@ router.route('/')
     // get the user with that id (accessed at GET http://localhost:8080/api/users/:user_id)
     .post(function(req, res) {
         userModel.findOne({name:req.body.name}).select('+password').exec(function(err, user){
+            console.log(req.body);
             if(err)
                 res.send(err);
             if(user){
@@ -22,11 +23,12 @@ router.route('/')
                         console.log('Password:', isMatch);
 
                     console.log('Password:', isMatch);
+
                     //do jwt here
                     var token = jwt.sign({name: req.body.name}, jwtSecret);
 
-                    //set cookie to bearer = token here
-
+                    //set cookie
+                    res.cookie('claimBook', {jwt: token});
                     res.status(200).json(token);
                 });
             } else {

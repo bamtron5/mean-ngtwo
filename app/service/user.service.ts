@@ -1,5 +1,5 @@
 import {Injectable}     from 'angular2/core'
-import {Http, Response} from 'angular2/http'
+import {Http, Response, Headers} from 'angular2/http'
 import {User}           from './models/user'
 import {Observable}     from 'rxjs/Observable'
 import 'rxjs/add/operator/share'
@@ -21,7 +21,6 @@ export class userService {
 
   submitted$: Observable<Boolean>;
   _submittedObserver: any;
-
 
   constructor(private http: Http) { 
     this.users$ = new Observable(observer => this._usersObserver = observer).share();
@@ -52,15 +51,14 @@ export class userService {
   }
 
   postUser(user) {
-    var query = "?name=" + user.name;
-    this.http.post(this._usersUrl + query, JSON.stringify(user))
+    this.http.post(this._usersUrl, JSON.stringify(user))
       .map(res => res.json())
       .subscribe(
-        data => {
-          this._dataStore.users.unshift(data);
-          this._userObserver.next(data);
-          this._usersObserver.next(this._dataStore.users);
-        }, error => this.handleError(error)
+          data => {
+        this._dataStore.users.unshift(data);
+        this._userObserver.next(data);
+        this._usersObserver.next(this._dataStore.users);
+          }, error => this.handleError(error)
       );
   }
 
@@ -73,6 +71,18 @@ export class userService {
           this._userObserver.next(data);
           this.getUsers();
         }, error => this.handleError(error)
+      );
+  }
+
+  login(user){
+    var strUser = JSON.stringify(user);
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.http.post('/api/login', strUser, {headers: headers})
+      .map(res => res.json())
+      .subscribe(
+        data => {},
+        error => this.handleError(error)
       );
   }
 

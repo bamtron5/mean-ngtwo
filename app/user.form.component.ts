@@ -17,7 +17,7 @@ export class UserFormComponent {
     this._userService.submitted$.subscribe(updatedSubmission => { this.submitted = updatedSubmission });
   }
 
-  model = new User("");
+  model = new User();
   submitted: Boolean;
   active = true;
   editForm: Boolean;
@@ -42,7 +42,7 @@ export class UserFormComponent {
   }
 
   newUser() {
-    this.model = new User("");
+    this.model = new User();
     this.active = false;
     this._userService._submittedObserver.next(false);
     this._userService._editObserver.next(false);

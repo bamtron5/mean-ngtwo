@@ -29,7 +29,7 @@ System.register(['angular2/core', './service/models/user', './service/user.servi
                 function UserFormComponent(_userService) {
                     var _this = this;
                     this._userService = _userService;
-                    this.model = new user_1.User("");
+                    this.model = new user_1.User();
                     this.active = true;
                     this._userService.user$.subscribe(function (updatedUser) { _this.model = updatedUser; });
                     this._userService.editForm$.subscribe(function (updatedEdit) { _this.editForm = updatedEdit; });
@@ -55,7 +55,7 @@ System.register(['angular2/core', './service/models/user', './service/user.servi
                 };
                 UserFormComponent.prototype.newUser = function () {
                     var _this = this;
-                    this.model = new user_1.User("");
+                    this.model = new user_1.User();
                     this.active = false;
                     this._userService._submittedObserver.next(false);
                     this._userService._editObserver.next(false);
