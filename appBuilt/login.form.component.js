@@ -33,10 +33,8 @@ System.register(['angular2/platform/browser', 'angular2/core', './service/models
                 function LoginFormComponent(_userService) {
                     this._userService = _userService;
                     this.model = new user_1.User();
-                    console.log(this.model);
                 }
                 LoginFormComponent.prototype.onSubmit = function () {
-                    console.log(this.model);
                     var method = this._userService.login(this.model);
                     return Promise.all([method]);
                 };

@@ -79,7 +79,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                     headers.append('Content-Type', 'application/json');
                     this.http.post('/api/login', strUser, { headers: headers })
                         .map(function (res) { return res.json(); })
-                        .subscribe(function (data) { }, function (error) { return _this.handleError(error); });
+                        .subscribe(function (error) { return _this.handleError(error); });
                 };
                 userService.prototype.deleteUser = function (user) {
                     var _this = this;

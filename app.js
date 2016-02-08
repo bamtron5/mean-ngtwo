@@ -1,5 +1,16 @@
 var express = require('express');
 var app = express();
+var cookieSession = require('cookie-session');
+
+app.set('trust proxy', 1);
+
+app.use(
+  cookieSession({
+    name: 'claimBook',
+    keys: ['auth']
+  })
+);
+
 var env = app.get('env');
 
 var path = require('path');
@@ -15,6 +26,8 @@ var router = express.Router();
 if(env === 'development'){
   var seed = require('./seeds/index.js');
 }
+
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

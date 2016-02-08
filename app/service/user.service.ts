@@ -81,7 +81,6 @@ export class userService {
     this.http.post('/api/login', strUser, {headers: headers})
       .map(res => res.json())
       .subscribe(
-        data => {},
         error => this.handleError(error)
       );
   }

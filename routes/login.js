@@ -31,6 +31,12 @@ router.route('/')
                         //do jwt here
                         var token = jwt.sign({name: req.body.name}, jwtSecret);
                         //set cookie
+                        req.sessionOptions.maxAge = 1440000;
+                        req.sessionOptions.httpOnly = true;
+                        req.session.auth = token;
+                        console.log(req.body.name + ' has connnected as \n\n');
+                        console.log(req.session);
+                        console.log('\n\n');
                         res.cookie('claimBook', {jwt: token}, { maxAge: 1440000, httpOnly: true });
                         res.end();
                     }

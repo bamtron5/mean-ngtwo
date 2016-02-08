@@ -16,16 +16,13 @@ import 'rxjs/Rx' //operators for es6 ... wtf
 })
 
 export class LoginFormComponent{
-	constructor(public _userService: userService){
-		console.log(this.model);
-	}
+	constructor(public _userService: userService){ }
 
 	model = new User();
 
 
 
 	onSubmit(){
-		console.log(this.model);
 		var method = this._userService.login(this.model);
 		return Promise.all([method]);
 	}

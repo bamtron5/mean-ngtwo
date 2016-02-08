@@ -14,4 +14,7 @@ switch (document.location.pathname){
 	case '/login':
 		System.import('appBuilt/login.form.component').then(null, console.error.bind(console));
     break;
+  case '/profile':
+    System.import('appBuilt/profile.component').then(null, console.error.bind(console));
+    break;
 }
