@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var expressJWT = require('express-jwt');
-var jwtSecret = require('../admin/jwtSecret');
 var isAuth = require('../admin/isAuth');
 
 /* GET home page. */

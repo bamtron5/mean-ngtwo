@@ -4,6 +4,7 @@ var jwtSecret = require('./jwtSecret');
 //pass in req.session
 var isAuth = function(session, cb){
 	jwt.verify(session.auth, jwtSecret, function(err, decoded){
+		console.log("Session REQ IS" + session.auth);
 		console.log("SESSION AUTH IS " + decoded);
 		console.log("ERR IS " + err);
 		if(!decoded || err){

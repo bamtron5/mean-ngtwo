@@ -2,6 +2,7 @@ import {Component} from 'angular2/core'
 import {NgForm}    from 'angular2/common'
 import { Todo }    from './service/models/todo'
 import {todoService} from './service/todo.service'
+import {authService} from './service/auth.service'
 import {TodoListComponent} from './todo.list.component'
 
 @Component({
@@ -11,19 +12,22 @@ import {TodoListComponent} from './todo.list.component'
 })
 
 export class TodoFormComponent {
-  constructor (public _todoService: todoService) {
+  constructor (public _todoService: todoService, public _authService: authService) {
     this._todoService.todo$.subscribe(updatedtodo => { this.model = updatedtodo });
     this._todoService.editForm$.subscribe(updatedEdit => { this.editForm = updatedEdit });
     this._todoService.submitted$.subscribe(updatedSubmission => { this.submitted = updatedSubmission });
+    this._authService.auth$.subscribe(updatedAuth => {this.auth = updatedAuth});
   }
 
   model = new Todo();
   submitted: Boolean;
   active = true;
   editForm: Boolean;
+  auth: Boolean;
 
   ngOnInit(){
     this._todoService._submittedObserver.next(false);
+    this._authService.getAuth();
   }
 
   onSubmit() { 

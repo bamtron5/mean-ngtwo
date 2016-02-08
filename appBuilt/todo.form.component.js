@@ -1,4 +1,4 @@
-System.register(['angular2/core', './service/models/todo', './service/todo.service', './todo.list.component'], function(exports_1) {
+System.register(['angular2/core', './service/models/todo', './service/todo.service', './service/auth.service', './todo.list.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', './service/models/todo', './service/todo.servi
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, todo_1, todo_service_1, todo_list_component_1;
+    var core_1, todo_1, todo_service_1, auth_service_1, todo_list_component_1;
     var TodoFormComponent;
     return {
         setters:[
@@ -21,22 +21,28 @@ System.register(['angular2/core', './service/models/todo', './service/todo.servi
             function (todo_service_1_1) {
                 todo_service_1 = todo_service_1_1;
             },
+            function (auth_service_1_1) {
+                auth_service_1 = auth_service_1_1;
+            },
             function (todo_list_component_1_1) {
                 todo_list_component_1 = todo_list_component_1_1;
             }],
         execute: function() {
             TodoFormComponent = (function () {
-                function TodoFormComponent(_todoService) {
+                function TodoFormComponent(_todoService, _authService) {
                     var _this = this;
                     this._todoService = _todoService;
+                    this._authService = _authService;
                     this.model = new todo_1.Todo();
                     this.active = true;
                     this._todoService.todo$.subscribe(function (updatedtodo) { _this.model = updatedtodo; });
                     this._todoService.editForm$.subscribe(function (updatedEdit) { _this.editForm = updatedEdit; });
                     this._todoService.submitted$.subscribe(function (updatedSubmission) { _this.submitted = updatedSubmission; });
+                    this._authService.auth$.subscribe(function (updatedAuth) { _this.auth = updatedAuth; });
                 }
                 TodoFormComponent.prototype.ngOnInit = function () {
                     this._todoService._submittedObserver.next(false);
+                    this._authService.getAuth();
                 };
                 TodoFormComponent.prototype.onSubmit = function () {
                     var _this = this;
@@ -71,7 +77,7 @@ System.register(['angular2/core', './service/models/todo', './service/todo.servi
                         directives: [todo_list_component_1.TodoListComponent],
                         templateUrl: 'templates/todo-form.component.html'
                     }), 
-                    __metadata('design:paramtypes', [todo_service_1.todoService])
+                    __metadata('design:paramtypes', [todo_service_1.todoService, auth_service_1.authService])
                 ], TodoFormComponent);
                 return TodoFormComponent;
             })();

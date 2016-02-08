@@ -92,7 +92,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                 };
                 userService.prototype.handleError = function (error) {
                     console.error(error);
-                    return Observable_1.Observable.throw(error.json().error || 'Server error');
+                    return Observable_1.Observable.throw(error || 'Server error');
                 };
                 userService = __decorate([
                     core_1.Injectable(), 

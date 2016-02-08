@@ -1,4 +1,4 @@
-System.register(['angular2/platform/browser', 'angular2/core', './service/todo.service', './todo.form.component', 'angular2/http', 'rxjs/Rx'], function(exports_1) {
+System.register(['angular2/platform/browser', 'angular2/core', './service/todo.service', './service/auth.service', './todo.form.component', 'angular2/http', 'rxjs/Rx'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/platform/browser', 'angular2/core', './service/todo.s
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var browser_1, core_1, todo_service_1, todo_form_component_1, http_1;
+    var browser_1, core_1, todo_service_1, auth_service_1, todo_form_component_1, http_1;
     var AppComponent;
     return {
         setters:[
@@ -20,6 +20,9 @@ System.register(['angular2/platform/browser', 'angular2/core', './service/todo.s
             },
             function (todo_service_1_1) {
                 todo_service_1 = todo_service_1_1;
+            },
+            function (auth_service_1_1) {
+                auth_service_1 = auth_service_1_1;
             },
             function (todo_form_component_1_1) {
                 todo_form_component_1 = todo_form_component_1_1;
@@ -40,6 +43,7 @@ System.register(['angular2/platform/browser', 'angular2/core', './service/todo.s
                         template: "\n\t\t<todo-form></todo-form>\n\t",
                         providers: [
                             http_1.HTTP_PROVIDERS,
+                            auth_service_1.authService,
                             todo_service_1.todoService
                         ]
                     }), 
@@ -49,7 +53,7 @@ System.register(['angular2/platform/browser', 'angular2/core', './service/todo.s
             })();
             exports_1("AppComponent", AppComponent);
             ;
-            browser_1.bootstrap(AppComponent, [todo_service_1.todoService])
+            browser_1.bootstrap(AppComponent, [todo_service_1.todoService, auth_service_1.authService])
                 .catch(function (err) { return console.log(err); });
         }
     }

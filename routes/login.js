@@ -24,8 +24,8 @@ router.route('/')
                     }
 
                     if(!isMatch){
-                        res.json({message:"Your login is not valid, please try again"});
                         console.log('Password:', isMatch);
+                        res.json({message:"Your login is not valid, please try again"});
                     } else {
                         console.log('Password:', isMatch);
                         //do jwt here

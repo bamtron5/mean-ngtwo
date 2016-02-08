@@ -27,8 +27,6 @@ if(env === 'development'){
   var seed = require('./seeds/index.js');
 }
 
-
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -45,6 +43,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var todo = require('./routes/todo');
 var login = require('./routes/login');
+var auth = require('./routes/auth');
 
 //static paths
 app.use(express.static(path.join(__dirname, 'public')));
@@ -58,6 +57,7 @@ app.use('/', routes);
 app.use('/api/users', users);
 app.use('/api/login', login);
 app.use('/api/todos', todo);
+app.use('/api/auth', auth);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -68,7 +68,8 @@ app.use(expressJWT({secret: jwtSecret})
   .unless({
     path:[
       "/api/login",
-      "/api/todos"
+      "/api/todos",
+      "/api/auth"
     ]
   })
 );
