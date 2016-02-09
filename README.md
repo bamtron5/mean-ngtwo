@@ -1,4 +1,4 @@
-# NG2 Mean Stack
+# NG2 Mean Stack on TypeScript
 
 ## Release
 Pre-alpha | Dev only. Contribution welcome.
@@ -14,6 +14,7 @@ then:
 	- *needs testing*
 * Components:
 	- Nav Component
+	- Login Component
 	- Todo List Component
 	- Profile Component 
 * Mongo Seeds (todo model, users model)
