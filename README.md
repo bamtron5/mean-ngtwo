@@ -1,6 +1,6 @@
 # NG2 Mean Stack
 
-
+## Release
 
 ## Run directions
 `npm install`
@@ -10,15 +10,38 @@ then:
 
 ## Includes	
 * Authentication w/ JsonWebTokens
-	- needs testing
-* Todo List Component
-* Profile Component
-* Mongo Seeds (todos, users)
+	- *needs testing*
+* Components:
+	- Nav Component
+	- Todo List Component
+	- Profile Component 
+* Mongo Seeds (todo model, users model)
 * My NG Service Boiler Plate
 * Express API routes
+	- *needs testing*
 * Static Routing
 
 ## Future Support
+Angular2 Developer Tools
+- Angular2 Developer Tools `https://github.com/angular/angular/blob/master/TOOLS_DART.md`
+	- Angular debugging tools
+	- Code size
+	- Performance
+
+```javascript
+import 'package:angular2/platform/browser.dart';
+
+main() async {
+  var appRef = await bootstrap(Application);
+  enableDebugTools(appRef);
+}
+
+//------
+
+// In the dev console:
+ng.profiler.timeChangeDetection();
+```
+
 - Server Scripts
 	- `npm serve` - just serve
 	- `npm run [env]` - lint / build / serve
@@ -30,3 +53,5 @@ then:
 	- `webpack [config]`
 - Heroku Deploy
 	- `heroku deploy`
+- Travis CI
+- Puphet like VM DEV
