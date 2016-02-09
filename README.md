@@ -1,6 +1,7 @@
 # NG2 Mean Stack
 
 ## Release
+Pre-alpha | Dev only. Contribution welcome.
 
 ## Run directions
 `npm install`
@@ -23,7 +24,7 @@ then:
 
 ## Future Support
 Angular2 Developer Tools
-- Angular2 Developer Tools `https://github.com/angular/angular/blob/master/TOOLS_DART.md`
+- [Angular2 Developer Tools](https://github.com/angular/angular/blob/master/TOOLS_DART.md)
 	- Angular debugging tools
 	- Code size
 	- Performance
