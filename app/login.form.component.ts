@@ -1,10 +1,10 @@
 import {bootstrap} from 'angular2/platform/browser'
-import {Component} from 'angular2/core'
+import {Component, OnChanges, SimpleChange } from 'angular2/core'
 import {NgForm}    from 'angular2/common'
 import { User }    from './service/models/user'
 import {userService} from './service/user.service'
-import {authService} from './service/auth.service'
 import {HTTP_PROVIDERS} from 'angular2/http'
+import {authService} from './service/auth.service';
 import 'rxjs/Rx' //operators for es6 ... wtf
 
 @Component({
@@ -12,28 +12,25 @@ import 'rxjs/Rx' //operators for es6 ... wtf
     templateUrl: 'templates/login-form.html',
 	providers: [
 		HTTP_PROVIDERS,
-		userService,
-		authService
+		authService,
+		userService
 	]
 })
 
-export class LoginFormComponent{
-	constructor(public _userService: userService, public _authService: authService){
-		this._authService.auth$.subscribe(updatedAuth => { this.isAuth = updatedAuth });
+export class LoginFormComponent {
+	constructor(public _userService: userService, public _authService: authService) {
+		(this._userService.acceptedLogin$.subscribe(updatedAccept => { this.isAccepted = updatedAccept})) ? undefined : false;
 	}
 
 	model = new User();
-	isAuth:Boolean;
+	isAccepted: Boolean;
 
-	ngOnInit(){
-		this._authService.getAuth();
-	}
-
-	onSubmit(){
-		var method = this._userService.login(this.model);
-		return Promise.all([method]);
+	onSubmit() {
+		var method = this._userService.login(this.model, false);
 	}
 }
 
-bootstrap(LoginFormComponent, [userService])
+
+
+bootstrap(LoginFormComponent, [userService, authService])
 	.catch(err => console.log(err));

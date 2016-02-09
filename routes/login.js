@@ -25,7 +25,7 @@ router.route('/')
 
                     if(!isMatch){
                         console.log('Password:', isMatch);
-                        res.json({message:"Your login is not valid, please try again"});
+                        res.status(400).json({login:false,message:"Your login is not valid, please try again"});
                     } else {
                         console.log('Password:', isMatch);
                         //do jwt here
@@ -34,15 +34,18 @@ router.route('/')
                         req.sessionOptions.maxAge = 1440000;
                         req.sessionOptions.httpOnly = true;
                         req.session.auth = token;
+                        req.session.name = req.body.name;
                         console.log(req.body.name + ' has connnected as \n\n');
                         console.log(req.session);
                         console.log('\n\n');
                         res.cookie('claimBook', {jwt: token}, { maxAge: 1440000, httpOnly: true });
+                        res.cookie('name', req.body.name, {maxAge: 1440000, httpOnly: true});
+                        res.status(200).json({login:true});
                         res.end();
                     }
                 });
             } else {
-                res.json({message:"Your login is not valid, please try again"});
+                res.status(400).json({login:false,message:"Your login is not valid, please try again"});
             }
         });
     });

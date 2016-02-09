@@ -1,9 +1,9 @@
 <div class="container">
   <h1>Todo Names</h1>
   <todo-list></todo-list>
-  {{auth}}
   <div [hidden]="submitted">
     <h1>Todo Form</h1>
+    {{error}}
     <!-- the form -->
     <form *ngIf="active" (ngSubmit)="onSubmit()" #todoForm="ngForm">
       <div class="form-group">

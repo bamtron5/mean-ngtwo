@@ -29,6 +29,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                     this.http = http;
                     this._authUrl = 'api/auth/';
                     this.auth$ = new Observable_1.Observable(function (observer) { return _this._authObserver = observer; }).share();
+                    this.userName$ = new Observable_1.Observable(function (observer) { return _this._userNameObserver = observer; }).share();
                 }
                 authService.prototype.getAuth = function () {
                     var _this = this;
@@ -36,6 +37,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                         .map(function (res) { return res.json(); })
                         .subscribe(function (data) {
                         _this._authObserver.next(data.auth);
+                        _this._userNameObserver.next(data.name);
                     }, function (error) { return _this.handleError(error); });
                 };
                 authService.prototype.handleError = function (error) {

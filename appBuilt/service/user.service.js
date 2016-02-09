@@ -32,7 +32,9 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                     this.user$ = new Observable_1.Observable(function (observer) { return _this._userObserver = observer; }).share();
                     this.editForm$ = new Observable_1.Observable(function (observer) { return _this._editObserver = observer; }).share();
                     this.submitted$ = new Observable_1.Observable(function (observer) { return _this._submittedObserver = observer; }).share();
+                    this.acceptedLogin$ = new Observable_1.Observable(function (observer) { return _this._acceptedObserver = observer; }).share();
                     this._dataStore = { users: [] };
+                    this._acceptStore = { accept: [] };
                 }
                 userService.prototype.getUsers = function () {
                     var _this = this;
@@ -72,14 +74,18 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', 'rxjs/add/
                         _this.getUsers();
                     }, function (error) { return _this.handleError(error); });
                 };
-                userService.prototype.login = function (user) {
+                userService.prototype.login = function (user, redirect) {
                     var _this = this;
+                    var redirect = redirect ? redirect : '/profile';
                     var strUser = JSON.stringify(user);
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/json');
-                    this.http.post('/api/login', strUser, { headers: headers })
+                    return this.http.post('/api/login', strUser, { headers: headers })
                         .map(function (res) { return res.json(); })
-                        .subscribe(function (error) { return _this.handleError(error); });
+                        .subscribe(function (data) {
+                        _this._acceptedObserver.next(true);
+                        location.href = redirect;
+                    }, function (error) { return _this._acceptedObserver.next(false); });
                 };
                 userService.prototype.deleteUser = function (user) {
                     var _this = this;

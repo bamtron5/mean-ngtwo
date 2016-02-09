@@ -12,7 +12,8 @@ router.route('/')
             if(err || !decoded){
                 res.json({auth:false});
             } else {
-                res.json({auth:true});
+                console.log(Object.keys(req.session));
+                res.json({auth:true, name: req.session.name});
             }
         });
     });

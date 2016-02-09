@@ -7,7 +7,7 @@ app.set('trust proxy', 1);
 app.use(
   cookieSession({
     name: 'claimBook',
-    keys: ['auth']
+    keys: ['auth', 'name']
   })
 );
 

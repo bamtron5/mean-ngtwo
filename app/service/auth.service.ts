@@ -8,8 +8,12 @@ export class authService {
   auth$: Observable<Boolean>;
   _authObserver: any;
 
+  userName$: Observable<String>;
+  _userNameObserver: any;
+
   constructor(private http: Http) {
     this.auth$ = new Observable(observer => this._authObserver = observer).share();
+    this.userName$ = new Observable(observer => this._userNameObserver = observer).share();
   }
 
   private _authUrl = 'api/auth/';
@@ -19,6 +23,7 @@ export class authService {
       .map(res => res.json())
       .subscribe(data => {
         this._authObserver.next(data.auth);
+        this._userNameObserver.next(data.name);
       }, error => this.handleError(error));
   }
 

@@ -13,6 +13,10 @@ export class userService {
     users: Array<User>
   }
 
+  private _acceptStore:{
+    accept:Array<Boolean>
+  }
+
   user$: Observable<User>;
   _userObserver: any;
 
@@ -22,12 +26,17 @@ export class userService {
   submitted$: Observable<Boolean>;
   _submittedObserver: any;
 
+  acceptedLogin$: Observable<Boolean>;
+  _acceptedObserver: any;
+
   constructor(private http: Http) { 
     this.users$ = new Observable(observer => this._usersObserver = observer).share();
     this.user$ = new Observable(observer => this._userObserver = observer).share();
     this.editForm$ = new Observable(observer => this._editObserver = observer).share();
     this.submitted$ = new Observable(observer => this._submittedObserver = observer).share();
+    this.acceptedLogin$ = new Observable(observer => this._acceptedObserver = observer).share();
     this._dataStore = { users: [] };
+    this._acceptStore = { accept: [] };
   }
 
   private _usersUrl = 'api/users/';
@@ -74,15 +83,20 @@ export class userService {
       );
   }
 
-  login(user){
+  login(user, redirect){
+    var redirect = redirect ? redirect : '/profile';
     var strUser = JSON.stringify(user);
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    this.http.post('/api/login', strUser, {headers: headers})
-      .map(res => res.json())
-      .subscribe(
-        error => this.handleError(error)
-      );
+    return this.http.post('/api/login', strUser, { headers: headers })
+    .map(res => res.json())
+    .subscribe(
+        data => { 
+          this._acceptedObserver.next(true);
+          location.href = redirect;
+        },
+        error => this._acceptedObserver.next(false)
+    );
   }
 
   deleteUser(user){
