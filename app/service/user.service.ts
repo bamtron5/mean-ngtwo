@@ -99,6 +99,16 @@ export class userService {
     );
   }
 
+  logout(){
+     return this.http.post('/api/logout', JSON.stringify({logout:true}))
+      .map(res => res.json())
+      .subscribe(
+       data => { 
+         location.href = '/'; 
+       }
+      )
+  }
+
   deleteUser(user){
     var query = user._id;
     this.http.delete(this._usersUrl + query, {})

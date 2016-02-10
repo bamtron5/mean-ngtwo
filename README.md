@@ -57,3 +57,6 @@ ng.profiler.timeChangeDetection();
 	- `heroku deploy`
 - Travis CI
 - Puphet like VM DEV
+
+- Contact
+

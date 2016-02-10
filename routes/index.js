@@ -8,8 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET login page. */
-router.get('/login', 
-	function(req,res,next){
+router.get('/login', function(req,res,next){
 		isAuth(req.session, function(decoded){
 			if(decoded){
 				res.redirect('/profile');
@@ -21,8 +20,7 @@ router.get('/login',
 );
 
 /* GET profile page. */
-router.get('/profile',
-	function(req,res,next){
+router.get('/profile', function(req,res,next){
 		isAuth(req.session, function(decoded){
 			if(decoded){
 				res.render('profile');
