@@ -35,7 +35,11 @@ import {LoginFormComponent} from './login.form.component'
 	{path: '/profile', name:'ProfileComponent', component: ProfileComponent}
 ])
 
-export class AppComponent{};
+export class AppComponent{
+	constructor(){
+
+	}
+};
 
 bootstrap(AppComponent, [todoService, authService, ROUTER_PROVIDERS])
 	.catch(err => console.log(err));

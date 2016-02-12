@@ -1,4 +1,4 @@
 <p>Am i authorized: {{isAuth}}</p>
-<p>My User Name is: {{curUser}}</p>
+<p *ngIf="isAuth">My User Name is: {{curUser}}</p>
 <a *ngIf="!isAuth" href="/login">Login</a>
 <a *ngIf="isAuth" (click)="logout()" href="#">Logout</a>

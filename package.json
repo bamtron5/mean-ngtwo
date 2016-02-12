@@ -3,9 +3,9 @@
   "version": "0.0.01.pre",
   "private": true,
   "scripts": {
-    "server": "node ./bin/wwww",
-    "dev": "DEBUG=claimBook* npm start",
-    "start": "node_modules/typescript/bin/tsc -outDir appBuilt && node ./bin/www"
+    "serve": "DEBUG=claimBook* && node ./bin/www",
+    "dev": "DEBUG=claimBook* node_modules/typescript/bin/tsc -outDir appBuilt && node ./bin/www",
+    "watch": "DEBUG=claimBook* node_modules/typescript/bin/tsc -outDir appBuilt -w"
   },
   "bugs": {
     "url": "https://github.com/bamtron5/mean-ngtwo/issues",
