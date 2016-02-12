@@ -4,7 +4,6 @@ import {NgForm}    from 'angular2/common'
 import { User }    from './service/models/user'
 import {userService} from './service/user.service'
 import {HTTP_PROVIDERS} from 'angular2/http'
-import {authService} from './service/auth.service';
 import 'rxjs/Rx' //operators for es6 ... wtf
 
 @Component({
@@ -12,13 +11,12 @@ import 'rxjs/Rx' //operators for es6 ... wtf
     templateUrl: 'templates/login-form.html',
 	providers: [
 		HTTP_PROVIDERS,
-		authService,
 		userService
 	]
 })
 
 export class LoginFormComponent {
-	constructor(public _userService: userService, public _authService: authService) {
+	constructor(public _userService: userService) {
 		(this._userService.acceptedLogin$.subscribe(updatedAccept => { this.isAccepted = updatedAccept})) ? undefined : false;
 	}
 
@@ -29,8 +27,3 @@ export class LoginFormComponent {
 		var method = this._userService.login(this.model, false);
 	}
 }
-
-
-
-bootstrap(LoginFormComponent, [userService, authService])
-	.catch(err => console.log(err));

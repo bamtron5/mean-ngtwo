@@ -10,7 +10,3 @@ import 'rxjs/Rx' //operators for es6 ... wtf
 })
 
 export class ProfileComponent{};
-
-bootstrap(ProfileComponent)
-	.catch(err => console.log(err));
-
