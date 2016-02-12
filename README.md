@@ -22,6 +22,7 @@ then:
 * Express API routes
 	- *needs testing*
 * Static Routing
+* Jasmine Testing
 
 ## Future Support
 Angular2 Developer Tools

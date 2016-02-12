@@ -1,5 +1,5 @@
 import {bootstrap} from 'angular2/platform/browser'
-import {Component, OnChanges, SimpleChange } from 'angular2/core'
+import { Component } from 'angular2/core'
 import {NgForm}    from 'angular2/common'
 import { User }    from './service/models/user'
 import {userService} from './service/user.service'

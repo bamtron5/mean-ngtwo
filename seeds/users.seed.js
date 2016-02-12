@@ -1,6 +1,5 @@
 var User = require('../models/users');
 
-//move to populator... used to remove test data
 User.remove({}, function(err){
 	if(err){
 		console.log(err);
@@ -21,7 +20,6 @@ var newUser = [
 	})
 ];
 
-//move to populator... used to save new test data
 for(var i=0; i < newUser.length; i++){
 	newUser[i].save(function(err){
 		if(err){

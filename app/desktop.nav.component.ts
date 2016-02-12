@@ -1,7 +1,6 @@
 import {bootstrap} from 'angular2/platform/browser'
 import {Component} from 'angular2/core'
 import {NgForm}    from 'angular2/common'
-// import { User }    from './service/models/user'
 import {userService} from './service/user.service'
 import {authService} from './service/auth.service'
 import {HTTP_PROVIDERS} from 'angular2/http'
@@ -25,7 +24,6 @@ export class DesktopNavComponent{
 
 	isAuth:Boolean;
 	curUser: String;
-	fake: Object;
 
 	ngOnInit(){
 		this._authService.getAuth();
