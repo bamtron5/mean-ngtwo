@@ -10,9 +10,9 @@ then:
 `npm run dev`
 
 ##Package Execution Scripts
-	- `npm run serve`
-	- `npm run dev`
-	- `npm run watch`
+- `npm run serve`
+- `npm run dev`
+- `npm run watch`
 
 ## Includes	
 * Authentication w/ JsonWebTokens
@@ -36,4 +36,4 @@ then:
 - Puphet like VM DEV
 
 ## Contact
-	[http://brandonam.com](http://brandonam.com)
+[http://brandonam.com](http://brandonam.com)
