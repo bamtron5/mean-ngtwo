@@ -1,9 +1,20 @@
 {
   "name": "claimBook",
-  "version": "0.0.0",
+  "version": "0.0.01.pre",
   "private": true,
   "scripts": {
+    "server": "node ./bin/wwww",
+    "dev": "DEBUG=claimBook* npm start",
     "start": "node_modules/typescript/bin/tsc -outDir appBuilt && node ./bin/www"
+  },
+  "bugs": {
+    "url" : "https://github.com/bamtron5/mean-ngtwo/issues",
+    "email" : "brandon@brandonam.com"
+  },
+  "author": {
+    "name":"Brandon Morrison",
+    "email":"brandon@brandonam.com",
+    "url":"http://brandonam.com"
   },
   "dependencies": {
     "angular2": "2.0.0-beta.0",
