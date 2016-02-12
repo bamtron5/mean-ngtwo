@@ -31,4 +31,11 @@ router.get('/profile', function(req,res,next){
 	}
 );
 
+/* GET test page. */
+/* Should be conditioned to only work in dev */
+router.get('/test', function(req,res,next){
+		res.render('../app/test/unit-tests');
+	}
+);
+
 module.exports = router;

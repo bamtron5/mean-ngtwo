@@ -8,13 +8,13 @@
     "start": "node_modules/typescript/bin/tsc -outDir appBuilt && node ./bin/www"
   },
   "bugs": {
-    "url" : "https://github.com/bamtron5/mean-ngtwo/issues",
-    "email" : "brandon@brandonam.com"
+    "url": "https://github.com/bamtron5/mean-ngtwo/issues",
+    "email": "brandon@brandonam.com"
   },
   "author": {
-    "name":"Brandon Morrison",
-    "email":"brandon@brandonam.com",
-    "url":"http://brandonam.com"
+    "name": "Brandon Morrison",
+    "email": "brandon@brandonam.com",
+    "url": "http://brandonam.com"
   },
   "dependencies": {
     "angular2": "2.0.0-beta.0",
@@ -39,7 +39,8 @@
     "zone.js": "0.5.10"
   },
   "devDependencies": {
-    "typescript": "^1.7.5",
-    "babel-cli": "^6.0.0"
+    "babel-cli": "^6.0.0",
+    "jasmine-core": "2.4.1",
+    "typescript": "^1.7.5"
   }
 }
