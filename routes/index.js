@@ -34,7 +34,11 @@ router.get('/profile', function(req,res,next){
 /* GET test page. */
 /* Should be conditioned to only work in dev */
 router.get('/test', function(req,res,next){
-		res.render('../app/test/unit-tests');
+		if(process.env.NODE_ENV === 'development'){
+			res.render('../app/test/unit-tests');
+		} else {
+			res.sendStatus(400);
+		}
 	}
 );
 

@@ -1,13 +1,31 @@
 <div class="container">
+    <button (click)="changeForm(true)">Login Form</button>
+    <button (click)="changeForm(false)">Sign up Form</button>
 
-    IS LOGGED IN? {{isAccepted}}
-    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+<!-- 
+    IS LOGGED IN? {{isAccepted}} -->
+    <form *ngIf="!isLogin" (ngSubmit)="onSubmit('signup')" #signUpForm="ngForm">
+        <h3>Sign up</h3>
+        <div class="form-group">
+          <label for="name">User Name</label>
+          <input type="text" class="form-control" required
+            [(ngModel)]="model.name"
+              ngControl="name"  #name="ngForm">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" required
+            [(ngModel)]="model.password"
+              ngControl="password"  #name="ngForm">
+        </div>
+        <button type="submit" class="btn btn-default" [disabled]="!signUpForm.form.valid">Login</button>
+    </form>
+
+    <form (ngSubmit)="onSubmit('login')" #loginForm="ngForm" *ngIf="isLogin">
+      <h3>Login</h3>
       <div class="form-group">
         <label for="name">User Name</label>
         <input type="text" class="form-control" required
           [(ngModel)]="model.name"
             ngControl="name"  #name="ngForm">
-        <br>
         <label for="password">Password</label>
         <input type="password" class="form-control" required
           [(ngModel)]="model.password"

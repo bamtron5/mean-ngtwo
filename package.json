@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "DEBUG=claimBook* && node ./bin/www",
-    "dev": "DEBUG=claimBook* node_modules/typescript/bin/tsc -outDir appBuilt && node ./bin/www",
+    "dev": "NODE_ENV=development DEBUG=claimBook* node_modules/typescript/bin/tsc -outDir appBuilt && node ./bin/www",
+    "prod": "NODE_ENV=production DEBUG=claimBook* node_modules/typescript/bin/tsc -outDir appBuilt &&  && node ./bin/www",
     "watch": "DEBUG=claimBook* node_modules/typescript/bin/tsc -outDir appBuilt -w"
   },
   "bugs": {

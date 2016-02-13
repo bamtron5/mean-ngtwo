@@ -99,6 +99,22 @@ export class userService {
     );
   }
 
+  signup(user, redirect){
+    var redirect = redirect ? redirect : '/profile';
+    var strUser = JSON.stringify(user);
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('/api/signup', strUser, { headers: headers })
+    .map(res => res.json())
+    .subscribe(
+       data => { 
+          this._acceptedObserver.next(true);
+          location.href = redirect;
+       },
+       error => this._acceptedObserver.next(false)
+    );
+  }
+
   logout(){
      return this.http.post('/api/logout', JSON.stringify({logout:true}))
       .map(res => res.json())
