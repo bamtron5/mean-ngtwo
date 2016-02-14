@@ -19,7 +19,6 @@ import 'rxjs/Rx' //operators for es6 ... wtf
 
 export class LoginFormComponent {
 	constructor(public _userService: userService, params: RouteParams) {
-		console.log(params.get('loginForm'));
 		if (params.get('loginForm') === "true" || params.get('loginForm') === null){
 			this.isLogin = true;
 		} else {

@@ -29,12 +29,16 @@ export class userService {
   acceptedLogin$: Observable<Boolean>;
   _acceptedObserver: any;
 
+  verification$: Observable<Object>;
+  _verificationObserver: any;
+
   constructor(private http: Http) { 
     this.users$ = new Observable(observer => this._usersObserver = observer).share();
     this.user$ = new Observable(observer => this._userObserver = observer).share();
     this.editForm$ = new Observable(observer => this._editObserver = observer).share();
     this.submitted$ = new Observable(observer => this._submittedObserver = observer).share();
     this.acceptedLogin$ = new Observable(observer => this._acceptedObserver = observer).share();
+    this.verification$ = new Observable(observer => this._verificationObserver = observer).share();
     this._dataStore = { users: [] };
     this._acceptStore = { accept: [] };
   }
@@ -112,6 +116,16 @@ export class userService {
           location.href = redirect;
        },
        error => this._acceptedObserver.next(false)
+    );
+  }
+
+  verify(token){
+    return this.http.get('/api/verify/' +  token)
+      .map(res => res.json())
+      .subscribe(
+      data => {
+      },
+      error => this.handleError(error)
     );
   }
 

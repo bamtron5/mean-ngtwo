@@ -11,12 +11,16 @@ var newUser = [
 	new User({
 		'name':'Flip',
 		'testData':true,
-		'password':'Password'
+		'email':'brandon@brandonam.com',
+		'password':'Password',
+		'active':true
 	}),
 	new User({
 		'name':'Kev',
 		'testData':true,
-		'password':'Password'
+		'email':'brmorrison61@gmail.com',
+		'password':'Password',
+		'active':true
 	})
 ];
 

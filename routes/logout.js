@@ -1,7 +1,5 @@
 var express = require('express');
-var bodyParser = require('body-parser');
 var router = express.Router();
-
 
 router.route('/')
     // get the user with that id (accessed at GET http://localhost:8080/api/users/:user_id)

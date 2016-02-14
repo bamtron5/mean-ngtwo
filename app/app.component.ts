@@ -13,6 +13,7 @@ import {authService} from './service/auth.service'
 import {TodoFormComponent} from './todo.form.component'
 import {ProfileComponent} from './profile.component'
 import {LoginFormComponent} from './login.form.component'
+import {VerificationComponent} from './verify.component'
 
 
 @Component({
@@ -32,7 +33,8 @@ import {LoginFormComponent} from './login.form.component'
 @RouteConfig([
 	{path: '/', name: 'TodoFormComponent', component: TodoFormComponent},
 	{path: '/login', name:'LoginFormComponent', component: LoginFormComponent},
-	{path: '/profile', name:'ProfileComponent', component: ProfileComponent}
+	{path: '/profile', name:'ProfileComponent', component: ProfileComponent},
+	{path: '/verify', name:'VerificationComponent', component: VerificationComponent}
 ])
 
 export class AppComponent{

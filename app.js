@@ -21,7 +21,6 @@ var bodyParser = require('body-parser');
 var db = require('./admin/mongoConnect.js');
 var expressJWT = require('express-jwt');
 var jwtSecret = require('./admin/jwtSecret');
-var router = express.Router(); 
 
 if(env === 'development'){
   var seed = require('./seeds/index.js');
@@ -45,6 +44,7 @@ var login = require('./routes/login');
 var auth = require('./routes/auth');
 var logout = require('./routes/logout');
 var signup = require('./routes/signup');
+var verify = require('./routes/verify');
 
 //static paths
 app.use(express.static(path.join(__dirname, 'public')));
@@ -61,6 +61,8 @@ app.use('/api/todos', todo);
 app.use('/api/auth', auth);
 app.use('/api/logout', logout);
 app.use('/api/signup', signup);
+app.use('/api/verify', verify);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -73,7 +75,8 @@ app.use(expressJWT({secret: jwtSecret})
       "/api/login",
       "/api/todos",
       "/api/auth",
-      "/api/signup"
+      "/api/signup",
+      "/api/verify"
     ]
   })
 );
@@ -89,8 +92,6 @@ app.use(function(req, res, next) {
 //((what mongo models are available))
 console.log('Mongo collections:');
 console.log(Object.keys(db.connections[0].collections));
-console.log('Node Environment Keys:\n');
-console.log(Object.keys(process.env));
 
 // error handlers
 // development error handler

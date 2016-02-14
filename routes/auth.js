@@ -3,7 +3,6 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 var jwtSecret = require('../admin/jwtSecret');
 
-
 router.route('/')
     // get the auth with that id (accessed at GET root/api/auth)
     .get(function(req,res){

@@ -1,3 +1,4 @@
 node_modules
 appBuilt
 npm-debug.log
+admin/emailSecret2.js

@@ -1,11 +1,9 @@
 var express = require('express');
-var bodyParser = require('body-parser');
 var router = express.Router();
 var mongoose = require('../admin/mongoConnect.js');
 var userModel = require('../models/users');
 var jwt = require('jsonwebtoken');
 var jwtSecret = require('../admin/jwtSecret');
-
 
 router.route('/')
     // get the user with that id (accessed at GET http://localhost:8080/api/users/:user_id)
@@ -16,7 +14,7 @@ router.route('/')
                 res.send(err);
             }
 
-            if(user){
+            if(user && user.active === true){
                 user.comparePassword(req.body.password, function(err, isMatch) {
                     if (err) {
                         console.log(err);
