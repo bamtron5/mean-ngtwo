@@ -1,4 +1,4 @@
-var mongoose     = require('../admin/mongoConnect.js');
+var mongoose     = require('../../admin/mongoConnect.js');
 var Schema       = mongoose.Schema;
 
 var VerificationSchema   = new Schema({

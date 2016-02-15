@@ -23,7 +23,7 @@ var expressJWT = require('express-jwt');
 var jwtSecret = require('./admin/jwtSecret');
 
 if(env === 'development'){
-  var seed = require('./seeds/index.js');
+  var seed = require('./routes/seeds/index.js');
 }
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -69,6 +69,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //JWT ONLY
+//if not, add to the excluded array in the path property
 app.use(expressJWT({secret: jwtSecret})
   .unless({
     path:[

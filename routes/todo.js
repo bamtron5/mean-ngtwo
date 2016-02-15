@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('../admin/mongoConnect.js');
-var todoModel = require('../models/todo');
+var todoModel = require('./models/todo');
 
 /* GET todos listing. */
 router.route('/')

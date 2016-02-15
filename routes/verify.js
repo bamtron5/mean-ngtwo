@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('../admin/mongoConnect.js');
-var userModel = require('../models/users');
-var verificationModel = require('../models/verification');
+var userModel = require('./models/users');
+var verificationModel = require('./models/verification');
 
 router.route('/:token')
     //this endpoint is for users to verify their account by token from the sign up email
