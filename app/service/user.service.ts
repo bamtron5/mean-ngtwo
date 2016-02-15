@@ -29,7 +29,7 @@ export class userService {
   acceptedLogin$: Observable<Boolean>;
   _acceptedObserver: any;
 
-  verification$: Observable<Object>;
+  verification$: Observable<Boolean>;
   _verificationObserver: any;
 
   constructor(private http: Http) { 
@@ -124,6 +124,8 @@ export class userService {
       .map(res => res.json())
       .subscribe(
       data => {
+        this._verificationObserver.next(data.verify);
+        console.log(data.verify);
       },
       error => this.handleError(error)
     );

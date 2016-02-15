@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('../admin/mongoConnect.js');
 var userModel = require('../models/users');
-var jwt = require('jsonwebtoken');
-var jwtSecret = require('../admin/jwtSecret');
 var nodemailer = require('nodemailer');
 //please change this to include your email smtp server
 //or equate to null to turn off the email confirmation
