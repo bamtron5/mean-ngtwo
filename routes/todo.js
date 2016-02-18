@@ -40,6 +40,8 @@ router.route('/:id')
     // update the todo with this id (accessed at PUT http://localhost:8080/api/todos/:todo_id)
     .put(function(req, res) {
         todoModel.findById(req.params.id, function(err, oldtodo) {
+            (oldtodo === null) ? res.sendStatus(204) : null;
+
             if (err){
                 res.send(err);
             }

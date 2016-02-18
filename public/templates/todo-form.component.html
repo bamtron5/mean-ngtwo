@@ -30,6 +30,6 @@
     </div>
     <br>
     <button type="button" class="btn btn-default" (click)="newTodo()">New todo</button>
-    <button class="btn btn-default" (click)="editTodo()" name="{{ model._id }}">Edit</button>
+    <button class="btn btn-default" (click)="editTodo()" name="{{ model._id }}" [disabled]="!model.length">Edit</button>
   </div>
 </div>

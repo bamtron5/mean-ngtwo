@@ -1,6 +1,6 @@
 {
   "name": "claimBook",
-  "version": "0.0.01.pre",
+  "version": "0.0.10.pre",
   "private": true,
   "scripts": {
     "serve": "DEBUG=claimBook* && node ./bin/www",
