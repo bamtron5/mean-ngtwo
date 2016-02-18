@@ -11,7 +11,8 @@ var emailSecret = require('../admin/emailSecret2');
 router.route('/')
     // get the user with that id (accessed at GET http://localhost:8080/api/users/:user_id)
     .post(function(req, res) {
-        userModel.findOne({name:req.body.name}, {email:req.body.email}, function(err, user){
+        //userModel.find({ $or: [{name:res.body.name}, {email:res.body.email}]}, function(err, user){
+        userModel.findOne({name:req.body.name}, function(err, user){
             if(err){
                 console.log(err);
             }
@@ -20,9 +21,22 @@ router.route('/')
                 res.send({signup: false, message: "Please try a different email or username."});
                 res.end();
             } else {
-                verifyUser();
+                userModel.findOne({email:req.body.email}, function(err, user){
+                    if(err){
+                        console.log(err);
+                    }
+
+                    if(user){
+                        res.send({signup: false, message: "Please try a different email or username."});
+                        res.end();
+                    } else {
+                        verifyUser();
+                    }
+                });
             }
         });
+
+        
 
         function verifyUser(){
             var verifyToken = Math.random().toString(36).substring(7);
