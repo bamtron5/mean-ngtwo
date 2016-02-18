@@ -1,5 +1,15 @@
-<p>Am i authorized: {{isAuth}}</p>
-<p *ngIf="isAuth">My User Name is: {{curUser}}</p>
-<a *ngIf="!isAuth" href="/login?loginForm=true">Login</a>
-<a *ngIf="!isAuth" href="/login?loginForm=false">Sign up</a>
-<a *ngIf="isAuth" (click)="logout()" href="#">Logout</a>
+<nav class="navbar navbar-default">
+	<div class="container">
+		<ul class="nav nav-tabs navbar-left">
+			<li><a href="/">Home</a></li>
+			<li *ngIf="!isAuth"><a href="/login?loginForm=true">Login</a></li>
+			<li *ngIf="!isAuth"><a href="/login?loginForm=false">Sign up</a></li>
+			<li *ngIf="isAuth"><a href="/profile">Profile</a></li>
+			<li *ngIf="isAuth"><a (click)="logout()" href="#">Logout</a></li>
+		</ul>
+		<div class="status navbar-right">
+			<p>Am i authorized: {{isAuth}}</p>
+			<p *ngIf="isAuth">My User Name is: {{curUser}}</p>
+		</div>
+	</div>
+</nav>

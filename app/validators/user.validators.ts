@@ -17,20 +17,16 @@ export class UserValidators{
 
 	static emailMatch({value}: ControlGroup): {[key: string]: any} {
 		if(value.emailCtrl === undefined && value.confirmEmail === undefined){
-			console.log('null');
 			return null;
 		} else {
-			console.log(value.emailCtrl === value.confirmEmail ? null : { emailMatch: true });
 			return value.emailCtrl === value.confirmEmail ? null : { emailMatch: true };
 		}
 	}
 
 	static passwordMatch({value}: ControlGroup): {[key: string]: any} {
 		if(value.password === undefined && value.confirmPassword === undefined){
-			console.log('null');
 			return null;
 		} else {
-			console.log(value.password === value.confirmPassword ? null : { passwordMatch: true });
 			return value.password === value.confirmPassword ? null : { passwordMatch: true };
 		}
 	}

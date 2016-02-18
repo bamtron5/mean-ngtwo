@@ -10,53 +10,53 @@
             <label for="name">Username</label>
             <input type="text" class="form-control" required [(ngModel)]="model.name" ngControl="name">
             <div *ngIf="name.dirty && !name.valid">
-                <span *ngIf="name.errors.minlength">Username must be longer that 4 characters.</span>
-                <span *ngIf="name.errors.maxlength">Username cannot be longer than 35 characters.</span>
+                <div ngClass="alert alert-danger" *ngIf="name.errors.minlength">Username must be longer that 4 characters.</div>
+                <div ngClass="alert alert-danger" *ngIf="name.errors.maxlength">Username cannot be longer than 35 characters.</div>
             </div>
 
             <label for="email">Email</label>
             <input type="email" class="form-control" required [(ngModel)]="model.email" ngControl="emailCtrl" #emailVar="ngForm">
             <div *ngIf="emailCtrl.dirty && !emailCtrl.valid">
-                <span *ngIf="emailCtrl.errors.emailValidator">Must be a valid email.</span>
+                <div ngClass="alert alert-danger" *ngIf="emailCtrl.errors.emailValidator">Must be a valid email.</div>
             </div>
             <div *ngIf="emailCtrl.dirty && emailVar.value !== confirmEmailVar.value">
-                <span *ngIf="emailVar.value !== confirmEmailVar.value">Email fields must match.</span>
+                <div ngClass="alert alert-danger" *ngIf="emailVar.value !== confirmEmailVar.value">Email fields must match.</div>
             </div>
 
             <label for="email">Confirm Email</label>
             <input type="email" class="form-control" required ngControl="confirmEmail" #confirmEmailVar="ngForm">
             <div *ngIf="confirmEmail.dirty && !confirmEmail.valid">
-                <span *ngIf="confirmEmail.errors.emailValidator">Must be a valid email.</span>
+                <div ngClass="alert alert-danger" *ngIf="confirmEmail.errors.emailValidator">Must be a valid email.</div>
             </div>
             <div *ngIf="confirmEmail.dirty && emailVar.value !== confirmEmailVar.value">
-                <span *ngIf="emailVar.value !== confirmEmailVar.value">Email fields must match.</span>
+                <div ngClass="alert alert-danger" *ngIf="emailVar.value !== confirmEmailVar.value">Email fields must match.</div>
             </div>
 
             <div ngControlGroup="matchingPassword">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" required [(ngModel)]="model.password" ngControl="password" #passwordVar="ngForm">
                 <div *ngIf="password.dirty && !password.valid">
-                    <span *ngIf="password.errors.minlength">Password must be longer that 8 characters.</span>
-                    <span *ngIf="password.errors.maxlength">Password cannot be longer than 35 characters.</span>
+                    <div ngClass="alert alert-danger" *ngIf="password.errors.minlength">Password must be longer that 8 characters.</div>
+                    <div ngClass="alert alert-danger" *ngIf="password.errors.maxlength">Password cannot be longer than 35 characters.</div>
                 </div>
                 <div *ngIf="password.dirty && passwordVar.value !== confirmPasswordVar.value">
-                    <span *ngIf="passwordVar.value !== confirmPasswordVar.value">Password fields must match.</span>
+                    <div ngClass="alert alert-danger" *ngIf="passwordVar.value !== confirmPasswordVar.value">Password fields must match.</div>
                 </div>
 
                 <label for="password">Confirm Password</label>
                 <input type="password" class="form-control" required ngControl="confirmPassword" #confirmPasswordVar="ngForm">
                 <div *ngIf="confirmPassword.dirty && !confirmPassword.valid">
-                    <span *ngIf="confirmPassword.errors.minlength">Password must be longer that 8 characters.</span>
-                    <span *ngIf="confirmPassword.errors.maxlength">Password cannot be longer than 35 characters.</span>
+                    <div ngClass="alert alert-danger" *ngIf="confirmPassword.errors.minlength">Password must be longer that 8 characters.</div>
+                    <div ngClass="alert alert-danger" *ngIf="confirmPassword.errors.maxlength">Password cannot be longer than 35 characters.</div>
                 </div>
                 <div *ngIf="confirmPassword.dirty && passwordVar.value !== confirmPasswordVar.value">
-                    <span *ngIf="passwordVar.value !== confirmPasswordVar.value">Password fields must match.</span>
+                    <div ngClass="alert alert-danger" *ngIf="passwordVar.value !== confirmPasswordVar.value">Password fields must match.</div>
                 </div>
             </div>
 
         </div>
 
-        <button type="submit" class="btn btn-default" [disabled]="!signUpForm.form.valid">Sign up</button>
+        <button ngClass="btn btn-primary" type="submit" [disabled]="!signUpForm.form.valid">Sign up</button>
         <p *ngIf="!acceptedLogin">{{signUpMessage}}</p>
 
     </form>
@@ -67,11 +67,11 @@
         <h3>Login</h3>
         <div class="form-group">
             <label for="name">User Name</label>
-            <input type="text" class="form-control" required [(ngModel)]="model.name" ngControl="name" #name="ngForm">
+            <input type="text" ngClass="form-control" required [(ngModel)]="model.name" ngControl="name" #name="ngForm">
             <label for="password">Password</label>
-            <input type="password" class="form-control" required [(ngModel)]="model.password" ngControl="password" #name="ngForm">
+            <input type="password" ngClass="form-control" required [(ngModel)]="model.password" ngControl="password" #name="ngForm">
         </div>
 
-        <button type="submit" class="btn btn-default" [disabled]="!loginForm.form.valid">Login</button>
+        <button type="submit" ngClass="btn btn-primary" [disabled]="!loginForm.form.valid">Login</button>
     </form>
 </div>

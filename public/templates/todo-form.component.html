@@ -16,8 +16,8 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-default" [disabled]="!todoForm.form.valid">Submit</button>
-      <button type="button" class="btn btn-default" (click)="newTodo()">New todo</button>
+      <button ngClass="btn btn-primary" type="submit" class="btn btn-default" [disabled]="!todoForm.form.valid">Submit</button>
+      <button ngClass="btn btn-primary" type="button" class="btn btn-default" (click)="newTodo()">New todo</button>
 
     </form>
   </div>
@@ -29,7 +29,7 @@
       <div class="col-xs-9  pull-left">{{ model.name }}</div>
     </div>
     <br>
-    <button type="button" class="btn btn-default" (click)="newTodo()">New todo</button>
-    <button class="btn btn-default" (click)="editTodo()" name="{{ model._id }}" [disabled]="!model.length">Edit</button>
+    <button ngClass="btn btn-primary btn-sm" type="button" class="btn btn-default" (click)="newTodo()">New todo</button>
+    <button ngClass="btn btn-primary btn-sm" class="btn btn-default" (click)="editTodo()" name="{{ model._id }}" [disabled]="!model.length">Edit</button>
   </div>
 </div>

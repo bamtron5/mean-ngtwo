@@ -8,8 +8,8 @@ import {Todo} from './service/models/todo'
 	<ul>
 		<li *ngFor="#todo of todos">
 		{{ todo.name }} 
-		<button (click)="editTodoForm([(todo)])">Edit</button>
-		<button (click)="deleteTodo([(todo)])">Delete</button>
+		<button ngClass="btn btn-primary btn-xs" (click)="editTodoForm([(todo)])">Edit</button>
+		<button ngClass="btn btn-primary btn-xs" (click)="deleteTodo([(todo)])">Delete</button>
 		</li>
 	</ul>
 	`
