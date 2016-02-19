@@ -15,7 +15,7 @@ then:
 	- insert: `exports.module = { PUBLIC_KEY: 'your public key', PRIVATE_KEY: 'your private key' }`
 - SMTP server for verification emails
 	- see admin/emailSecret.js
-- Change you admin/jwtSecret.js and don't publish that... like i have.  DEV ONLY
+- Change your admin/jwtSecret.js and don't publish that... like i have.  DEV ONLY
 
 ##Package Execution Scripts
 - `npm run serve`
