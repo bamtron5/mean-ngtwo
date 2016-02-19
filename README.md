@@ -9,6 +9,14 @@ Pre-alpha | Dev only. Contribution welcome.
 then:
 `npm run dev`
 
+##Prereq functional setup
+- You will need keys for Google ReCaptcha for Sign Up [https://developers.google.com/recaptcha/docs/start](https://developers.google.com/recaptcha/docs/start)
+	- create file admin/keys.js
+	- insert: `exports.module = { PUBLIC_KEY: 'your public key', PRIVATE_KEY: 'your private key' }`
+- SMTP server for verification emails
+	- see admin/emailSecret.js
+- Change you admin/jwtSecret.js and don't publish that... like i have.  DEV ONLY
+
 ##Package Execution Scripts
 - `npm run serve`
 - `npm run dev`
@@ -16,15 +24,16 @@ then:
 
 ## Includes	
 * Authentication w/ JsonWebTokens
+* Sign up w/ Google ReCaptcha and email verification
 * Components:
 	- Nav Component
-	- Login Component
+	- Login/Signup Component
 	- Todo List Component
 	- Profile Component 
 * Mongo Seeds (todo model, users model)
-* My NG Service Boiler Plate
+* NG Services
 * Express API routes
-* Static Routing
+* Static Routing w/ EJS templates
 * Jasmine Testing
 
 ## Future Support
