@@ -1,6 +1,7 @@
 import {Injectable}     from 'angular2/core'
 import {Http, Response, Headers} from 'angular2/http'
 import {User}           from './models/user'
+import {Captcha}        from './models/captcha'
 import {Observable}     from 'rxjs/Observable'
 import 'rxjs/add/operator/share'
 
@@ -35,6 +36,9 @@ export class userService {
   verification$: Observable<Boolean>;
   _verificationObserver: any;
 
+  captchaResponse$: Observable<Captcha>;
+  _captchaResponseObserver: any;
+
   constructor(private http: Http) { 
     this.users$ = new Observable(observer => this._usersObserver = observer).share();
     this.user$ = new Observable(observer => this._userObserver = observer).share();
@@ -43,6 +47,7 @@ export class userService {
     this.acceptedLogin$ = new Observable(observer => this._acceptedObserver = observer).share();
     this.signUpMessage$ = new Observable(observer => this._signUpMessageObserver = observer).share();
     this.verification$ = new Observable(observer => this._verificationObserver = observer).share();
+    this.captchaResponse$ = new Observable(observer => this._captchaResponseObserver = observer).share();
     this._dataStore = { users: [] };
     this._acceptStore = { accept: [] };
   }
@@ -104,10 +109,25 @@ export class userService {
           location.href = redirect;
         },
         error => this._acceptedObserver.next(false)
-    );
+    )
   }
 
-  signup(user, redirect){
+  verifyCaptcha(captcha: Object, cb: Function) {
+    console.log(captcha);
+    var captchaJson = JSON.stringify(captcha);
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('/api/signup/captcha', captchaJson, { headers: headers})
+      .map(res => res.json())
+      .subscribe(
+        data => {
+          this._captchaResponseObserver.next(data);
+          cb();
+        }, error => this.handleError(error)
+      )
+  }
+
+  signup(user, redirect) {
     var redirect = redirect ? redirect : '/profile';
     var strUser = JSON.stringify(user);
     var headers = new Headers();

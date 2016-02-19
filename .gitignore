@@ -2,3 +2,5 @@ node_modules
 appBuilt
 npm-debug.log
 admin/emailSecret2.js
+admin/keys.js
+views/npm-debug.log

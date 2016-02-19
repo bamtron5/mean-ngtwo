@@ -20,6 +20,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var db = require('./admin/mongoConnect.js');
 var expressJWT = require('express-jwt');
+var engine = require('ejs-locals');
 var jwtSecret = require('./admin/jwtSecret');
 
 if(env === 'development'){
@@ -63,10 +64,10 @@ app.use('/api/logout', logout);
 app.use('/api/signup', signup);
 app.use('/api/verify', verify);
 
-
 // view engine setup
+app.engine('ejs', engine)
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 //JWT ONLY
 //if not, add to the excluded array in the path property

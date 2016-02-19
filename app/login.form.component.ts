@@ -2,10 +2,13 @@ import {bootstrap} from 'angular2/platform/browser'
 import { Component } from 'angular2/core'
 import {NgForm, Control, Validators, ControlGroup, FormBuilder, FORM_DIRECTIVES}    from 'angular2/common'
 import { User }    from './service/models/user'
+import { Captcha } from './service/models/captcha'
 import {userService} from './service/user.service'
+import {authService} from './service/auth.service'
 import {HTTP_PROVIDERS} from 'angular2/http'
 import {ROUTER_PROVIDERS, Router, ROUTER_DIRECTIVES, RouteParams} from 'angular2/router'
 import {UserValidators} from './validators/user.validators'
+import {Observable}     from 'rxjs/Observable'
 import 'rxjs/Rx' //operators for es6 ... wtf
 
 @Component({
@@ -24,6 +27,7 @@ export class LoginFormComponent {
 	isLogin: Boolean;
 	isAccepted: Boolean;
 	signUpMessage: String;
+	captchaResponse: Captcha;
 
 	//controls
 	name: Control;
@@ -47,6 +51,8 @@ export class LoginFormComponent {
 		(this._userService.acceptedLogin$.subscribe(updatedAccept => { this.isAccepted = updatedAccept})) ? undefined : false;
 
 		this._userService.signUpMessage$.subscribe(updatedSignUpMessage => { this.signUpMessage = updatedSignUpMessage });
+
+		this._userService.captchaResponse$.subscribe(updatedCaptchaResponse => { this.captchaResponse = updatedCaptchaResponse });
 		
 		//control instances and validators
 		this.name = new Control('', Validators.compose([
@@ -88,11 +94,31 @@ export class LoginFormComponent {
 		}, { validator: UserValidators.emailMatch });
 	}
 
-	changeForm(_bool){
+	ngAfterViewInit(){
+		var c = <HTMLDivElement>document.getElementById('recaptcha_widget_div');
+		var newC = <HTMLDivElement>document.getElementById('captcha_div');
+		newC.appendChild(c);
+	}
+
+	changeForm(_bool: boolean) {
 		this.isLogin = _bool;
 	}
 
-	onSubmit(form) {
+	onSubmit(form: string) {
+		var captchaInput = <HTMLInputElement>document.getElementById('recaptcha_response_field');
+		var str = captchaInput.value;
+		var obj = { captcha: str, challenge: window['RecaptchaState'].challenge };
+
+		this._userService.verifyCaptcha(obj, () => {
+			if(this.captchaResponse.captcha){
+				this.submitForm(form);
+			} else {
+				window['Recaptcha'].reload();
+			}
+		});
+	}
+
+	submitForm(form:string){
 		if (form === "login"){
 			this._userService.login(this.model, false);
 		} else {

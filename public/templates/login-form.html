@@ -3,7 +3,7 @@
     <button (click)="changeForm(false)">Sign up Form</button>
 
     <!-- signupform -->
-    <form *ngIf="!isLogin" (ngSubmit)="onSubmit('signup')" #signUpForm="ngForm" [ngFormModel]="signUpFormGroup">
+    <form [hidden]="isLogin" (ngSubmit)="onSubmit('signup')" #signUpForm="ngForm" [ngFormModel]="signUpFormGroup">
         <h3>Sign up</h3>
         <div class="form-group">
 
@@ -56,14 +56,19 @@
 
         </div>
 
+        <div id="captcha_div">
+            <!-- appended by login.form.component on ngViewInit -->
+        </div>
+
         <button ngClass="btn btn-primary" type="submit" [disabled]="!signUpForm.form.valid">Sign up</button>
         <p *ngIf="!acceptedLogin">{{signUpMessage}}</p>
+        <p *ngIf="!acceptedLogin && captchaResponse">{{captchaResponse.message}}</p>
 
     </form>
 
 
     <!-- loginform -->
-    <form (ngSubmit)="onSubmit('login')" #loginForm="ngForm" *ngIf="isLogin">
+    <form (ngSubmit)="onSubmit('login')" #loginForm="ngForm" [hidden]="!isLogin">
         <h3>Login</h3>
         <div class="form-group">
             <label for="name">User Name</label>

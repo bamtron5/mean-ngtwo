@@ -1,6 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var isAuth = require('../admin/isAuth');
+var Recaptcha = require('re-captcha');
+var keys = require('../admin/keys');
+var recaptcha = new Recaptcha(keys.PUBLIC_KEY, keys.PRIVATE_KEY);
+
+console.log(recaptcha);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,7 +18,12 @@ router.get('/login', function(req,res,next){
 			if(decoded){
 				res.redirect('/profile');
 			} else {
-				res.render('login', {title: 'Login Page'});
+				res.render('login', {
+					locals: {
+						title: 'Login Page', 
+						recaptcha_form: recaptcha.toHTML()
+					}
+				});
 			}
 		});
 	}

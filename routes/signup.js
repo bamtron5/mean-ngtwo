@@ -3,7 +3,10 @@ var router = express.Router();
 var mongoose = require('../admin/mongoConnect.js');
 var userModel = require('./models/users');
 var verificatonModel = require('./models/verification');
-var nodemailer = require('nodemailer');
+var nodemailer = require('nodemailer'); 
+var Recaptcha = require('re-captcha');
+var keys = require('../admin/keys');
+var recaptcha = new Recaptcha(keys.PUBLIC_KEY, keys.PRIVATE_KEY);
 //please change this to include your email smtp server
 //or equate to null to turn off the email confirmation
 var emailSecret = require('../admin/emailSecret2'); 
@@ -88,6 +91,33 @@ router.route('/')
             res.status(200).json({message:"Sign up successful.", signup:true});
             res.end();
         }
+    });
+
+router.route('/captcha')
+    .post(function(req,res){
+        var data = {
+            response:  req.body.captcha,
+            challenge: req.body.challenge,
+            remoteip: req.connection.remoteAddress
+        };
+
+        console.log(data);
+
+        recaptcha.verify(data, function(err) {
+            if (err) {
+                console.log(err);
+                res.send({captcha:false, message:"Invalid captcha. Please try again."})
+                // Redisplay the form.
+                // res.render('form.html', {
+                //     layout: false,
+                //     locals: {
+                //       recaptcha_form: recaptcha.toHTML(err)
+                //     }
+                // });
+            } else {
+                res.send({captcha:true, message:"Valid captcha."});
+            }
+        });
     });
 
 module.exports = router;

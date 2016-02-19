@@ -33,3 +33,18 @@ desktop-navigation nav ul{
 todo-list ul > li{
 	margin-bottom:10px;
 }
+
+/**
+* captcha
+**/
+#recaptcha_widget_div{
+	display:none;
+}
+
+#captcha_div{
+	margin-bottom:10px;
+}
+
+#captcha_div #recaptcha_widget_div{
+	display:block;
+}
