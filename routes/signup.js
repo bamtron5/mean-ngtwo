@@ -8,7 +8,6 @@ var Recaptcha = require('re-captcha');
 var keys = require('../admin/keys');
 var recaptcha = new Recaptcha(keys.PUBLIC_KEY, keys.PRIVATE_KEY);
 //please change this to include your email smtp server
-//or equate to null to turn off the email confirmation
 var emailSecret = require('../admin/emailSecret2'); 
 
 router.route('/')
@@ -18,6 +17,7 @@ router.route('/')
         userModel.findOne({name:req.body.name}, function(err, user){
             if(err){
                 console.log(err);
+                res.send({signup: false, message: "An error has occurred. Please try again."});
             }
 
             if(user){
@@ -27,6 +27,7 @@ router.route('/')
                 userModel.findOne({email:req.body.email}, function(err, user){
                     if(err){
                         console.log(err);
+                        res.send({signup: false, message: "An error has occurred. Please try again."});
                     }
 
                     if(user){
@@ -66,13 +67,15 @@ router.route('/')
 
             transporter.sendMail(mailOptions, function(error, info){
                 if(error){
-                    return console.log(error);
+                    console.log(error);
+                    res.send({signup: false, message: "An error has occurred. Your email address was rejected."});
                 }
                 console.log('Message sent: ' + info.response);
 
                 newVerification.save(function(err){
                     if(err){
                         console.log(err);
+                        res.send({signup: false, message: "An error has occurred. Please try again."});
                     } else {
                         console.log('saved verification');
                         console.log(newVerification);
@@ -80,7 +83,6 @@ router.route('/')
                 });
             });
 
-            /*below will be moved to the verification stage*/
             newUser.save(function(err){
                 if(err){
                     res.status(400).json({signup:false,message:"Sign up failed."});
@@ -101,19 +103,10 @@ router.route('/captcha')
             remoteip: req.connection.remoteAddress
         };
 
-        console.log(data);
-
         recaptcha.verify(data, function(err) {
             if (err) {
                 console.log(err);
                 res.send({captcha:false, message:"Invalid captcha. Please try again."})
-                // Redisplay the form.
-                // res.render('form.html', {
-                //     layout: false,
-                //     locals: {
-                //       recaptcha_form: recaptcha.toHTML(err)
-                //     }
-                // });
             } else {
                 res.send({captcha:true, message:"Valid captcha."});
             }
