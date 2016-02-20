@@ -1,0 +1,51 @@
+remote:        
+remote:        > bcrypt@0.8.5 install /tmp/build_b225c763e30426ba26eacf8f7b9088fc/node_modules/bcrypt
+remote:        > node-gyp rebuild
+remote:        
+remote:        gyp info it worked if it ends with ok
+remote:        gyp verb cli [ 'node',
+remote:        gyp verb cli   '/tmp/build_b225c763e30426ba26eacf8f7b9088fc/.heroku/node/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js',
+remote:        gyp verb cli   'rebuild' ]
+remote:        gyp info using node-gyp@1.0.2
+remote:        gyp info using node@0.12.0 | linux | x64
+remote:        gyp verb command rebuild []
+remote:        gyp verb command clean []
+remote:        gyp verb clean removing "build" directory
+remote:        gyp verb command configure []
+remote:        gyp verb check python checking for Python executable "python" in the PATH
+remote:        gyp verb `which` succeeded python /usr/bin/python
+remote:        gyp verb check python version `python -c "import platform; print(platform.python_version());"` returned: "2.7.6n"
+remote:        gyp verb get node dir no --target version specified, falling back to host node version: v0.12.0
+remote:        gyp verb command install [ 'v0.12.0' ]
+remote:        gyp verb install input version string "v0.12.0"
+remote:        gyp verb install installing version: 0.12.0
+remote:        gyp verb install --ensure was passed, so won't reinstall if already installed
+remote:        gyp verb install version not already installed, continuing with install 0.12.0
+remote:        gyp verb ensuring nodedir is created /app/.node-gyp/0.12.0
+remote:        gyp verb created nodedir /app/.node-gyp
+remote:        gyp http GET http://nodejs.org/dist/v0.12.0/node-v0.12.0.tar.gz
+remote:        gyp http 524 http://nodejs.org/dist/v0.12.0/node-v0.12.0.tar.gz
+remote:        gyp WARN install got an error, rolling back install
+remote:        gyp verb command remove [ '0.12.0' ]
+remote:        gyp verb remove using node-gyp dir: /app/.node-gyp
+remote:        gyp verb remove removing target version: 0.12.0
+remote:        gyp verb remove removing development files for version: 0.12.0
+remote:        gyp ERR! configure error
+remote:        gyp ERR! stack Error: 524 status code downloading tarball
+remote:        gyp ERR! stack     at Request.<anonymous> (/tmp/build_b225c763e30426ba26eacf8f7b9088fc/.heroku/node/lib/node_modules/npm/node_modules/node-gyp/lib/install.js:246:14)
+remote:        gyp ERR! stack     at Request.emit (events.js:129:20)
+remote:        gyp ERR! stack     at Request.onRequestResponse (/tmp/build_b225c763e30426ba26eacf8f7b9088fc/.heroku/node/lib/node_modules/npm/node_modules/request/request.js:1176:10)
+remote:        gyp ERR! stack     at ClientRequest.emit (events.js:107:17)
+remote:        gyp ERR! stack     at HTTPParser.parserOnIncomingClient (_http_client.js:419:21)
+remote:        gyp ERR! stack     at HTTPParser.parserOnHeadersComplete (_http_common.js:111:23)
+remote:        gyp ERR! stack     at Socket.socketOnData (_http_client.js:310:20)
+remote:        gyp ERR! stack     at Socket.emit (events.js:107:17)
+remote:        gyp ERR! stack     at readableAddChunk (_stream_readable.js:163:16)
+remote:        gyp ERR! stack     at Socket.Readable.push (_stream_readable.js:126:10)
+remote:        gyp ERR! System Linux 3.13.0-77-generic
+remote:        gyp ERR! command "node" "/tmp/build_b225c763e30426ba26eacf8f7b9088fc/.heroku/node/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js" "rebuild"
+remote:        gyp ERR! cwd /tmp/build_b225c763e30426ba26eacf8f7b9088fc/node_modules/bcrypt
+remote:        gyp ERR! node -v v0.12.0
+remote:        gyp ERR! node-gyp -v v1.0.2
+remote:        gyp ERR! not ok
+remote:        npm verb unsafe-perm in lifecycle true
