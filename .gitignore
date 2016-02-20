@@ -5,3 +5,4 @@ admin/emailSecret2.js
 admin/keys.js
 views/npm-debug.log
 .node_modules
+log.txt
