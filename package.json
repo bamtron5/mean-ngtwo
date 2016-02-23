@@ -23,8 +23,8 @@
   },
   "dependencies": {
     "angular2": "2.0.0-beta.0",
-    "babel-preset-es2015": "^6.3.13",
     "bcrypt": "^0.8.5",
+    "bindings": "^1.2.1",
     "body-parser": "~1.13.2",
     "bootstrap": "^3.3.6",
     "cookie-parser": "~1.3.5",
@@ -45,11 +45,10 @@
     "rxjs": "5.0.0-beta.0",
     "serve-favicon": "~2.3.0",
     "systemjs": "^0.19.18",
-    "zone.js": "0.5.10",
-    "typescript": "^1.7.5"
+    "typescript": "^1.7.5",
+    "zone.js": "0.5.10"
   },
   "devDependencies": {
-    "babel-cli": "^6.0.0",
     "jasmine-core": "2.4.1"
   }
 }
