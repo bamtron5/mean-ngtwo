@@ -27,7 +27,6 @@ export class TodoFormComponent {
 
   ngOnInit(){
     this._todoService._submittedObserver.next(false);
-    this._authService.getAuth();
   }
 
   onSubmit() { 

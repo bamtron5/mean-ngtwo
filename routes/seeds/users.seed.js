@@ -13,13 +13,7 @@ var newUser = [
 		'testData':true,
 		'email':'brandon@brandonam.com',
 		'password':'Password',
-		'active':true
-	}),
-	new User({
-		'name':'Kev',
-		'testData':true,
-		'email':'brmorrison61@gmail.com',
-		'password':'Password',
+		'role':'admin',
 		'active':true
 	})
 ];

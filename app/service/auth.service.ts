@@ -23,7 +23,7 @@ export class authService {
       .map(res => res.json())
       .subscribe(data => {
         this._authObserver.next(data.auth);
-        data.name ? this._userNameObserver.next(data.name) : null;
+        this._userNameObserver.next(data.name);
       }, error => this.handleError(error));
   }
 

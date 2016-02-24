@@ -1,13 +1,14 @@
 var express = require('express');
 var app = express();
 var cookieSession = require('cookie-session');
+app.set('permission', {role: 'user'});
 
 app.set('trust proxy', 1);
 
 app.use(
   cookieSession({
     name: 'claimBook',
-    keys: ['auth', 'name']
+    keys: ['auth', 'name','role']
   })
 );
 
@@ -21,11 +22,14 @@ var bodyParser = require('body-parser');
 var db = require('./admin/mongoConnect.js');
 var expressJWT = require('express-jwt');
 var engine = require('ejs-locals');
-var jwtSecret = require('./admin/jwtSecret');
 
+//this should be one time... is this per request??
 if(env === 'development'){
   var seed = require('./routes/seeds/index.js');
 }
+
+//check for token auth
+
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -55,15 +59,6 @@ app.use('/appBuilt', express.static(__dirname + '/appBuilt/'));
 //view routes
 app.use('/', routes);
 
-//api routes
-app.use('/api/users', users);
-app.use('/api/login', login);
-app.use('/api/todos', todo);
-app.use('/api/auth', auth);
-app.use('/api/logout', logout);
-app.use('/api/signup', signup);
-app.use('/api/verify', verify);
-
 // view engine setup
 app.engine('ejs', engine)
 app.set('views', path.join(__dirname, 'views'));
@@ -71,17 +66,33 @@ app.set('view engine', 'ejs');
 
 //JWT ONLY
 //if not, add to the excluded array in the path property
-app.use(expressJWT({secret: jwtSecret})
-  .unless({
-    path:[
-      "/api/login",
-      "/api/todos",
-      "/api/auth",
-      "/api/signup",
-      "/api/verify"
-    ]
-  })
-);
+// app.use(expressJWT({secret: jwtSecret})
+//   .unless({
+//     path:[
+//       "/api/login",
+//       "/api/todos",
+//       "/api/auth",
+//       "/api/signup",
+//       "/api/verify"
+//     ]
+//   })
+// );
+
+//api routes
+app.use('/api/users', users);
+app.use('/api/logout', logout);
+app.use('/api/auth', auth);
+app.use('/api/login', login);
+app.use('/api/todos', todo);
+console.log();
+// app.get('/api/todos', todo.);
+// app.post()
+// app.get();
+// app.put();
+// app.delete();
+app.use('/api/signup', signup);
+app.use('/api/verify', verify);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

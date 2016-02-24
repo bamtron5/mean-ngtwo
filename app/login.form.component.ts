@@ -105,24 +105,25 @@ export class LoginFormComponent {
 	}
 
 	onSubmit(form: string) {
+		if (form === "login"){
+			this._userService.login(this.model, false);
+		} else {
+			this.submitSignup();	
+		}
+		
+	}
+
+	submitSignup(){
 		var captchaInput = <HTMLInputElement>document.getElementById('recaptcha_response_field');
 		var str = captchaInput.value;
 		var obj = { captcha: str, challenge: window['RecaptchaState'].challenge };
 
 		this._userService.verifyCaptcha(obj, () => {
 			if(this.captchaResponse.captcha){
-				this.submitForm(form);
+				this._userService.signup(this.model, false);
 			} else {
 				window['Recaptcha'].reload();
 			}
 		});
-	}
-
-	submitForm(form:string){
-		if (form === "login"){
-			this._userService.login(this.model, false);
-		} else {
-			this._userService.signup(this.model, false);
-		}
 	}
 }

@@ -8,7 +8,7 @@ var Recaptcha = require('re-captcha');
 var keys = require('../admin/keys');
 var recaptcha = new Recaptcha(keys.PUBLIC_KEY, keys.PRIVATE_KEY);
 //please change this to include your email smtp server
-var emailSecret = require('../admin/emailSecret2'); 
+var emailSecret = require('./../admin/emailSecret2'); 
 
 router.route('/')
     // get the user with that id (accessed at GET http://localhost:8080/api/users/:user_id)
@@ -48,7 +48,8 @@ router.route('/')
             var newUser = new userModel({
                 'name':req.body.name,
                 'password':req.body.password,
-                'email':req.body.email
+                'email':req.body.email,
+                'role':'user'
             });
 
             var newVerification = new verificatonModel({
@@ -69,6 +70,7 @@ router.route('/')
                 if(error){
                     console.log(error);
                     res.send({signup: false, message: "An error has occurred. Your email address was rejected."});
+                    res.end();
                 }
                 console.log('Message sent: ' + info.response);
 
@@ -76,6 +78,7 @@ router.route('/')
                     if(err){
                         console.log(err);
                         res.send({signup: false, message: "An error has occurred. Please try again."});
+                        res.end();
                     } else {
                         console.log('saved verification');
                         console.log(newVerification);
@@ -85,13 +88,15 @@ router.route('/')
 
             newUser.save(function(err){
                 if(err){
-                    res.status(400).json({signup:false,message:"Sign up failed."});
+                    res.send({signup:false,message:"Sign up failed."});
+                    res.end();
+                } else {
+                    res.status(200).json({message:"Sign up successful.", signup:true});
                     res.end();
                 }
             });
 
-            res.status(200).json({message:"Sign up successful.", signup:true});
-            res.end();
+            
         }
     });
 

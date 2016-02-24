@@ -2,10 +2,8 @@ var express = require('express');
 var router = express.Router();
 var isAuth = require('../admin/isAuth');
 var Recaptcha = require('re-captcha');
-var keys = require('../admin/keys');
-var recaptcha = new Recaptcha(keys.PUBLIC_KEY, keys.PRIVATE_KEY);
-
-console.log(recaptcha);
+var keys = require('./../admin/keys');
+var recaptcha = new Recaptcha(keys.PUBLIC_KEY, keys.PRIVATE_KEY, 'https://');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -47,7 +45,7 @@ router.get('/test', function(req,res,next){
 		if(process.env.NODE_ENV === 'development'){
 			res.render('../app/test/unit-tests');
 		} else {
-			res.sendStatus(400);
+			res.sendStatus(404);
 		}
 	}
 );

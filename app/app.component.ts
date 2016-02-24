@@ -31,7 +31,6 @@ import {VerificationComponent} from './verify.component'
 })
 
 @RouteConfig([
-	{path: '/', name: 'TodoFormComponent', component: TodoFormComponent},
 	{path: '/login', name:'LoginFormComponent', component: LoginFormComponent},
 	{path: '/profile', name:'ProfileComponent', component: ProfileComponent},
 	{path: '/verify', name:'VerificationComponent', component: VerificationComponent}
