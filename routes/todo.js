@@ -8,6 +8,7 @@ router.route('/')
 
     // get the todo with that id (accessed at GET http://localhost:8080/api/todos/:todo_id)
     .get(function(req, res) {
+        /*always at the top to return next or 403*/
         todoModel.find(function(err, todos) {
             if (err)
                 res.send(err);
@@ -16,6 +17,7 @@ router.route('/')
     })
     
     .post(function(req, res) {
+        /*always at the top to return next or 403*/
         var newtodo = new todoModel();
         newtodo.name = req.body.name;
         newtodo.save(function(err, todo){

@@ -12,7 +12,8 @@ var newUser = [
 		'name':'Flip',
 		'testData':true,
 		'email':'brandon@brandonam.com',
-		'password':'asdfadsfklk;kfsa;dfjka;sd',
+		'password':'Password',
+		'role':'admin',
 		'active':true
 	})
 ];

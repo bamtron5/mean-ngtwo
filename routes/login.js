@@ -33,6 +33,7 @@ router.route('/')
                         req.sessionOptions.httpOnly = true;
                         req.session.auth = token;
                         req.session.name = req.body.name;
+                        req.session.role = "user";
                         console.log(req.body.name + ' has connnected as \n\n');
                         console.log(req.session);
                         console.log('\n\n');

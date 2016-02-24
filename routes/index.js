@@ -5,8 +5,6 @@ var Recaptcha = require('re-captcha');
 var keys = require('./../admin/keys');
 var recaptcha = new Recaptcha(keys.PUBLIC_KEY, keys.PRIVATE_KEY, 'https://');
 
-console.log(recaptcha);
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	res.render('index', { title: 'Express' });
@@ -47,7 +45,7 @@ router.get('/test', function(req,res,next){
 		if(process.env.NODE_ENV === 'development'){
 			res.render('../app/test/unit-tests');
 		} else {
-			res.sendStatus(400);
+			res.sendStatus(404);
 		}
 	}
 );
