@@ -12,7 +12,7 @@ var emailSecret = require('./../admin/emailSecret2');
 
 router.route('/')
     // get the user with that id (accessed at GET http://localhost:8080/api/users/:user_id)
-    .post(function(req, res) {
+    .post(function(req, res) { 
         //userModel.find({ $or: [{name:res.body.name}, {email:res.body.email}]}, function(err, user){
         userModel.findOne({name:req.body.name}, function(err, user){
             if(err){

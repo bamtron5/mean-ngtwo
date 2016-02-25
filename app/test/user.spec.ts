@@ -1,4 +1,4 @@
-import {User} from '../../service/models/user';
+import {User} from '../service/models/user';
 
 describe('User', () => {
 	it('has a setter property for name', () => {
@@ -13,4 +13,4 @@ describe('User', () => {
 		user.password = "NewUserPassword"
 		expect(user.password).toEqual('NewUserPassword');
 	})
-});
+}); 

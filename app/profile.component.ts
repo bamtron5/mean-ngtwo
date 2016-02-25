@@ -10,4 +10,7 @@ import {TodoFormComponent} from './todo.form.component'
 	`
 })
 
-export class ProfileComponent{};
+export class ProfileComponent{
+	constructor(){
+	}
+};

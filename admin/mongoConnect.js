@@ -1,6 +1,15 @@
 var mongoose = require('mongoose');
+var express = require('express');
+var app = express();
 
 //env dependent
-module.exports = mongoose.connect('mongodb://heroku_0n5b3krj:hv00uqljiljjuqg1jn37hpv8e@ds049744.mongolab.com:49744/heroku_0n5b3krj');
-// mongodb://heroku_0n5b3krj:56c60a16aa072a665724a28b@ds049744.mongolab.com:49744/heroku_0n5b3krj
-// mongodb://heroku_0n5b3krj:hv00uqljiljjuqg1jn37hpv8e@ds049744.mongolab.com:49744/heroku_0n5b3krj
+var env = app.get('env');
+var mConnect = null;
+if(env !== 'development'){
+	mConnect = 'mongodb://heroku_0n5b3krj:hv00uqljiljjuqg1jn37hpv8e@ds049744.mongolab.com:49744/heroku_0n5b3krj';
+} else {
+	mConnect = 'mongodb://localhost/claimBook';
+}
+
+
+module.exports = mongoose.connect(mConnect);

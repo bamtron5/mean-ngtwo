@@ -36,9 +36,8 @@ import {VerificationComponent} from './verify.component'
 	{path: '/verify', name:'VerificationComponent', component: VerificationComponent}
 ])
 
-export class AppComponent{
+export class AppComponent{  
 	constructor(){
-
 	}
 };
 

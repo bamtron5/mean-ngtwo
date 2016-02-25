@@ -4,7 +4,7 @@ import {NgForm}    from 'angular2/common'
 import {userService} from './service/user.service'
 import {authService} from './service/auth.service'
 import {HTTP_PROVIDERS} from 'angular2/http'
-import 'rxjs/Rx' //operators for es6 ... wtf
+import 'rxjs/Rx' //operators for es6 ... wtf 
 
 @Component({
     selector: 'desktop-navigation',

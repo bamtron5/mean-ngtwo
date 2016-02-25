@@ -6,5 +6,9 @@ System.config({
     }
   }
 });
-
-System.import('appBuilt/test/spec/user.spec.js').then(null, console.error.bind(console));
+Promise.all([
+	System.import('appBuilt/test/user.spec.js'),
+	System.import('appBuilt/test/todo.spec.js')
+])
+.then(window.onload)
+.catch(console.error.bind(console));
