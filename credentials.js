@@ -13,10 +13,10 @@ var CredSchema = new Schema({
 var CredModel = mongoose.model('Credentials', CredSchema);
 
 var creds = new CredModel();
-creds.email = '';
-creds.captcha.PUBLIC_KEY = '';
-creds.captcha.PRIVATE_KEY = '';
-creds.jwt = '';
+creds.email = 'smtps://email@provider.com:MyPassword123@smtpserver.com';
+creds.captcha.PUBLIC_KEY = 'your captcha public key';
+creds.captcha.PRIVATE_KEY = 'your captcha private key';
+creds.jwt = 'a token string of some sort';
 
 creds.save(function(err){
 	if(err){
