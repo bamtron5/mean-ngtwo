@@ -6,3 +6,5 @@ views/npm-debug.log
 log.txt
 sandbox
 testBuild
+admin/emailSecret2.js
+admin/keys2.js

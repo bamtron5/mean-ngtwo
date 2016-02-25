@@ -6,7 +6,8 @@ var app = express();
 var env = app.get('env');
 var mConnect = null;
 if(env !== 'development'){
-	mConnect = 'mongodb://heroku_0n5b3krj:hv00uqljiljjuqg1jn37hpv8e@ds049744.mongolab.com:49744/heroku_0n5b3krj';
+	//use a production mongodb here
+	mConnect = 'mongodb://localhost/claimBook';
 } else {
 	mConnect = 'mongodb://localhost/claimBook';
 }
