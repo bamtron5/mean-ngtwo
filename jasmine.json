@@ -1,0 +1,6 @@
+{
+    "spec_dir": "./appBuild/test/spec",
+    "spec_files": [
+        "*.js"
+    ]
+}

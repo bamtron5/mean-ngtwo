@@ -13,6 +13,7 @@ app.use(
 );
 
 var env = app.get('env');
+process.env.NODE_ENV = env;
 
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -84,12 +85,6 @@ app.use('/api/logout', logout);
 app.use('/api/auth', auth);
 app.use('/api/login', login);
 app.use('/api/todos', todo);
-console.log();
-// app.get('/api/todos', todo.);
-// app.post()
-// app.get();
-// app.put();
-// app.delete();
 app.use('/api/signup', signup);
 app.use('/api/verify', verify);
 

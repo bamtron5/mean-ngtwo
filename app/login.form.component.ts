@@ -1,6 +1,5 @@
-import {bootstrap} from 'angular2/platform/browser'
 import { Component } from 'angular2/core'
-import {NgForm, Control, Validators, ControlGroup, FormBuilder, FORM_DIRECTIVES}    from 'angular2/common'
+import {NgForm, Control, Validators, ControlGroup, FormBuilder, FORM_DIRECTIVES} from 'angular2/common'
 import { User }    from './service/models/user'
 import { Captcha } from './service/models/captcha'
 import {userService} from './service/user.service'

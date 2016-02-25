@@ -43,7 +43,7 @@ router.get('/profile', function(req,res,next){
 /* Should be conditioned to only work in dev */
 router.get('/test', function(req,res,next){
 		if(process.env.NODE_ENV === 'development'){
-			res.render('../app/test/unit-tests');
+			res.render('unit-tests');
 		} else {
 			res.sendStatus(404);
 		}

@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "DEBUG=claimBook* && node ./bin/www",
-    "dev": "DEBUG=claimBook* && node_modules/typescript/bin/tsc -outDir appBuilt && node ./bin/www",
-    "start": "DEBUG=claimBook* && node_modules/typescript/bin/tsc -outDir appBuilt && node ./bin/www",
-    "watch": "DEBUG=claimBook* && node_modules/typescript/bin/tsc -outDir appBuilt -w"
+    "prune": "rm -rf appBuilt",
+    "start": "npm run prune & node_modules/typescript/bin/tsc & npm run serve",
+    "test": "node_modules/jasmine-node/bin/jasmine-node --verbose testBuilt/test/*.js",
+    "testBuild": "rm -rf testBuilt && node_modules/typescript/bin/tsc --module commonjs --outDir testBuilt",
+    "test:build": "npm run testBuild && npm run test", 
+    "watch": "npm run prune && echo '\\033[0;32m Stand by for compilation:\\033[m' && node_modules/typescript/bin/tsc -w --noResolve & npm run serve"
   },
   "engines": {
     "node": "5.6.0",
@@ -37,6 +40,7 @@
     "es6-shim": "^0.33.13",
     "express": "~4.13.1",
     "express-jwt": "^3.3.0",
+    "jasmine-node": "^1.14.5",
     "jsonwebtoken": "^5.5.4",
     "mongoose": "^4.3.7",
     "morgan": "~1.6.1",
@@ -48,6 +52,7 @@
     "serve-favicon": "~2.3.0",
     "systemjs": "^0.19.18",
     "typescript": "^1.7.5",
+    "typings": "^0.6.8",
     "zone.js": "0.5.10"
   },
   "devDependencies": {

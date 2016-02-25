@@ -19,7 +19,8 @@ var newTodo = [
 for(var i=0; i < newTodo.length; i++){
 	newTodo[i].save(function(err){
 		if(err){
-			return handleError(err);
+			console.log(err);
+			throw err;
 		} 
 	});
 }

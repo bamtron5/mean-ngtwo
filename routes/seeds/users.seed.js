@@ -21,7 +21,8 @@ var newUser = [
 for(var i=0; i < newUser.length; i++){
 	newUser[i].save(function(err){
 		if(err){
-			return handleError(err);
+			console.log(err);
+			throw err;
 		} 
 	});
 }
