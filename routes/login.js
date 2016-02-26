@@ -23,7 +23,7 @@ router.route('/')
 
                     if(!isMatch){
                         console.log('Password:', isMatch);
-                        res.status(400).json({login:false,message:"Your login is not valid, please try again"});
+                        res.status(200).json({login:false,message:"Your login is not valid, please try again"});
                     } else {
                         console.log('Password:', isMatch);
                         //do jwt here
@@ -44,7 +44,7 @@ router.route('/')
                     }
                 });
             } else {
-                res.status(400).json({login:false,message:"Your login is not valid, please try again"});
+                res.status(200).json({login:false,message:"Your login is not valid, please try again"});
             }
         });
     });
