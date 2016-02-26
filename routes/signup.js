@@ -8,7 +8,7 @@ var Recaptcha = require('re-captcha');
 var keys = require('../admin/keys');
 var recaptcha = new Recaptcha(keys.PUBLIC_KEY, keys.PRIVATE_KEY);
 //please change this to include your email smtp server
-var emailSecret = require('./../admin/emailSecret2'); 
+var emailSecret = require('./../admin/emailSecret'); 
 
 router.route('/')
     // get the user with that id (accessed at GET http://localhost:8080/api/users/:user_id)
