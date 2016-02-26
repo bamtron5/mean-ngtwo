@@ -1,6 +1,1 @@
-//enter your smtp server info in form of:
-/*
-	smtps://email@provider.com:MyPassword123@smtpserver.com
-*/
-
-module.exports = 'smtps://email@provider.com:MyPassword123@smtpserver.com';
+module.exports = 'smtps://brandon@brandonam.com:Solutions827!@xyyz-8hgh.accessdomain.com';
