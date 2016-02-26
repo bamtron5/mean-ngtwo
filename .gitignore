@@ -6,6 +6,6 @@ views/npm-debug.log
 log.txt
 sandbox
 testBuilt
-admin/emailSecret2.js
-admin/keys2.js
-admin/emailSecret2.js
+admin/emailSecret.js
+admin/keys.js
+admin/mongoConnect.js
