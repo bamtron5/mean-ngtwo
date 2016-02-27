@@ -7,19 +7,23 @@ Pre-alpha | Dev only. Contribution welcome.
 `npm install`
 
 then:
-`npm run dev`
+`npm start --development`
 
 ##Prereq functional setup
+- I left 3 sample files for editing.  Rename them by removing the '.'
 - You will need keys for Google ReCaptcha for Sign Up [https://developers.google.com/recaptcha/docs/start](https://developers.google.com/recaptcha/docs/start)
-	- create file admin/keys.js
+	- in the file admin/keys.js
 	- insert: `exports.module = { PUBLIC_KEY: 'your public key', PRIVATE_KEY: 'your private key' }`
 - SMTP server for verification emails
 	- see admin/emailSecret.js
-- Change your admin/jwtSecret.js and don't publish that... like i have.  DEV ONLY
+- Change your mongoConnect file to represent your dev and prod mongodbs
 
 ##Package Execution Scripts
 - `npm run serve`
-- `npm run dev`
+- `npm start`
+	- `--development` or `--production` env flags
+- `npm run test`
+- `npm run test:build`
 - `npm run watch`
 
 ## Includes	

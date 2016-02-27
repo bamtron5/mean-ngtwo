@@ -1,7 +1,9 @@
 var express = require('express');
 var app = express();
 var cookieSession = require('cookie-session');
-app.set('permission', {role: 'user'});
+var db = require('./admin/mongoConnect.js');
+var acl = require('acl');
+var permission = new acl(new acl.mongodbBackend(db.connection.db, 'acl_'));
 
 app.set('trust proxy', 1);
 
@@ -20,17 +22,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var db = require('./admin/mongoConnect.js');
 var expressJWT = require('express-jwt');
+var jwtSecret = require('./admin/jwtSecret.js');
 var engine = require('ejs-locals');
 
 //this should be one time... is this per request??
 if(env === 'development'){
   var seed = require('./routes/seeds/index.js');
 }
-
-//check for token auth
-
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -65,29 +64,28 @@ app.engine('ejs', engine)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//JWT ONLY
-//if not, add to the excluded array in the path property
-// app.use(expressJWT({secret: jwtSecret})
-//   .unless({
-//     path:[
-//       "/api/login",
-//       "/api/todos",
-//       "/api/auth",
-//       "/api/signup",
-//       "/api/verify"
-//     ]
-//   })
-// );
+//***
+/*  /api/users  */ 
+//***
+permission.allow('user', ['/api/users'], ['get']);
+app.get('/api/users', permission.middleware(), users.getUsers);
+app.get('/api/users/:id', users.getUserById);
+app.put('/api/users/:id', users.editUser);
+app.delete('/api/users/:id', users.deleteUser);
 
-//api routes
-app.use('/api/users', users);
-app.use('/api/logout', logout);
-app.use('/api/auth', auth);
-app.use('/api/login', login);
+//***
+/*  /api/todos  */ 
+//***
 app.use('/api/todos', todo);
+
+//***
+/*  PUBLIC API  */ 
+//***
 app.use('/api/signup', signup);
 app.use('/api/verify', verify);
-
+app.use('/api/auth', auth);
+app.use('/api/login', login);
+app.use('/api/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
