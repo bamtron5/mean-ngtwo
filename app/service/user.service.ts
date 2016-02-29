@@ -33,6 +33,10 @@ export class userService {
   signUpMessage$: Observable<String>;
   _signUpMessageObserver: any;
 
+  loginMessage$: Observable<String>;
+  _loginMessageObserver: any;
+
+
   verification$: Observable<Boolean>;
   _verificationObserver: any;
 
@@ -46,6 +50,7 @@ export class userService {
     this.submitted$ = new Observable(observer => this._submittedObserver = observer).share();
     this.acceptedLogin$ = new Observable(observer => this._acceptedObserver = observer).share();
     this.signUpMessage$ = new Observable(observer => this._signUpMessageObserver = observer).share();
+    this.loginMessage$ = new Observable(observer => this._loginMessageObserver = observer).share();;
     this.verification$ = new Observable(observer => this._verificationObserver = observer).share();
     this.captchaResponse$ = new Observable(observer => this._captchaResponseObserver = observer).share();
     this._dataStore = { users: [] };
@@ -105,10 +110,11 @@ export class userService {
     .map(res => res.json())
     .subscribe(
         data => { 
-          this._acceptedObserver.next(true);
-          location.href = redirect;
+          this._acceptedObserver.next(data.login);
+          this._loginMessageObserver.next(data.message);
+          data.login === true ? location.href = redirect : null;
         },
-        error => this._acceptedObserver.next(false)
+        error => { this._acceptedObserver.next(false);}
     )
   }
 

@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('../admin/mongoConnect.js');
 var userModel = require('./models/users');
 var verificationModel = require('./models/verification');
 

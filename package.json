@@ -6,10 +6,11 @@
     "serve": "DEBUG=claimBook* && node ./bin/www",
     "prune": "rm -rf appBuilt",
     "start": "npm run prune & node_modules/typescript/bin/tsc & npm run serve",
+    "debug": "node-debug bin/www",
     "test": "node_modules/jasmine-node/bin/jasmine-node --verbose testBuilt/test/*.js",
     "testBuild": "rm -rf testBuilt && node_modules/typescript/bin/tsc --module commonjs --outDir testBuilt",
-    "test:build": "npm run testBuild && npm run test", 
-    "watch": "npm run prune && echo '\\033[0;32m Stand by for compilation:\\033[m' && node_modules/typescript/bin/tsc -w --noResolve & npm run serve"
+    "test:build": "npm run testBuild && npm run test",
+    "watch": "npm run prune && echo '\\033[0;32m Stand by for compilation:\\033[m' && node_modules/typescript/bin/tsc -w --noResolve & npm run serve -- -w"
   },
   "engines": {
     "node": "5.6.0",
@@ -25,6 +26,7 @@
     "url": "http://brandonam.com"
   },
   "dependencies": {
+    "acl": "^0.4.9",
     "angular2": "2.0.0-beta.0",
     "bcrypt": "^0.8.5",
     "bindings": "^1.2.1",

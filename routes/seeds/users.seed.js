@@ -15,6 +15,14 @@ var newUser = [
 		'password':'Password',
 		'role':'admin',
 		'active':true
+	}),
+	new User({
+		'name':'bamtron5',
+		'testData':true,
+		'email':'brandon@brandonam.com',
+		'password':'Password',
+		'role':'user',
+		'active':true
 	})
 ];
 

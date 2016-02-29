@@ -26,6 +26,7 @@ export class LoginFormComponent {
 	isLogin: Boolean;
 	isAccepted: Boolean;
 	signUpMessage: String;
+	loginMessage: String;
 	captchaResponse: Captcha;
 
 	//controls
@@ -52,6 +53,8 @@ export class LoginFormComponent {
 		this._userService.signUpMessage$.subscribe(updatedSignUpMessage => { this.signUpMessage = updatedSignUpMessage });
 
 		this._userService.captchaResponse$.subscribe(updatedCaptchaResponse => { this.captchaResponse = updatedCaptchaResponse });
+
+		this._userService.loginMessage$.subscribe(updatedLoginMessage => { this.loginMessage = updatedLoginMessage });
 		
 		//control instances and validators
 		this.name = new Control('', Validators.compose([
@@ -106,6 +109,7 @@ export class LoginFormComponent {
 	onSubmit(form: string) {
 		if (form === "login"){
 			this._userService.login(this.model, false);
+			console.log(this.loginMessage);
 		} else {
 			this.submitSignup();	
 		}
