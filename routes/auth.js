@@ -11,7 +11,13 @@ router.route('/')
             if(err || !decoded){
                 res.json({auth:false, name: null});
             } else {
-                console.log(Object.keys(req.session));
+                var sessionAnswer = {};
+                var sessionKeys = Object.keys(req.session);
+                var sessionValues = sessionKeys.map(function(val){ sessionAnswer[val] = req.session[val] });
+                console.log('_____________________________');
+                console.log("who you iz: ");
+                console.log(JSON.stringify(sessionAnswer, null, 4));
+                console.log('_____________________________');
                 res.json({auth:true, name: req.session.name});
             }
         });

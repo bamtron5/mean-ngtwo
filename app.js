@@ -7,6 +7,7 @@ var acl = require('acl');
 var permission = new acl(new acl.mongodbBackend(mongoose.connection.db));
 var checkAcl = require('./admin/acl.js');
 
+//cookie proxy channel
 app.set('trust proxy', 1);
 
 app.use(
@@ -18,15 +19,21 @@ app.use(
 
 //set api permissions here
 mongoose.connection.on('connected', function(){
+
+  //user
   permission.allow('user', 'todos', ['get','post','put','delete']);
-  //Server output
+  permission.allow('user', 'users', ['getById']);
+
+  //admin
+  permission.allow('admin', 'todos', '*');
+  permission.allow('admin', 'users', '*');
+
   //((what mongo models are available))
   console.log('Mongoose connected! Mongo collections:');
   console.log('_____________________________');
-  console.log(Object.keys(mongoConnect.connections[0].collections));
+  console.log(JSON.stringify(Object.keys(mongoConnect.connections[0].collections), null, 3));
   console.log('_____________________________');
 });
-
 
 var env = app.get('env');
 process.env.NODE_ENV = env;
@@ -40,7 +47,7 @@ var expressJWT = require('express-jwt');
 var jwtSecret = require('./admin/jwtSecret.js');
 var engine = require('ejs-locals');
 
-//this should be one time... is this per request??
+//up and down models/testdata on server restart in development only
 if(env === 'development'){
   var seed = require('./routes/seeds/index.js');
 }
@@ -81,10 +88,11 @@ app.set('view engine', 'ejs');
 //***
 /*  /api/users  */ 
 //***
-app.get('/api/users', permission.middleware(1, 'user', 'get'), users.getUsers);
-app.get('/api/users/:id', users.getUserById);
-app.put('/api/users/:id', users.editUser);
-app.delete('/api/users/:id', users.deleteUser);
+
+app.get('/api/users', checkAcl('users', 'getList'), users.getUsers);
+app.get('/api/users/:id', checkAcl('users', 'getById'), users.getUserById);
+app.put('/api/users/:id', checkAcl('users', 'put'), users.editUser);
+app.delete('/api/users/:id', checkAcl('users', 'delete'), users.deleteUser);
 
 //***
 /*  /api/todos  */ 
@@ -111,7 +119,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 
 // error handlers
 // development error handler

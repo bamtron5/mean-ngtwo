@@ -22,12 +22,10 @@ router.route('/:token')
                 res.send(err);
             }
 
-            //if no token was included, check code
-            if(req.params.token === null){
-            	res.status(200).json({verify: false});
-            }
-
-            if(verification){
+            if(req.params.token === 'null'){
+            	res.status(400).json({verify: false, message:"This verification was unsuccessful."});
+                res.end();
+            } else if(verification) {
 
                 //if verification was found, make user active
                 userModel.findOne({name: verification.name}, function(err, user){

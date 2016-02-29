@@ -48,5 +48,5 @@ then:
 - Travis CI
 - Puphet like VM DEV
 
-## Contact
+## Contact 
 [http://brandonam.com](http://brandonam.com)
