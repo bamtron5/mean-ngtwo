@@ -1,4 +1,5 @@
-var mongoose     = require('../../admin/mongoConnect.js');
+var mongoConnect = require('../../admin/mongoConnect.js');
+var mongoose = mongoConnect;
 var Schema       = mongoose.Schema;
 var bcrypt      = require('bcrypt');
 var SALT_WORK_FACTOR = 10;

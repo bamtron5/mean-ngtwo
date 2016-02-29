@@ -1,9 +1,11 @@
 var express = require('express');
 var app = express();
 var cookieSession = require('cookie-session');
-var db = require('./admin/mongoConnect.js');
+var mongoose = require('mongoose');
+var mongoConnect = require('./admin/mongoConnect.js');
 var acl = require('acl');
-var permission = new acl(new acl.mongodbBackend(db.connection.db, 'acl_'));
+var permission = new acl(new acl.mongodbBackend(mongoose.connection.db));
+var checkAcl = require('./admin/acl.js');
 
 app.set('trust proxy', 1);
 
@@ -13,6 +15,18 @@ app.use(
     keys: ['auth', 'name','role']
   })
 );
+
+//set api permissions here
+mongoose.connection.on('connected', function(){
+  permission.allow('user', 'todos', ['get','post','put','delete']);
+  //Server output
+  //((what mongo models are available))
+  console.log('Mongoose connected! Mongo collections:');
+  console.log('_____________________________');
+  console.log(Object.keys(mongoConnect.connections[0].collections));
+  console.log('_____________________________');
+});
+
 
 var env = app.get('env');
 process.env.NODE_ENV = env;
@@ -67,8 +81,7 @@ app.set('view engine', 'ejs');
 //***
 /*  /api/users  */ 
 //***
-permission.allow('user', ['/api/users'], ['get']);
-app.get('/api/users', permission.middleware(), users.getUsers);
+app.get('/api/users', permission.middleware(1, 'user', 'get'), users.getUsers);
 app.get('/api/users/:id', users.getUserById);
 app.put('/api/users/:id', users.editUser);
 app.delete('/api/users/:id', users.deleteUser);
@@ -76,7 +89,12 @@ app.delete('/api/users/:id', users.deleteUser);
 //***
 /*  /api/todos  */ 
 //***
-app.use('/api/todos', todo);
+
+app.get('/api/todos', checkAcl('todos', 'get'), todo.getTodos);
+app.post('/api/todos', checkAcl('todos','post'), todo.postTodo);
+app.get('/api/todos/:id', checkAcl('todos','get'), todo.getTodoById)
+app.put('/api/todos/:id', checkAcl('todos','put'), todo.editTodo);
+app.delete('/api/todos/:id', checkAcl('todos','delete'), todo.deleteTodo);
 
 //***
 /*  PUBLIC API  */ 
@@ -94,10 +112,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-//Server output
-//((what mongo models are available))
-console.log('Mongo collections:');
-console.log(Object.keys(db.connections[0].collections));
 
 // error handlers
 // development error handler

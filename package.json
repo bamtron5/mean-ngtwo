@@ -6,6 +6,7 @@
     "serve": "DEBUG=claimBook* && node ./bin/www",
     "prune": "rm -rf appBuilt",
     "start": "npm run prune & node_modules/typescript/bin/tsc & npm run serve",
+    "debug": "node-debug bin/www",
     "test": "node_modules/jasmine-node/bin/jasmine-node --verbose testBuilt/test/*.js",
     "testBuild": "rm -rf testBuilt && node_modules/typescript/bin/tsc --module commonjs --outDir testBuilt",
     "test:build": "npm run testBuild && npm run test",

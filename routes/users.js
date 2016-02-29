@@ -1,4 +1,3 @@
-var mongoose = require('../admin/mongoConnect.js');
 var userModel = require('./models/users');
 
 var users = {
