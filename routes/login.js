@@ -11,7 +11,9 @@ router.route('/')
     // get the user with that id (accessed at GET http://localhost:8080/api/users/:user_id)
     .post(function(req, res) {
         userModel.findOne({name:req.body.name}).select('+password').exec(function(err, user){
-            console.log(req.body);
+            console.log('_____________________________');
+            console.log('login attempt');
+            console.log('_____________________________');
             if(err){
                 res.send(err);
             }
@@ -36,14 +38,14 @@ router.route('/')
                         req.session.auth = token;
                         req.session.name = req.body.name;
                         req.session.userId = req.body.name;
-                        req.session.role = "user";
+                        req.session.role = user.role;
                         console.log(req.body.name + ' has connnected as \n\n');
-                        console.log(req.session);
+                        console.log(JSON.stringify(req.session, null, 4));
                         console.log('\n\n');
                         res.cookie('claimBook', {jwt: token}, { maxAge: 1440000, httpOnly: true });
                         res.cookie('name', req.body.name, {maxAge: 1440000, httpOnly: true});
-                        permission.addUserRoles(req.body.name, 'user', function(){
-                            console.log(req.body.name + ' added as user to acl.');
+                        permission.addUserRoles(req.body.name, user.role, function(){
+                            console.log(req.body.name + ' added as ' + user.role + ' to acl.');
                         });
                         res.status(200).json({login:true});
                         res.end();

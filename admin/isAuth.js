@@ -5,10 +5,10 @@ var jwtSecret = require('./jwtSecret');
 var isAuth = function(session, cb){
 	jwt.verify(session.auth, jwtSecret, function(err, decoded){
 	 	console.log('_____________________________');
-		console.log("Session REQ IS" + session.auth);
+		console.log("Session REQ IZ " + session.auth);
 		if(decoded){
-			console.log("SESSION NAME IS " + decoded.name);
-			console.log("SESSION IAT IS " + decoded.iat);
+			console.log("SESSION NAME IZ " + decoded.name);
+			console.log("SESSION IAT IZ " + decoded.iat);
 		} else {
 			console.log("ERR IS " + err);
 		}

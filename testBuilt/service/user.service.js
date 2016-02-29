@@ -22,6 +22,8 @@ var userService = (function () {
         this.submitted$ = new Observable_1.Observable(function (observer) { return _this._submittedObserver = observer; }).share();
         this.acceptedLogin$ = new Observable_1.Observable(function (observer) { return _this._acceptedObserver = observer; }).share();
         this.signUpMessage$ = new Observable_1.Observable(function (observer) { return _this._signUpMessageObserver = observer; }).share();
+        this.loginMessage$ = new Observable_1.Observable(function (observer) { return _this._loginMessageObserver = observer; }).share();
+        ;
         this.verification$ = new Observable_1.Observable(function (observer) { return _this._verificationObserver = observer; }).share();
         this.captchaResponse$ = new Observable_1.Observable(function (observer) { return _this._captchaResponseObserver = observer; }).share();
         this._dataStore = { users: [] };
@@ -74,9 +76,10 @@ var userService = (function () {
         return this.http.post('/api/login', strUser, { headers: headers })
             .map(function (res) { return res.json(); })
             .subscribe(function (data) {
-            _this._acceptedObserver.next(true);
-            location.href = redirect;
-        }, function (error) { return _this._acceptedObserver.next(false); });
+            _this._acceptedObserver.next(data.login);
+            _this._loginMessageObserver.next(data.message);
+            data.login === true ? location.href = redirect : null;
+        }, function (error) { _this._acceptedObserver.next(false); });
     };
     userService.prototype.verifyCaptcha = function (captcha, cb) {
         var _this = this;

@@ -29,6 +29,7 @@ var LoginFormComponent = (function () {
         (this._userService.acceptedLogin$.subscribe(function (updatedAccept) { _this.isAccepted = updatedAccept; })) ? undefined : false;
         this._userService.signUpMessage$.subscribe(function (updatedSignUpMessage) { _this.signUpMessage = updatedSignUpMessage; });
         this._userService.captchaResponse$.subscribe(function (updatedCaptchaResponse) { _this.captchaResponse = updatedCaptchaResponse; });
+        this._userService.loginMessage$.subscribe(function (updatedLoginMessage) { _this.loginMessage = updatedLoginMessage; });
         //control instances and validators
         this.name = new common_1.Control('', common_1.Validators.compose([
             common_1.Validators.required,
@@ -74,6 +75,7 @@ var LoginFormComponent = (function () {
     LoginFormComponent.prototype.onSubmit = function (form) {
         if (form === "login") {
             this._userService.login(this.model, false);
+            console.log(this.loginMessage);
         }
         else {
             this.submitSignup();
