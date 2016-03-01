@@ -47,9 +47,12 @@ var expressJWT = require('express-jwt');
 var jwtSecret = require('./admin/jwtSecret.js');
 var engine = require('ejs-locals');
 
-//up and down models/testdata on server restart in development only
+//dev only settings
 if(env === 'development'){
+  //rake up and down test data
   var seed = require('./routes/seeds/index.js');
+  //access to app source code for dev inspection
+  app.use('/app', express.static(__dirname + '/app/'));
 }
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

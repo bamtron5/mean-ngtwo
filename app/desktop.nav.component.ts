@@ -1,9 +1,11 @@
 import {bootstrap} from 'angular2/platform/browser'
-import {Component} from 'angular2/core'
+import {Component, EventEmitter} from 'angular2/core'
 import {NgForm}    from 'angular2/common'
 import {userService} from './service/user.service'
 import {authService} from './service/auth.service'
+import {Auth} from './service/models/auth'
 import {HTTP_PROVIDERS} from 'angular2/http'
+import {Observable}     from 'rxjs/Observable'
 import 'rxjs/Rx' //operators for es6 ... wtf 
 
 @Component({
@@ -19,11 +21,11 @@ import 'rxjs/Rx' //operators for es6 ... wtf
 export class DesktopNavComponent{
 	constructor(public _authService: authService, public _userService: userService){
 		this._authService.auth$.subscribe(updatedAuth => { this.isAuth = updatedAuth });
-		this._authService.userName$.subscribe(updatedUser => { this.curUser = updatedUser });
+		this._authService.authName$.subscribe(updatedAuthName => { this.authName = updatedAuthName });
 	}
 
-	isAuth:Boolean;
-	curUser: String;
+	isAuth: boolean;
+	authName: string;
 
 	ngOnInit(){
 		this._authService.getAuth();
@@ -35,6 +37,3 @@ export class DesktopNavComponent{
 		}
 	}
 }
-
-bootstrap(DesktopNavComponent, [authService, userService])
-	.catch(err => console.log(err));

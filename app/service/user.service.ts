@@ -68,9 +68,8 @@ export class userService {
       }, error => this.handleError(error));
   }
 
-  getUser(user){
-      var query = user._id;
-      this.http.get(this._usersUrl + query)
+  getUser(user:String){
+      this.http.get(this._usersUrl + user)
         .map(res => res.json())
         .subscribe(data => {
           this._userObserver.next(data);

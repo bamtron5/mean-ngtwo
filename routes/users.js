@@ -8,9 +8,9 @@ var users = {
             res.json(users);
         });
     },
-
+    // /api/users/:name
     getUserById:function(req, res){
-       userModel.findById(req.params.id, function(err, user) {
+       userModel.find({name:req.params.id}, function(err, user) {
             if (err)
                 res.send(err);
             res.json(user);

@@ -1,6 +1,6 @@
 import {Todo} from '../service/models/todo';
 
-describe('Todo', () => {
+describe('Todo Model', () => {
 	it('has a setter property for name', () => {
 		let todo = new Todo();
 		todo.name = "NewTodo1";

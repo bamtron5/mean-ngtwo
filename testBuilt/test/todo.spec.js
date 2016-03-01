@@ -1,5 +1,5 @@
 var todo_1 = require('../service/models/todo');
-describe('Todo', function () {
+describe('Todo Model', function () {
     it('has a setter property for name', function () {
         var todo = new todo_1.Todo();
         todo.name = "NewTodo1";
