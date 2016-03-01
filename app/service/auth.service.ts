@@ -29,8 +29,8 @@ export class authService {
         .subscribe(data => {
           let authCast = new Auth();
           Object.keys(data).map((val) => { authCast[val] = data[val] });
-          (authCast.hasOwnProperty('name') && this.hasOwnProperty('_authNameObserver')) ? this._authNameObserver.next(data.name) : null;
-          (authCast.hasOwnProperty('auth') && this.hasOwnProperty('_authObserver')) ? this._authObserver.next(data.auth) : null;
+          this.hasOwnProperty('_authNameObserver') ? this._authNameObserver.next(data.name) : null;
+          this.hasOwnProperty('_authObserver') ? this._authObserver.next(data.auth) : null;
           resolve();
         }, error => reject(this.handleError(error) ));
     });

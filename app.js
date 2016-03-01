@@ -23,10 +23,12 @@ mongoose.connection.on('connected', function(){
   //user
   permission.allow('user', 'todos', ['get','post','put','delete']);
   permission.allow('user', 'users', ['getById']);
+  permission.allow('user', 'profile', ['getProfile']);
 
   //admin
   permission.allow('admin', 'todos', '*');
   permission.allow('admin', 'users', '*');
+  permission.allow('admin', 'profile', '*')
 
   //((what mongo models are available))
   console.log('Mongoose connected! Mongo collections:');
@@ -74,6 +76,7 @@ var auth = require('./routes/auth');
 var logout = require('./routes/logout');
 var signup = require('./routes/signup');
 var verify = require('./routes/verify');
+var profile = require('./routes/profile');
 
 //static paths
 app.use(express.static(path.join(__dirname, 'public')));
@@ -106,6 +109,11 @@ app.post('/api/todos', checkAcl('todos','post'), todo.postTodo);
 app.get('/api/todos/:id', checkAcl('todos','get'), todo.getTodoById)
 app.put('/api/todos/:id', checkAcl('todos','put'), todo.editTodo);
 app.delete('/api/todos/:id', checkAcl('todos','delete'), todo.deleteTodo);
+
+//***
+/*  /api/profile  */ 
+//***
+app.get('/api/profile/:id', checkAcl('profile', 'getProfile'), profile.getProfile);
 
 //***
 /*  PUBLIC API  */ 
