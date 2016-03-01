@@ -36,12 +36,14 @@ export class userService {
   loginMessage$: Observable<String>;
   _loginMessageObserver: any;
 
-
   verification$: Observable<Boolean>;
   _verificationObserver: any;
 
   captchaResponse$: Observable<Captcha>;
   _captchaResponseObserver: any;
+
+  profileName$: Observable<string>;
+  _profileNameObserver: any;
 
   constructor(private http: Http) { 
     this.users$ = new Observable(observer => this._usersObserver = observer).share();
@@ -53,6 +55,7 @@ export class userService {
     this.loginMessage$ = new Observable(observer => this._loginMessageObserver = observer).share();;
     this.verification$ = new Observable(observer => this._verificationObserver = observer).share();
     this.captchaResponse$ = new Observable(observer => this._captchaResponseObserver = observer).share();
+    this.profileName$ = new Observable(observer => this._profileNameObserver = observer).share();
     this._dataStore = { users: [] };
     this._acceptStore = { accept: [] };
   }
@@ -68,13 +71,23 @@ export class userService {
       }, error => this.handleError(error));
   }
 
-  getUser(user){
-      var query = user._id;
-      this.http.get(this._usersUrl + query)
+  getUser(user:String){
+      this.http.get(this._usersUrl + user)
         .map(res => res.json())
         .subscribe(data => {
           this._userObserver.next(data);
         }, error => this.handleError(error));
+  }
+
+  getProfile(user: string){
+    return new Promise((resolve, reject) => {
+    this.http.get('/api/profile/' + user)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.hasOwnProperty('_profileNameObserver') ? this._profileNameObserver.next(data.name) : null;
+        resolve();
+      }, error => reject(error))
+    })
   }
 
   postUser(user) {

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var userModel = require('./models/users');
 var verificationModel = require('./models/verification');
+var profileModel = require('./models/profile');
 
 router.route('/:token')
     //this endpoint is for users to verify their account by token from the sign up email
@@ -13,7 +14,9 @@ router.route('/:token')
         sign up endpoint. 
         verify account token, 
         make user active, 
-        remove verification, and send status
+        remove verification, 
+        instatiate new user
+        and send status
     */
 
     .get(function(req, res) {
@@ -46,6 +49,15 @@ router.route('/:token')
                 	if(err){
                 		console.log(err);
                 	}
+                });
+
+                var profile = new profileModel();
+                profile.name = verification.name;
+
+                profile.save(function(err, profile){
+                    if(err){
+                        console.log(err);
+                    }
                 });
 
                 //send result

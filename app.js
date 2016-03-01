@@ -23,10 +23,12 @@ mongoose.connection.on('connected', function(){
   //user
   permission.allow('user', 'todos', ['get','post','put','delete']);
   permission.allow('user', 'users', ['getById']);
+  permission.allow('user', 'profile', ['getProfile']);
 
   //admin
   permission.allow('admin', 'todos', '*');
   permission.allow('admin', 'users', '*');
+  permission.allow('admin', 'profile', '*')
 
   //((what mongo models are available))
   console.log('Mongoose connected! Mongo collections:');
@@ -47,9 +49,12 @@ var expressJWT = require('express-jwt');
 var jwtSecret = require('./admin/jwtSecret.js');
 var engine = require('ejs-locals');
 
-//up and down models/testdata on server restart in development only
+//dev only settings
 if(env === 'development'){
+  //rake up and down test data
   var seed = require('./routes/seeds/index.js');
+  //access to app source code for dev inspection
+  app.use('/app', express.static(__dirname + '/app/'));
 }
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -71,6 +76,7 @@ var auth = require('./routes/auth');
 var logout = require('./routes/logout');
 var signup = require('./routes/signup');
 var verify = require('./routes/verify');
+var profile = require('./routes/profile');
 
 //static paths
 app.use(express.static(path.join(__dirname, 'public')));
@@ -103,6 +109,11 @@ app.post('/api/todos', checkAcl('todos','post'), todo.postTodo);
 app.get('/api/todos/:id', checkAcl('todos','get'), todo.getTodoById)
 app.put('/api/todos/:id', checkAcl('todos','put'), todo.editTodo);
 app.delete('/api/todos/:id', checkAcl('todos','delete'), todo.deleteTodo);
+
+//***
+/*  /api/profile  */ 
+//***
+app.get('/api/profile/:id', checkAcl('profile', 'getProfile'), profile.getProfile);
 
 //***
 /*  PUBLIC API  */ 

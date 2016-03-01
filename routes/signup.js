@@ -10,9 +10,8 @@ var recaptcha = new Recaptcha(keys.PUBLIC_KEY, keys.PRIVATE_KEY);
 var emailSecret = require('./../admin/emailSecret'); 
 
 router.route('/')
-    // get the user with that id (accessed at GET http://localhost:8080/api/users/:user_id)
     .post(function(req, res) { 
-        //userModel.find({ $or: [{name:res.body.name}, {email:res.body.email}]}, function(err, user){
+        var domain = req.headers.origin;
         userModel.findOne({name:req.body.name}, function(err, user){
             if(err){
                 console.log(err);
@@ -62,7 +61,7 @@ router.route('/')
                 from: "ClaimBook Verify",
                 to: req.body.email,
                 subject: "Welcome to ClaimBook",
-                html: "<a href='http://localhost:3000/verify?token=" + verifyToken + "'>Verify</a>"
+                html: "<a href='" + domain + "/verify?token=" + verifyToken + "'>Verify</a>"
             }
 
             transporter.sendMail(mailOptions, function(error, info){

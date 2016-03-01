@@ -39,6 +39,18 @@ router.get('/profile', function(req,res,next){
 	}
 );
 
+/* GET todo page. */
+router.get('/todo', function(req,res,next){
+		isAuth(req.session, function(decoded){
+			if(decoded){
+				res.render('todo');
+			} else {
+				res.redirect('/login');
+			}
+		});
+	}
+);
+
 /* GET test page. */
 /* Should be conditioned to only work in dev */
 router.get('/test', function(req,res,next){

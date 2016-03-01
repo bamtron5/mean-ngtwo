@@ -12,7 +12,7 @@ import 'rxjs/Rx' //operators for es6 ... wtf
     		<h3>Your Verification</h3>
             <div *ngIf="signup">
                 <p>Your account is now active.  Please login.</p>
-                <button ngClass="btn btn-primary"><a href="/login">Login</a></button>
+                <a ngClass="btn btn-primary" href="/login">Login</a>
             </div>
         </div>
 	`,

@@ -1,16 +1,33 @@
 import {User} from '../service/models/user';
 
-describe('User', () => {
+describe('User Model', () => {
+	/***
+	** Setters
+	***/
 	it('has a setter property for name', () => {
 		let user = new User();
 		user.name = "NewUser1";
 		expect(user.name).toEqual('NewUser1');
 	})
 
-	//lol would break tsc linting anyway... pointless.  just an example
-	it('has a password property for name', () => {
+	it('has a setter property for password', () => {
 		let user = new User();
 		user.password = "NewUserPassword"
 		expect(user.password).toEqual('NewUserPassword');
 	})
+
+	it('has a setter property for email', () => {
+		let user = new User();
+		user.email = "email@domain.com"
+		expect(user.email).toEqual('email@domain.com');
+	})
+
+	/***
+	** Validators
+	***/
+	//https://developers.livechatinc.com/blog/testing-angular-2-apps-dependency-injection-and-components/
+
+	/***
+	** ACL Status
+	***/
 }); 

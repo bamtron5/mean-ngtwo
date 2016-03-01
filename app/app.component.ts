@@ -14,12 +14,14 @@ import {TodoFormComponent} from './todo.form.component'
 import {ProfileComponent} from './profile.component'
 import {LoginFormComponent} from './login.form.component'
 import {VerificationComponent} from './verify.component'
+import {DesktopNavComponent} from './desktop.nav.component'
 
 
 @Component({
     selector: 'app',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, DesktopNavComponent],
     template: `
+    	<desktop-navigation></desktop-navigation>
 		<router-outlet></router-outlet>
 	`,
 	providers: [
@@ -33,6 +35,7 @@ import {VerificationComponent} from './verify.component'
 @RouteConfig([
 	{path: '/login', name:'LoginFormComponent', component: LoginFormComponent},
 	{path: '/profile', name:'ProfileComponent', component: ProfileComponent},
+	{path: '/todo', name: 'TodoFormComponent', component: TodoFormComponent},
 	{path: '/verify', name:'VerificationComponent', component: VerificationComponent}
 ])
 

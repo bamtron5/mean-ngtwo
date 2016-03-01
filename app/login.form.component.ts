@@ -109,7 +109,6 @@ export class LoginFormComponent {
 	onSubmit(form: string) {
 		if (form === "login"){
 			this._userService.login(this.model, false);
-			console.log(this.loginMessage);
 		} else {
 			this.submitSignup();	
 		}

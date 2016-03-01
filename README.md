@@ -3,6 +3,9 @@
 ## Release
 Pre-alpha | Dev only. Contribution welcome.
 
+## Heroku Sample
+[https://serene-stream-25390.herokuapp.com](https://serene-stream-25390.herokuapp.com)
+
 ## Run directions
 `npm install`
 
@@ -25,13 +28,14 @@ then:
 - `npm run test`
 - `npm run test:build`
 - `npm run watch`
+- `npm run debug` requires `npm i -g node-debug`
 
 ## Includes	
 * Authentication w/ JsonWebTokens
 * Sign up w/ Google ReCaptcha and email verification
 * Components:
 	- Nav Component
-	- Login/Signup Component
+	- Login/Signup Component w/ email confirmation
 	- Todo List Component
 	- Profile Component 
 * Mongo Seeds (todo model, users model)
