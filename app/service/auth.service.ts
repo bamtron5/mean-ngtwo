@@ -1,7 +1,6 @@
 import {Injectable, EventEmitter}     from 'angular2/core'
 import {Http, Response, Headers} from 'angular2/http'
 import {Observable}     from 'rxjs/Observable'
-import * as Rx from 'rxjs'
 import {User} from './models/user'
 import {Auth} from './models/auth'
 import 'rxjs/add/operator/share'
