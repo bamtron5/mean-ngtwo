@@ -1,8 +1,7 @@
 # NG2 Mean Stack on TypeScript
-
-## Release
 ![](https://media.giphy.com/media/xT9DPQvQ4wuYAbCRtC/giphy.gif "")
 
+## Release
 Pre-alpha | Dev only. Contribution welcome.
 
 ## Heroku Sample
