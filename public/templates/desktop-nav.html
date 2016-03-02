@@ -9,8 +9,8 @@
 			<li *ngIf="isAuth"><a (click)="logout()" href="#">Logout</a></li>
 		</ul>
 		<div class="status navbar-right">
-			<p>Am i authorized: {{authName}}</p>
-			<p *ngIf="isAuth">My User Name is: {{isAuth}}</p>
+			<p>Am i authorized: {{isAuth}}</p>
+			<p *ngIf="authName">My User Name is: {{authName}}</p>
 		</div>
 	</div>
 </nav>
