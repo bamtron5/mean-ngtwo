@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - v0.12.0
+install: npm install
+script:
+  - npm run prune
+  - gulp
+  - npm run build
