@@ -41,4 +41,23 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb){
 	});
 }
 
+//@param: from route req next param
+//@param: typeof name === string
+//@param: typeof models === <list[models]>
+UserSchema.methods.starterKit = (next, name, models) => {
+	return new Promise((resolve, reject) => {
+		models.map((val) => {
+			var curModel = new val();
+			curModel.name = name;
+			curModel.save((err, profile) => {
+				if(err){
+					return reject();
+				}
+			})
+		});
+		resolve();
+	});
+	
+}
+
 module.exports = mongoose.model('AppUser', UserSchema);
