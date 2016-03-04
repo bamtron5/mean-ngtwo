@@ -19,7 +19,7 @@ router.route('/:token')
         and send status
     */
 
-    .get(function(req, res) {
+    .get(function(req, res, next) {
         verificationModel.findOne({token: req.params.token}).exec(function(err, verification){
             if(err){
                 res.send(err);
@@ -51,18 +51,19 @@ router.route('/:token')
                 	}
                 });
 
-                var profile = new profileModel();
-                profile.name = verification.name;
-
-                profile.save(function(err, profile){
-                    if(err){
-                        console.log(err);
-                    }
+                userModel.schema.methods.starterKit(next, verification.name, [
+                    profileModel
+                ]).then(() => {
+                    console.log('profileCreated');
+                    //send result
+                    res.status(200).json({verify:true});
+                    res.end();
+                }).catch(() => {
+                    console.log('profileNotCreated');
+                    res.status(400).json({verify:false,message:"This verification was unsuccessful."});
                 });
 
-                //send result
-                res.status(200).json({verify:true});
-                res.end();
+
             } else {
 
                 //if verication was not found
