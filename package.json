@@ -3,9 +3,9 @@
   "version": "0.0.10.pre",
   "private": true,
   "scripts": {
-    "serve": "DEBUG=claimBook* && node ./bin/www",
+    "start": "DEBUG=claimBook* && node ./bin/www",
     "prune": "rm -rf appBuilt routesBuilt testBuilt",
-    "start": "npm run prune & node_modules/typescript/bin/tsc & npm run serve",
+    "build": "node_modules/typescript/bin/tsc",
     "debug": "node-debug bin/www",
     "test": "node_modules/jasmine-node/bin/jasmine-node --verbose testBuilt/test/*.js",
     "testBuild": "rm -rf testBuilt && node_modules/typescript/bin/tsc --module commonjs --outDir testBuilt",
