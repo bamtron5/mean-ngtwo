@@ -1,8 +1,11 @@
 # NG2 Mean Stack on TypeScript
+
+[![Build Status](https://travis-ci.org/bamtron5/mean-ngtwo.svg?branch=master)](https://travis-ci.org/bamtron5/mean-ngtwo)
+
 ![](https://media.giphy.com/media/xT9DPQvQ4wuYAbCRtC/giphy.gif "")
 
-## Release
-Pre-alpha | Dev only. Contribution welcome.
+## Release Notes
+Pre-alpha | Dev only. Contribution welcome.  Major release at 1.0.0.
 
 ## Heroku Sample
 [https://serene-stream-25390.herokuapp.com](https://serene-stream-25390.herokuapp.com)
