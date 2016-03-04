@@ -1,4 +1,5 @@
-import {Todo} from '../service/models/todo';
+/// <reference path="../typings/browser/ambient/jasmine/jasmine.d.ts" />
+import {Todo} from '../app/service/models/todo';
 
 describe('Todo Model', () => {
 	it('has a setter property for name', () => {

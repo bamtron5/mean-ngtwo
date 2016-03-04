@@ -10,3 +10,4 @@ admin/emailSecret.js
 admin/keys.js
 admin/mongoConnect.js
 routesBuilt
+typings
