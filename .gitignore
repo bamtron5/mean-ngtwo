@@ -1,13 +1,7 @@
 node_modules
 appBuilt
 npm-debug.log
-views/npm-debug.log
-.node_modules
-log.txt
 sandbox
 testBuilt
-admin/emailSecret.js
-admin/keys.js
-admin/mongoConnect.js
 routesBuilt
 typings
