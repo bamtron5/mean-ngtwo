@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "preinstall":"command -v tsd || npm install -g tsd & command -v typings || npm install -g typings && typings install",
+    "prestart":"gulp && npm run build",
     "start": "DEBUG=claimBook* && node ./bin/www",
     "prune": "rm -rf appBuilt routesBuilt testBuilt",
     "build": "node_modules/typescript/bin/tsc",
@@ -59,14 +60,14 @@
     "systemjs": "^0.19.18",
     "typescript": "1.7.5",
     "typings": "^0.6.8",
-    "zone.js": "0.5.11"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.0.0",
+    "zone.js": "0.5.11",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-rename": "^1.2.2",
-    "gulp-watch": "^4.3.5",
+    "gulp-watch": "^4.3.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.0.0",
     "inquirer": "^0.11.1",
     "jasmine-core": "2.4.1"
   }
