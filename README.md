@@ -7,14 +7,14 @@
 ## Release Notes
 Pre-alpha | Dev only. Contribution welcome.  Major release at 1.0.0.
 
-## Heroku Sample
-[https://serene-stream-25390.herokuapp.com](https://serene-stream-25390.herokuapp.com)
+<!-- ## Heroku Sample
+[https://serene-stream-25390.herokuapp.com](https://serene-stream-25390.herokuapp.com) -->
 
 ## Run directions
 `npm install`
 
 then:
-`npm start --development`
+`gulp` & `npm run build` & `npm run serve`
 
 ##Prereq functional setup
 - I left 3 sample files for editing.  Rename them by removing the '.'
@@ -33,9 +33,11 @@ then:
 - `npm run test:build`
 - `npm run watch`
 - `npm run debug` requires `npm i -g node-debug`
+- `gulp stream` or `gulp` for .es6
 
 ## Includes	
 * Authentication w/ JsonWebTokens
+* Access control list with user roles
 * Sign up w/ Google ReCaptcha and email verification
 * Components:
 	- Nav Component
@@ -49,12 +51,7 @@ then:
 * Jasmine Testing
 
 ## Future Support
-- Webpack
-	- `webpack [config]`
-- Heroku Deploy
-	- `heroku deploy`
-- Travis CI
-- Puphet like VM DEV
+- Vagrant VM DEV for CI Ubuntu 14.04
 
 ## Contact 
 [http://brandonam.com](http://brandonam.com)
