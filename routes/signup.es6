@@ -5,9 +5,9 @@ var verificatonModel = require('./models/verification');
 var nodemailer = require('nodemailer'); 
 var Recaptcha = require('re-captcha');
 var keys = require('../admin/keys');
-var recaptcha = new Recaptcha(keys.PUBLIC_KEY, keys.PRIVATE_KEY);
+var recaptcha = new Recaptcha(keys.CAPTCHA_PUBLIC_KEY, keys.CAPTCHA_PRIVATE_KEY);
 //please change this to include your email smtp server
-var emailSecret = require('./../admin/emailSecret'); 
+var emailSecret = keys.emailSecret; 
 
 router.route('/')
     .post(function(req, res) { 

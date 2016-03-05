@@ -17,7 +17,7 @@ app.use(cookieSession({
 
 //set api permissions here
 mongoose.connection.on('connected', function () {
-  console.log(jwt);
+
   //user
   permission.allow('user', 'todos', ['get', 'post', 'put', 'delete']);
   permission.allow('user', 'users', ['getById']);
@@ -44,7 +44,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressJWT = require('express-jwt');
-var jwtSecret = require('./admin/jwtSecret.js');
+var keys = require('./admin/keys.js');
+var jwtSecret = keys.jwtSecret;
 var engine = require('ejs-locals');
 
 //dev only settings

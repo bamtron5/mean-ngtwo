@@ -65,6 +65,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-rename": "^1.2.2",
     "gulp-watch": "^4.3.5",
+    "inquirer": "^0.11.1",
     "jasmine-core": "2.4.1"
   }
 }

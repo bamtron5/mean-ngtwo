@@ -19,3 +19,5 @@ install: npm install
 script:
   - gulp
   - npm run build 
+after_success:
+  - npm run test:build

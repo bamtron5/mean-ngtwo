@@ -1,5 +1,6 @@
 var jwt = require('jsonwebtoken');
-var jwtSecret = require('./jwtSecret');
+var keys = require('./keys.js');
+var jwtSecret = keys.jwtSecret;
 
 //pass in req.session
 var isAuth = function(session, cb){

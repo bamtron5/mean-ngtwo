@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var userModel = require('./models/users');
+var keys = require('../admin/keys.js');
 var jwt = require('jsonwebtoken');
-var jwtSecret = require('../admin/jwtSecret');
+var jwtSecret = keys.jwtSecret;
 var mongoose = require('mongoose');
 var acl = require('acl');
 var permission = new acl(new acl.mongodbBackend(mongoose.connection.db));
