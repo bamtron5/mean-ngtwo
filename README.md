@@ -17,13 +17,10 @@ then:
 `gulp` & `npm run build` & `npm run serve`
 
 ##Prereq functional setup
-- I left 3 sample files for editing.  Rename them by removing the '.'
+- see `admin/keys.js`
 - You will need keys for Google ReCaptcha for Sign Up [https://developers.google.com/recaptcha/docs/start](https://developers.google.com/recaptcha/docs/start)
-	- in the file admin/keys.js
-	- insert: `exports.module = { PUBLIC_KEY: 'your public key', PRIVATE_KEY: 'your private key' }`
 - SMTP server for verification emails
-	- see admin/emailSecret.js
-- Change your mongoConnect file to represent your dev and prod mongodbs
+- MongoDB connection string
 
 ##Package Execution Scripts
 - `npm run serve`

@@ -1,5 +1,6 @@
 {
   "name": "claimBook",
+  "license": "MIT",
   "version": "0.1.10.pre",
   "private": true,
   "scripts": {
