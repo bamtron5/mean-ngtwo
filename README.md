@@ -15,7 +15,7 @@ Pre-alpha | Dev only. Contribution welcome.  Major release at 1.0.0.
 `npm install`
 
 then:
-`gulp` & `npm run build` & `npm run serve`
+`gulp` & `npm run build` & `npm start` or `npm start --production`
 
 ##Prereq functional setup
 - see `admin/keys.js`
