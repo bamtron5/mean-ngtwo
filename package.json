@@ -4,6 +4,7 @@
   "version": "0.1.10.pre",
   "private": true,
   "scripts": {
+    "preinstall":"command -v tsd || npm install -g tsd",
     "start": "DEBUG=claimBook* && node ./bin/www",
     "prune": "rm -rf appBuilt routesBuilt testBuilt",
     "build": "node_modules/typescript/bin/tsc",
