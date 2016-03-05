@@ -15,6 +15,8 @@ env:
     - secure: "DSxGlAMXAK82h9/yiG+ED77BIbJFia1aEZgJQi9QKrZa5JKTcvP5HdxS7Uk/+aAq5vnw1PqJNuW6yUluvTBrUuveUTRZA1SzaZLt/NF62ssehtr/aA+Wcmt794e29ki/fN5UXOmBPf9F+dKbOb2D/qRNRmbOyO568XgeozTw6OA55W1wpt1Hq46QAX6NrP/b7LYD/yA41hzEZpod6yD5vDpOqe1gWbBCiC99hOXovPW+wa80ROvwaOIhU1kIofn47zOhzW+W0jkb7cueNpaPDNdryGxpfuSSOJNug25dh1DSfratJ14Wrh0lLUQ6+S4QNXlQbCA61ZhddNrNNQOxUminngjmaZIe6mpti8ku4ZVtgmNWToipqzSffVVVwtvQ4k6JGNy3gZNB/lVfhbu+sAh/+216lTsaVSon/K3VnBVAha44cmTOba1gBCrFKQlRdOX6q1b6UJPUF/SgI/iDYcPkej0IrCugbGP51ob5DfGGuAWvTfl2b+ntng1+wwUPdm+a9bUAR5ENSaBsXqzTcBmTC19SOEtrxgtctSOvBHVaBuKK8RCNFXxK/g2r8eUlisnU+w2/WzdiNGOWx6gUOSG7Smo8CyE7n8w1Y7tYI0DxM+17AVWtKaXYyOyQqVhEdzyENNBpompEn8twaqj9mioPfMHKdIy7+tX1rgQ1Fn0="
 before_install:
   - npm install tsd --global
+  - npm install typings --global
+  - typings install
 install: npm install
 script:
   - gulp
