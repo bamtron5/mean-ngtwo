@@ -3,7 +3,7 @@ var router = express.Router();
 var isAuth = require('../admin/isAuth');
 var Recaptcha = require('re-captcha');
 var keys = require('./../admin/keys');
-var recaptcha = new Recaptcha(keys.PUBLIC_KEY, keys.PRIVATE_KEY, 'https://');
+var recaptcha = new Recaptcha(keys.CAPTCHA_PUBLIC_KEY, keys.CAPTCHA_PRIVATE_KEY, 'https://');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
