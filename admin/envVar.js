@@ -1,1 +1,0 @@
-export jwt='this shit is secret'
