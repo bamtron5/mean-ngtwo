@@ -1,3 +1,4 @@
+var keys = require('./admin/keys.js');
 var express = require('express');
 var app = express();
 var cookieSession = require('cookie-session');
@@ -44,7 +45,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressJWT = require('express-jwt');
-var keys = require('./admin/keys.js');
 var jwtSecret = keys.jwtSecret;
 var engine = require('ejs-locals');
 

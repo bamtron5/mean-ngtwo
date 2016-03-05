@@ -33,11 +33,11 @@ var keys = {
 		REMOTE_MONGO_DB: (process.env['REMOTE_MONGO_DB']) || "mongodb://localhost/claimBook"
 	},
 	production: {
-		jwtSecret: process.env['jwtSecret'],
-		emailSecret: process.env['emailSecret'],
-		CAPTCHA_PUBLIC_KEY: process.env['CAPTCHA_PUBLIC_KEY'],
-		CAPTCHA_PRIVATE_KEY: process.env['CAPTCHA_PRIVATE_KEY'],
-		REMOTE_MONGO_DB: process.env['REMOTE_MONGO_DB']
+		jwtSecret: (process.env['jwtSecret']) || "your jwt secret",
+		emailSecret: (process.env['emailSecret']) || "smtps://email@domain.com:yourpassword@smtpProvider",
+		CAPTCHA_PUBLIC_KEY: (process.env['CAPTCHA_PUBLIC_KEY']) || "your jwt secret",
+		CAPTCHA_PRIVATE_KEY: (process.env['CAPTCHA_PRIVATE_KEY']) || "your jwt secret",
+		REMOTE_MONGO_DB: (process.env['REMOTE_MONGO_DB']) || "mongodb://localhost/claimBook"
 	}
 }
 
