@@ -18,4 +18,4 @@ before_install:
 install: npm install
 script:
   - gulp
-  - npm run build
+  - npm run build 
