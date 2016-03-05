@@ -6,7 +6,6 @@ var mongoConnect = require('./admin/mongoConnect.js');
 var acl = require('acl');
 var permission = new acl(new acl.mongodbBackend(mongoose.connection.db));
 var checkAcl = require('./admin/acl.js');
-var envVar = require('./admin/envVar.js');
 
 //cookie proxy channel
 app.set('trust proxy', 1);
