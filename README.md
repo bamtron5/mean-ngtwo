@@ -8,7 +8,9 @@
 Pre-alpha | Dev only. Contribution welcome.  Major release at 1.0.0.
 
 <!-- ## Heroku Sample
-[https://serene-stream-25390.herokuapp.com](https://serene-stream-25390.herokuapp.com) -->
+[https://serene-stream-25390.herokuapp.com](https://serene-stream-25390.herokuapp.com) 
+[https://devcenter.heroku.com/articles/how-heroku-works](How heroku works)
+-->
 
 ## Run directions
 `npm install`
