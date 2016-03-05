@@ -6,6 +6,7 @@ var mongoConnect = require('./admin/mongoConnect.js');
 var acl = require('acl');
 var permission = new acl(new acl.mongodbBackend(mongoose.connection.db));
 var checkAcl = require('./admin/acl.js');
+var envVar = require('./admin/envVar.js');
 
 //cookie proxy channel
 app.set('trust proxy', 1);
@@ -17,7 +18,7 @@ app.use(cookieSession({
 
 //set api permissions here
 mongoose.connection.on('connected', function () {
-
+  console.log(jwt);
   //user
   permission.allow('user', 'todos', ['get', 'post', 'put', 'delete']);
   permission.allow('user', 'users', ['getById']);
