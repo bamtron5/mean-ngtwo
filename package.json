@@ -4,7 +4,7 @@
   "version": "0.1.10.pre",
   "private": true,
   "scripts": {
-    "preinstall":"command -v tsd || npm install -g tsd & command -v typings || npm install -g typings & typings install",
+    "preinstall":"command -v tsd || npm install -g tsd & command -v typings || npm install -g typings && typings install",
     "start": "DEBUG=claimBook* && node ./bin/www",
     "prune": "rm -rf appBuilt routesBuilt testBuilt",
     "build": "node_modules/typescript/bin/tsc",
