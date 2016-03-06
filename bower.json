@@ -1,0 +1,21 @@
+{
+  "name": "claim-book",
+  "version": "1.0.0.candidate",
+  "homepage": "https://github.com/bamtron5/mean-ngtwo",
+  "authors": [
+    "brandon@brandonam.com <brandon@brandonam.com>"
+  ],
+  "description": "ngtwo-mean stack boiler plate",
+  "main": "app.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "animate.css": "^3.5.1"
+  }
+}
