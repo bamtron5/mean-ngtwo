@@ -10,6 +10,7 @@ import {todoService} from './service/todo.service';
 import {authService} from './service/auth.service'
 
 //Components
+import {HomePageComponent} from './homepage.component'
 import {TodoFormComponent} from './todo.form.component'
 import {ProfileComponent} from './profile.component'
 import {LoginFormComponent} from './login.form.component'
@@ -21,8 +22,12 @@ import {DesktopNavComponent} from './desktop.nav.component'
     selector: 'app',
     directives: [ROUTER_DIRECTIVES, DesktopNavComponent],
     template: `
-    	<desktop-navigation></desktop-navigation>
-		<router-outlet></router-outlet>
+    	
+    	<section [class.bounceInDown]="viewInit" class="animated">
+    		<desktop-navigation></desktop-navigation>
+    		<router-outlet></router-outlet>
+    	</section>
+		
 	`,
 	providers: [
 		HTTP_PROVIDERS,
@@ -33,6 +38,7 @@ import {DesktopNavComponent} from './desktop.nav.component'
 })
 
 @RouteConfig([
+	{path: '/', name:'HomePageComponent', component: HomePageComponent},
 	{path: '/login', name:'LoginFormComponent', component: LoginFormComponent},
 	{path: '/profile', name:'ProfileComponent', component: ProfileComponent},
 	{path: '/todo', name: 'TodoFormComponent', component: TodoFormComponent},
@@ -40,7 +46,14 @@ import {DesktopNavComponent} from './desktop.nav.component'
 ])
 
 export class AppComponent{  
-	constructor(){
+	viewInit: boolean;
+
+	constructor() {
+		this.viewInit = false;
+	}
+
+	ngAfterContentInit() {
+		this.viewInit = true;
 	}
 };
 
