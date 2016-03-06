@@ -80,6 +80,7 @@ var profile = require('./routesBuilt/profile');
 //static paths
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/modules', express.static(__dirname + '/node_modules/'));
+app.use('/bower_components', express.static(__dirname + '/bower_components/'));
 app.use('/appBuilt', express.static(__dirname + '/appBuilt/'));
 
 //view routes
