@@ -2,6 +2,8 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const rename = require('gulp-rename');
 const watch = require('gulp-watch');
+const uglify = require('gulp-uglify');
+
  
 gulp.task('default', function(){
 	gulp.src('routes/**/*.es6')
@@ -24,6 +26,8 @@ gulp.task('stream', function(){
 
 		
 });
+
+
 
 gulp.task('callback', function(cb){
 	gulp.src('routes/**/*.es6')

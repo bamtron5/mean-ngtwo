@@ -4,9 +4,10 @@
   "version": "0.1.10.pre",
   "private": true,
   "scripts": {
-    "preinstall":"command -v tsd || npm install -g tsd & command -v typings || npm install -g typings && typings install",
-    "postinstall":"command -v tsd || npm install -g tsd",
-    "prestart":"gulp && npm run build",
+    "preinstall": "command -v tsd || npm install -g tsd & command -v typings || npm install -g typings && typings install",
+    "postinstall": "command -v tsd || npm install -g tsd",
+    "prestart": "gulp && npm run build",
+    "serve": "DEBUG=claimBook* && node ./bin/www",
     "start": "DEBUG=claimBook* && node ./bin/www",
     "start:production": "npm run preinstall & npm run prestart & DEBUG=claimBook* && node ./bin/www",
     "prune": "rm -rf appBuilt routesBuilt testBuilt",
@@ -48,6 +49,11 @@
     "es6-shim": "^0.33.13",
     "express": "~4.13.1",
     "express-jwt": "^3.3.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3",
+    "gulp-watch": "^4.3.5",
     "jasmine-node": "^1.14.5",
     "jsonwebtoken": "^5.5.4",
     "microm": "^0.2.4",
@@ -62,11 +68,7 @@
     "systemjs": "^0.19.18",
     "typescript": "1.7.5",
     "typings": "^0.6.8",
-    "zone.js": "0.5.15",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-watch": "^4.3.5"
+    "zone.js": "0.5.15"
   },
   "devDependencies": {
     "babel-cli": "^6.0.0",
