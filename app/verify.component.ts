@@ -8,9 +8,9 @@ import 'rxjs/Rx' //operators for es6 ... wtf
     selector: 'verify',
     directives: [ROUTER_DIRECTIVES],
     template: `
-        <div ngClass="container">
+        <div ngClass="container" *ngIf="signup">
     		<h3>Your Verification</h3>
-            <div *ngIf="signup">
+            <div>
                 <p>Your account is now active.  Please login.</p>
                 <a ngClass="btn btn-primary" href="/login">Login</a>
             </div>

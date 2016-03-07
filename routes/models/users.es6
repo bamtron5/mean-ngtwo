@@ -10,11 +10,13 @@ var UserSchema   = new Schema({
     email: {type: String, required: true},
     role: {type: String, required: true},
     testData: {type: Boolean, default: false},
-    active: {type: Boolean, default:false}
+    active: {type: Boolean, default:false},
+    activeDate: {type: String, required: true, default: new Date()}
 });
 
 UserSchema.pre('save', function(next){
 	var user = this;
+
 	if(!user.isModified('password'))
 		return next();
 
@@ -27,6 +29,7 @@ UserSchema.pre('save', function(next){
 				return next(err);
 
 			user.password = hash;
+			user.activeDate = new Date();
 			next();
 		});
 	});
