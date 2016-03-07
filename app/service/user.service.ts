@@ -45,6 +45,9 @@ export class userService {
   profileName$: Observable<string>;
   _profileNameObserver: any;
 
+  activeDate$: Observable<string>;
+  _activeDateObserver: any;
+
   constructor(private http: Http) { 
     this.users$ = new Observable(observer => this._usersObserver = observer).share();
     this.user$ = new Observable(observer => this._userObserver = observer).share();
@@ -56,6 +59,7 @@ export class userService {
     this.verification$ = new Observable(observer => this._verificationObserver = observer).share();
     this.captchaResponse$ = new Observable(observer => this._captchaResponseObserver = observer).share();
     this.profileName$ = new Observable(observer => this._profileNameObserver = observer).share();
+    this.activeDate$ = new Observable(observer => this._activeDateObserver = observer).share();
     this._dataStore = { users: [] };
     this._acceptStore = { accept: [] };
   }
@@ -71,12 +75,16 @@ export class userService {
       }, error => this.handleError(error));
   }
 
-  getUser(user:String){
-      this.http.get(this._usersUrl + user)
-        .map(res => res.json())
-        .subscribe(data => {
-          this._userObserver.next(data);
-        }, error => this.handleError(error));
+  getUser(user:string){
+      return new Promise((resolve, reject) => {
+
+        this.http.get(this._usersUrl + user)
+          .map(res => res.json())
+          .subscribe(data => {
+            data.hasOwnProperty('activeDate') ? this._activeDateObserver.next(data.activeDate) : console.log('whyyyy');
+            resolve();
+          }, error => reject(error));
+      })
   }
 
   getProfile(user: string){

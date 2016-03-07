@@ -10,7 +10,7 @@ var users = {
     },
     // /api/users/:name
     getUserById:function(req, res){
-       userModel.find({name:req.params.id}, function(err, user) {
+       userModel.findOne({name:req.params.id}, function(err, user) {
             if (err)
                 res.send(err);
             res.json(user);
