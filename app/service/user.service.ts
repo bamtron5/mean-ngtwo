@@ -155,7 +155,6 @@ export class userService {
   }
 
   signup(user, redirect) {
-    console.log("wrong");
     var redirect = redirect ? redirect : '/profile';
     var strUser = JSON.stringify(user);
     var headers = new Headers();

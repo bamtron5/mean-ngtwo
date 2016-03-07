@@ -65,7 +65,7 @@ router.route('/')
             }
 
             transporter.sendMail(mailOptions, function(error, info){
-                if(error){
+                if(error || !info || !info.hasOwnProperty('response')){
                     console.log(error);
                     res.send({signup: false, message: "An error has occurred. Your email address was rejected."});
                     res.end();
