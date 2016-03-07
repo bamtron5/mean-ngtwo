@@ -1,7 +1,7 @@
 {
   "name": "claimBook",
   "license": "MIT",
-  "version": "1.0.0.candidate",
+  "version": "1.0.0-candidate",
   "private": true,
   "scripts": {
     "serve":"DEBUG=claimBook* && node ./bin/www",
