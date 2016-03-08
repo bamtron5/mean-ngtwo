@@ -33,7 +33,7 @@ router.route('/')
                 html: "<a href='" + domain + "/verify?token=" + verifyToken + "'>Verify</a>"
             }
 
-            sendEmail(mailOptions).then((res) => {
+            sendEmail(mailOptions).then((info) => {
 
                 let newVerification = new verificatonModel({
                     'name':req.body.name,
@@ -55,8 +55,8 @@ router.route('/')
                     saveUser();
                 });
 
-            }).catch((res) => {
-                console.log(res);
+            }).catch((info) => {
+                console.log(info);
                 fail.message = 'bad email.';
                 res.status(202).json(fail);
                 res.end();
