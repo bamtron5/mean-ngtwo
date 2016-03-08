@@ -122,7 +122,11 @@ export class LoginFormComponent {
 
 		this._userService.verifyCaptcha(obj, () => {
 			if(this.captchaResponse.captcha){
-				this._userService.signup(this.model, false);
+				this._userService.signup(this.model, false).then(() => {
+					null;
+				}).catch(() => {
+					window['Recaptcha'].reload();
+				});
 			} else {
 				window['Recaptcha'].reload();
 			}

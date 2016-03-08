@@ -153,24 +153,29 @@ export class userService {
         }, error => this.handleError(error)
       )
   }
-
+  
   signup(user, redirect) {
     var redirect = redirect ? redirect : '/profile';
     var strUser = JSON.stringify(user);
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('/api/signup', strUser, { headers: headers })
-    .map(res => res.json())
-    .subscribe(
-       data => { 
-          this._acceptedObserver.next(data.signup);
-          this._signUpMessageObserver.next(data.message);
-          if(data.signup){
-            location.href = redirect;
-          }
-       },
-       error => this._acceptedObserver.next(false)
-    );
+    return new Promise((resolve, reject) => {
+      this.http.post('/api/signup', strUser, { headers: headers })
+        .map(res => res.json())
+        .subscribe(
+           data => { 
+              this._acceptedObserver.next(data.signup);
+              this._signUpMessageObserver.next(data.message);
+              if(data.signup){
+                location.href = redirect;
+                resolve();
+              } else {
+                reject();
+              }
+           },
+           error => {reject()}
+        );
+    });
   }
 
   verify(token){
