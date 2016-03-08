@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
-var keys = require('../admin/keys.js');
+var keys = require('../../admin/keys.js');
 var jwtSecret = keys.jwtSecret;
 
 router.route('/')

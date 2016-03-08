@@ -4,7 +4,7 @@ const userModel = require('./models/users');
 const verificatonModel = require('./models/verification');
 const sendEmail = require('./script/sendEmail');
 const Recaptcha = require('re-captcha');
-const keys = require('../admin/keys');
+const keys = require('../../admin/keys');
 const recaptcha = new Recaptcha(keys.CAPTCHA_PUBLIC_KEY, keys.CAPTCHA_PRIVATE_KEY);
 
 router.route('/')

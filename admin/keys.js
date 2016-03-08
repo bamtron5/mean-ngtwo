@@ -5,7 +5,6 @@
 	 	CAPTCHA_PUBLIC_KEY
 	 	CAPTCHA_PRIVATE_KEY
 	 	REMOTE_MONGO_DB
-
  	Travis hashing for builds recommended
  	`gem install travis`
  	`travis encrypt jwtSecret=your secret`

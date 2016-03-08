@@ -8,7 +8,7 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": false,
-    "outDir":"appBuilt",
+    "outDir":"dist",
     "listFiles":true,
     "diagnostics":true
   },
@@ -16,6 +16,6 @@
     "node_modules",
     "typings/browser.d.ts",
     "typings/browser",
-    "test"
+    "src/test"
   ]
 }

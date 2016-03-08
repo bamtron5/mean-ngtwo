@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var isAuth = require('../admin/isAuth');
+var isAuth = require('../../admin/isAuth');
 var Recaptcha = require('re-captcha');
-var keys = require('./../admin/keys');
+var keys = require('../../admin/keys');
 var recaptcha = new Recaptcha(keys.CAPTCHA_PUBLIC_KEY, keys.CAPTCHA_PRIVATE_KEY, 'https://');
 
 /* GET home page. */

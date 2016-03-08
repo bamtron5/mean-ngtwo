@@ -1,4 +1,4 @@
-/// <reference path="../typings/browser/ambient/jasmine/jasmine.d.ts" />
+///<reference path="../../typings/browser/ambient/jasmine/jasmine.d.ts" />
 import {Todo} from '../app/service/models/todo';
 
 describe('Todo Model', () => {

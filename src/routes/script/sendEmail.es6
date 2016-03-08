@@ -1,4 +1,4 @@
-var keys = require('../../admin/keys');
+var keys = require('../../../admin/keys');
 var emailSecret = keys.emailSecret; 
 var nodemailer = require('nodemailer'); 
 var transporter = nodemailer.createTransport(emailSecret);

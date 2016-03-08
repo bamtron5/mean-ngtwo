@@ -1,4 +1,4 @@
-///<reference path="../typings/browser/ambient/jasmine/jasmine.d.ts" />
+///<reference path="../../typings/browser/ambient/jasmine/jasmine.d.ts" />
 import {User} from '../app/service/models/user';
 
 describe('User Model', () => {

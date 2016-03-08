@@ -1,6 +1,6 @@
 'use strict';
 
-var mongoConnect = require('../../admin/mongoConnect');
+var mongoConnect = require('../../../admin/mongoConnect');
 var mongoose = require('mongoose');
 var Profile = require('../models/profile.js');
 var Todo = require('../models/todo.js');

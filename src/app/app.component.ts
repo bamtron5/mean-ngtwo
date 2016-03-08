@@ -5,6 +5,7 @@ import {HTTP_PROVIDERS} from 'angular2/http'
 import 'rxjs/Rx' //operators for es6 ... wtf
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 
+
 //Service
 import {todoService} from './service/todo.service';
 import {authService} from './service/auth.service'

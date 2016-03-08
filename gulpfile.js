@@ -6,23 +6,23 @@ const uglify = require('gulp-uglify');
 
  
 gulp.task('default', function(){
-	gulp.src('routes/**/*.es6')
+	gulp.src('src/routes/**/*.es6')
 		.pipe(rename({extname:".js"}))
 		.pipe(babel({
 			presets: ['es2015']
 		}))
-		.pipe(gulp.dest('./routesBuilt'));
+		.pipe(gulp.dest('./dist/routes'));
 });
 
 
 gulp.task('stream', function(){
-	return gulp.src('routes/**/*.es6')
-		.pipe(watch('routes/**/*.es6'))
+	return gulp.src('src/routes/**/*.es6')
+		.pipe(watch('src/routes/**/*.es6'))
 		.pipe(rename({extname:".js"}))
 		.pipe(babel({
 			presets: ['es2015']
 		}))
-		.pipe(gulp.dest('./routesBuilt'))
+		.pipe(gulp.dest('./dist/routes'))
 
 		
 });
@@ -30,12 +30,12 @@ gulp.task('stream', function(){
 
 
 gulp.task('callback', function(cb){
-	gulp.src('routes/**/*.es6')
-		.pipe(watch('routes/**/*.es6'))
+	gulp.src('src/routes/**/*.es6')
+		.pipe(watch('src/routes/**/*.es6'))
 		.pipe(rename({extname:".js"}))
 		.pipe(babel({
 			presets: ['es2015']
 		}))
-		.pipe(gulp.dest('./routesBuilt'))
+		.pipe(gulp.dest('./dist/routes'))
 		.on('end', cb)
 });

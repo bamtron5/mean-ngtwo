@@ -7,8 +7,8 @@ System.config({
   }
 });
 Promise.all([
-	System.import('appBuilt/test/user.spec.js'),
-	System.import('appBuilt/test/todo.spec.js')
+	System.import('dist/test/user.spec.js'),
+	System.import('dist/test/todo.spec.js')
 ])
 .then(window.onload)
 .catch(console.error.bind(console));

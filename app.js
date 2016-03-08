@@ -51,9 +51,9 @@ var engine = require('ejs-locals');
 //dev only settings
 if (env === 'development') {
   //rake up and down test data
-  var seed = require('./routesBuilt/seeds/index.js');
+  var seed = require('./dist/routes/seeds/index.js');
   //access to app source code for dev inspection
-  app.use('/app', express.static(__dirname + '/app/'));
+  app.use('/src/app', express.static(__dirname + '/src/app/'));
 }
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -67,21 +67,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //set your headers
 
 //((pull in your apis))
-var routes = require('./routesBuilt/index');
-var users = require('./routesBuilt/users');
-var todo = require('./routesBuilt/todo');
-var login = require('./routesBuilt/login');
-var auth = require('./routesBuilt/auth');
-var logout = require('./routesBuilt/logout');
-var signup = require('./routesBuilt/signup');
-var verify = require('./routesBuilt/verify');
-var profile = require('./routesBuilt/profile');
+var routes = require('./dist/routes/index');
+var users = require('./dist/routes/users');
+var todo = require('./dist/routes/todo');
+var login = require('./dist/routes/login');
+var auth = require('./dist/routes/auth');
+var logout = require('./dist/routes/logout');
+var signup = require('./dist/routes/signup');
+var verify = require('./dist/routes/verify');
+var profile = require('./dist/routes/profile');
 
 //static paths
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/modules', express.static(__dirname + '/node_modules/'));
 app.use('/bower_components', express.static(__dirname + '/bower_components/'));
-app.use('/appBuilt', express.static(__dirname + '/appBuilt/'));
+app.use('/dist/app', express.static(__dirname + '/dist/app/'));
 
 //view routes
 app.use('/', routes);

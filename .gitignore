@@ -1,8 +1,6 @@
 node_modules
-appBuilt
+dist
 npm-debug.log
 sandbox
-testBuilt
-routesBuilt
 typings
 bower_components
