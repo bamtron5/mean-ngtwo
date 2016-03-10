@@ -24,7 +24,7 @@ import {DesktopNavComponent} from './desktop.nav.component'
     directives: [ROUTER_DIRECTIVES, DesktopNavComponent],
     template: `
     	
-    	<section [class.bounceInDown]="viewInit" class="animated">
+    	<section [class.slideInDown]="viewInit" class="animated">
     		<desktop-navigation></desktop-navigation>
     		<router-outlet></router-outlet>
     	</section>

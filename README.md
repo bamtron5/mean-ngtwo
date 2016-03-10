@@ -19,9 +19,15 @@ then:
 
 ##Prereq functional setup
 - see `admin/keys.js`
-- You will need keys for Google ReCaptcha for Sign Up [https://developers.google.com/recaptcha/docs/start](https://developers.google.com/recaptcha/docs/start)
-- SMTP server for verification emails
-- MongoDB connection string
+- overirde these process vars by creates a `.env` file in the root dir
+
+```
+jwtSecret: "your jwt secret",
+emailSecret: "smtps://email@domain.com:yourpassword@smtpProvider",
+CAPTCHA_PUBLIC_KEY: "your jwt secret",
+CAPTCHA_PRIVATE_KEY: "your jwt secret",
+REMOTE_MONGO_DB: "mongodb://localhost/claimBook"
+```
 
 ##Package Execution Scripts
 - `npm run serve`

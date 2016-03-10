@@ -1,10 +1,11 @@
 /***
-	 KEYS:
+	 KEYS should be created with a .env file:
 	 	jwtSecret
 	 	emailSecret
 	 	CAPTCHA_PUBLIC_KEY
 	 	CAPTCHA_PRIVATE_KEY
 	 	REMOTE_MONGO_DB
+	 	
  	Travis hashing for builds recommended
  	`gem install travis`
  	`travis encrypt jwtSecret=your secret`
@@ -25,18 +26,18 @@ var env = app.get('env');
 
 var keys = {
 	development: {
-		jwtSecret: (process.env['jwtSecret']) || "your jwt secret",
-		emailSecret: (process.env['emailSecret']) || "smtps://email@domain.com:yourpassword@smtpProvider",
-		CAPTCHA_PUBLIC_KEY: (process.env['CAPTCHA_PUBLIC_KEY']) || "your jwt secret",
-		CAPTCHA_PRIVATE_KEY: (process.env['CAPTCHA_PRIVATE_KEY']) || "your jwt secret",
-		REMOTE_MONGO_DB: (process.env['REMOTE_MONGO_DB']) || "mongodb://localhost/claimBook"
+		jwtSecret: (process.env['jwtSecret']),
+		emailSecret: (process.env['emailSecret']),
+		CAPTCHA_PUBLIC_KEY: (process.env['CAPTCHA_PUBLIC_KEY']),
+		CAPTCHA_PRIVATE_KEY: (process.env['CAPTCHA_PRIVATE_KEY']),
+		REMOTE_MONGO_DB: (process.env['REMOTE_MONGO_DB'])
 	},
 	production: {
-		jwtSecret: (process.env['jwtSecret']) || "your jwt secret",
-		emailSecret: (process.env['emailSecret']) || "smtps://email@domain.com:yourpassword@smtpProvider",
-		CAPTCHA_PUBLIC_KEY: (process.env['CAPTCHA_PUBLIC_KEY']) || "your jwt secret",
-		CAPTCHA_PRIVATE_KEY: (process.env['CAPTCHA_PRIVATE_KEY']) || "your jwt secret",
-		REMOTE_MONGO_DB: (process.env['REMOTE_MONGO_DB']) || "mongodb://localhost/claimBook"
+		jwtSecret: (process.env['jwtSecret']),
+		emailSecret: (process.env['emailSecret']),
+		CAPTCHA_PUBLIC_KEY: (process.env['CAPTCHA_PUBLIC_KEY']),
+		CAPTCHA_PRIVATE_KEY: (process.env['CAPTCHA_PRIVATE_KEY']),
+		REMOTE_MONGO_DB: (process.env['REMOTE_MONGO_DB'])
 	}
 }
 

@@ -4,3 +4,4 @@ npm-debug.log
 sandbox
 typings
 bower_components
+.env
