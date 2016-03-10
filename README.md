@@ -19,14 +19,14 @@ then:
 
 ##Prereq functional setup
 - see `admin/keys.js`
-- overirde these process vars by creates a `.env` file in the root dir
+- overirde these process vars by creating a `.env` file in the root dir
 
 ```
-jwtSecret: "your jwt secret",
-emailSecret: "smtps://email@domain.com:yourpassword@smtpProvider",
-CAPTCHA_PUBLIC_KEY: "your jwt secret",
-CAPTCHA_PRIVATE_KEY: "your jwt secret",
-REMOTE_MONGO_DB: "mongodb://localhost/claimBook"
+jwtSecret=your jwt secret
+emailSecret=smtps://email@domain.com:yourpassword@smtpProvider
+CAPTCHA_PUBLIC_KEY=your captcha public key
+CAPTCHA_PRIVATE_KEY=your captcha private key
+REMOTE_MONGO_DB=mongodb://localhost/claimBook
 ```
 
 ##Package Execution Scripts
