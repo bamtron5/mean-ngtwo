@@ -7,7 +7,7 @@
     "serve": "DEBUG=claimBook* && node ./bin/www",
     "preinstall": "command -v bower || npm install -g bower & command -v tsd || npm install -g tsd & command -v typings || npm install -g typings && typings install && bower install",
     "build": "node_modules/typescript/bin/tsc --outDir dist/app",
-    "prestart": "test -d './dist/routes' || gulp && test -d './dist/app' || npm run build",
+    "prestart": "test -d './dist/routes' || echo 'ERROR: Run the gulp command' && test -d './dist/app' || echo 'ERROR: Run npm run build first'",
     "start": "DEBUG=claimBook* && node ./bin/www",
     "prune": "rm -rf dist",
     "debug": "node-debug bin/www",
