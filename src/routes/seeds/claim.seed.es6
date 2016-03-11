@@ -16,9 +16,11 @@ Support.remove({}, function(err){
 //new test data declared
 var newClaim = [
 	new Claim({
+		'slug':'claim-one',
 		'title':'Claim One'
 	}),
 	new Claim({
+		'slug':'claim-two',
 		'title':'Claim Two'
 	})
 ];

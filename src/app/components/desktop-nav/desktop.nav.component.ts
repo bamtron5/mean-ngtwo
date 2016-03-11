@@ -30,7 +30,6 @@ export class DesktopNavComponent{
 
 	ngOnInit(){
 		this.location = window['location'];
-		console.log(location);
 		this._authService.getAuth();
 	}
 

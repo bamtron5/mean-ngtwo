@@ -17,6 +17,7 @@ import {ProfileComponent} from './profile/profile.component'
 import {LoginFormComponent} from './login-form/login.form.component'
 import {VerificationComponent} from './verify/verify.component'
 import {DesktopNavComponent} from './desktop-nav/desktop.nav.component'
+import {ClaimDetailComponent} from './claim-detail/claim.detail.component'
 
 
 @Component({
@@ -40,6 +41,7 @@ import {DesktopNavComponent} from './desktop-nav/desktop.nav.component'
 
 @RouteConfig([
 	{path: '/', name:'HomePageComponent', component: HomePageComponent},
+	{path: '/claim/:id', name: 'ClaimDetailComponent', component: ClaimDetailComponent},
 	{path: '/login', name:'LoginFormComponent', component: LoginFormComponent},
 	{path: '/profile', name:'ProfileComponent', component: ProfileComponent},
 	{path: '/todo', name: 'TodoFormComponent', component: TodoFormComponent},

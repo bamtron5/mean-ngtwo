@@ -27,8 +27,10 @@ mongoose.connection.on('connected', function () {
   permission.allow('user', 'todos', ['get', 'post', 'put', 'delete']);
   permission.allow('user', 'users', ['getById']);
   permission.allow('user', 'profile', ['getProfile']);
+  permission.allow('user', 'claim', ['postClaim','updateClaim','deleteClaim'])
 
   //admin
+  permission.allow('admin', 'claim', '*');
   permission.allow('admin', 'todos', '*');
   permission.allow('admin', 'users', '*');
   permission.allow('admin', 'profile', '*');
@@ -81,6 +83,7 @@ var logout = require('./dist/routes/logout');
 var signup = require('./dist/routes/signup');
 var verify = require('./dist/routes/verify');
 var profile = require('./dist/routes/profile');
+var claim = require('./dist/routes/claim');
 
 //static paths
 app.use(express.static(path.join(__dirname, 'public')));
@@ -115,6 +118,15 @@ app.post('/api/todos', checkAcl('todos', 'post'), todo.postTodo);
 app.get('/api/todos/:id', checkAcl('todos', 'get'), todo.getTodoById);
 app.put('/api/todos/:id', checkAcl('todos', 'put'), todo.editTodo);
 app.delete('/api/todos/:id', checkAcl('todos', 'delete'), todo.deleteTodo);
+
+//***
+/*  /api/claims  */
+//***
+app.get('/api/claim', claim.getClaims);
+app.get('/api/claim/:id', claim.getClaimById);
+app.post('/api/claim', checkAcl('claim', 'post'), claim.postClaim);
+app.put('/api/claim/:id', checkAcl('claim', 'put'), claim.editClaim);
+app.delete('/api/claim/:id', checkAcl('claim', 'delete'), claim.deleteClaim);
 
 //***
 /*  /api/profile  */

@@ -51,6 +51,10 @@ router.get('/todo', function(req,res,next){
 	}
 );
 
+router.get('/claim/:id', (req, res, next) => {
+	res.render('claim-detail');
+});
+
 /* GET test page. */
 /* Should be conditioned to only work in dev */
 router.get('/test', function(req,res,next){
