@@ -82,6 +82,7 @@
     "map-stream": "0.0.6",
     "microm": "^0.2.4",
     "mongoose": "^4.3.7",
+    "mongoose-text-search": "0.0.2",
     "morgan": "~1.6.1",
     "mpromise": "^0.5.5",
     "nodemailer": "^2.1.0",

@@ -15,18 +15,22 @@ export class ClaimDetailComponent {
 
 	_id: string;
 	title: string;
+	tags: Array<string>;
+	description: string;
 
 	constructor(public _claimService: claimService, private _router: Router, routeParams: RouteParams) {
 		this._claimService.title$.subscribe(updatedTitle => { this.title = updatedTitle });
+		this._claimService.tags$.subscribe(updatedTags => { this.tags = updatedTags });
+		this._claimService.description$.subscribe(updatedDescription => { this.description = updatedDescription });
 		this._id = routeParams.get('id');
 		this._claimService.getClaim(this._id).then(() => {
-			console.log('service call to get claim');
+			
 		}).catch((err) => {
 			console.log(err);
 		});
 	}
 
 	ngOnInit(){
-		 
+		
 	}
 };

@@ -1,3 +1,6 @@
 <div class="ui container">
-	{{title}}
+	<h1 class="animated bounceInLeft">{{title}}</h1>
+	<p>{{description}}</p>
+	<a *ngFor="#tag of tags" class="ui small tag label red animated slideInUp" ngHref="/" style="margin-right:10px;">{{tag}}</a>
+
 </div>

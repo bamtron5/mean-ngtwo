@@ -124,6 +124,7 @@ app.delete('/api/todos/:id', checkAcl('todos', 'delete'), todo.deleteTodo);
 //***
 app.get('/api/claim', claim.getClaims);
 app.get('/api/claim/:id', claim.getClaimById);
+app.get('/api/search/claim/:id', claim.searchClaim);
 app.post('/api/claim', checkAcl('claim', 'post'), claim.postClaim);
 app.put('/api/claim/:id', checkAcl('claim', 'put'), claim.editClaim);
 app.delete('/api/claim/:id', checkAcl('claim', 'delete'), claim.deleteClaim);

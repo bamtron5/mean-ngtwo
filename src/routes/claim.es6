@@ -8,6 +8,13 @@ var claims = {
             res.json(claims);
         });
     },
+    searchClaim:function(req, res, next){
+        claimModel.find( { $text : { $search : req.params.id } }, function(err, output){
+            if (err) res.send(err);
+            res.json(output);
+            console.log(output);
+        });
+    },
     postClaim:function(req, res, next){
         /*always at the top to return next or 403*/
         var newClaim = new claimModel();
