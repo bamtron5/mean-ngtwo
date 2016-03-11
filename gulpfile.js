@@ -4,8 +4,16 @@ const rename = require('gulp-rename');
 const watch = require('gulp-watch');
 const uglify = require('gulp-uglify');
 
+
+gulp.task('default', ['build'], function(){
+
+});
+
+gulp.task('watch', ['stream'], function(){
+	console.log('watching .es6 from routes, and sass from src/app/components/**/*.scss');
+})
  
-gulp.task('default', function(){
+gulp.task('build', function(){
 	gulp.src('src/routes/**/*.es6')
 		.pipe(rename({extname:".js"}))
 		.pipe(babel({

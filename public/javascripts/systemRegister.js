@@ -10,4 +10,4 @@ System.config({
 });
 
 //global import((_authService.getAuth))
-System.import('dist/app/app.component').then(null, console.error.bind(console));
+System.import('dist/app/components/app.component').then(null, console.error.bind(console));

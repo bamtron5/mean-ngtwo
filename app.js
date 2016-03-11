@@ -4,6 +4,7 @@ var keys = require('./admin/keys.js');
 
 var express = require('express');
 var app = express();
+var colors = require('colors');
 var cookieSession = require('cookie-session');
 var mongoose = require('mongoose');
 var mongoConnect = require('./admin/mongoConnect.js');
@@ -33,9 +34,9 @@ mongoose.connection.on('connected', function () {
   permission.allow('admin', 'profile', '*');
 
   //((what mongo models are available))
-  console.log('Mongoose connected! Mongo collections:');
+  console.log('Mongoose connected! Mongo collections:'.yellow);
   console.log('_____________________________');
-  console.log(JSON.stringify(Object.keys(mongoConnect.connections[0].collections), null, 3));
+  console.log(JSON.stringify(Object.keys(mongoConnect.connections[0].collections), null, 3).cyan);
   console.log('_____________________________');
 });
 
@@ -53,6 +54,7 @@ var engine = require('ejs-locals');
 
 //dev only settings
 if (env === 'development') {
+  console.log('\n\n\n  -- DEV ENV --  \n\n'.red);
   //rake up and down test data
   var seed = require('./dist/routes/seeds/index.js');
   //access to app source code for dev inspection
@@ -85,6 +87,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/modules', express.static(__dirname + '/node_modules/'));
 app.use('/bower_components', express.static(__dirname + '/bower_components/'));
 app.use('/dist/app', express.static(__dirname + '/dist/app/'));
+app.use('/semantic', express.static(__dirname + '/semantic'));
 
 //view routes
 app.use('/', routes);

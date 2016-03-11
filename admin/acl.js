@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var acl = require('acl');
 var permission = new acl(new acl.mongodbBackend(mongoose.connection.db));
+var colors = require('colors');
 
 var checkPermission = function(resource, action){
     return function(req, res, next){
@@ -11,7 +12,11 @@ var checkPermission = function(resource, action){
 
         // perform permissions check
         permission.isAllowed(uid, resource, action, function(err, result){
-            console.log('[' + action + '] permission status on: ' + resource + ' and user: ' + uid + " = " + result);
+            console.log(
+                colors.yellow('\n[' + action + ']') + 'permission status on: ' 
+                + resource + ' and user: ' + uid + " = " 
+                + (result === true ? colors.green(result) : colors.red(result)) + '\n'
+            );
             if(result){
                 next();
             } else {

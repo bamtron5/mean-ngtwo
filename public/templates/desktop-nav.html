@@ -1,16 +1,13 @@
-<nav class="navbar navbar-default">
-	<div class="container">
-		<ul class="nav nav-tabs navbar-left">
-			<li><a href="/">Home</a></li>
-			<li *ngIf="!isAuth"><a href="/login?loginForm=true">Login</a></li>
-			<li *ngIf="!isAuth"><a href="/login?loginForm=false">Sign up</a></li>
-			<li *ngIf="isAuth"><a href="/profile">Profile</a></li>
-			<li *ngIf="isAuth"><a href="/todo">Todo</a></li>
-			<li *ngIf="isAuth"><a (click)="logout()" href="#">Logout</a></li>
-		</ul>
-		<div class="status navbar-right">
-			<p>Am i authorized: {{isAuth}}</p>
-			<p *ngIf="authName">My User Name is: {{authName}}</p>
+<nav class="ui pointing menu" style="margin-bottom:20px;">
+	<div class="ui container">
+		<a class="item" [class.active]="location.pathname === '/'" href="/">Home</a>
+		<a *ngIf="!isAuth" [class.active]="location.pathname === '/login' && location.search.indexOf('?loginForm') === -1 || location.search.indexOf('?loginForm=true') > -1" class="item" href="/login?loginForm=true">Login</a>
+		<a *ngIf="!isAuth" [class.active]="location.search.indexOf('?loginForm=false') > -1" class="item" href="/login?loginForm=false">Sign up</a>
+		<a *ngIf="isAuth"  [class.active]="location.pathname === '/profile'" class="item" href="/profile">Profile</a>
+		<a *ngIf="isAuth" [class.active]="location.pathname === '/todo'" class="item" href="/todo">Todo</a>
+		<a *ngIf="isAuth" (click)="logout()" class="item" href="#">Logout</a>
+		<div *ngIf="authName" class="ui right menu">
+			<p class="item">Hello, {{authName}}</p>
 		</div>
 	</div>
 </nav>

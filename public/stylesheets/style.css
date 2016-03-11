@@ -1,38 +1,22 @@
 /**
-* login-form
-**/
-
-login-form .container{
-	margin-top:10px;
-}
-
-login-form .form-group input{
-	margin-bottom:5px;
-}
-
-/**
-* desktop-navigation
-**/
-
-desktop-navigation nav{
-	border-bottom:1px solid black;
-}
-
-desktop-navigation nav .container{
-	margin-top:10px;
-	margin-bottom:10px;
-}
-
-desktop-navigation nav ul{
-	list-style:none;
-}
-
-/**
 * todo-list
 **/
 todo-list ul > li{
 	margin-bottom:10px;
 }
+
+
+/**
+* login-form
+**/
+login-form .ui.message{
+	margin-bottom:10px !important;
+}
+
+login-form input{
+	margin-bottom:5px !important;
+}
+
 
 /**
 * captcha

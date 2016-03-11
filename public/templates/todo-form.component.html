@@ -1,23 +1,21 @@
-<div class="container">
+<div class="ui container">
   <h1>Todo Names</h1>
   <todo-list></todo-list>
   <div [hidden]="submitted">
     <h1>Todo Form</h1>
     {{error}}
     <!-- the form -->
-    <form *ngIf="active" (ngSubmit)="onSubmit()" #todoForm="ngForm">
-      <div class="form-group">
+    <form *ngIf="active" (ngSubmit)="onSubmit()" #todoForm="ngForm" class="ui form">
         <label for="name">Name</label>
-        <input type="text" class="form-control" required
+        <input type="text" required
           [(ngModel)]="model.name"
-            ngControl="name"  #name="ngForm" >
+            ngControl="name"  #name="ngForm" style="margin-bottom:10px;" />
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
           Name is required
         </div>
-      </div>
 
-      <button ngClass="btn btn-primary" type="submit" class="btn btn-default" [disabled]="!todoForm.form.valid">Submit</button>
-      <button ngClass="btn btn-primary" type="button" class="btn btn-default" (click)="newTodo()">New todo</button>
+      <button ngClass="ui primary button" type="submit" [disabled]="!todoForm.form.valid">Submit</button>
+      <button ngClass="ui button" type="button" (click)="newTodo()">New todo</button>
 
     </form>
   </div>
@@ -29,7 +27,7 @@
       <div class="col-xs-9  pull-left">{{ model.name }}</div>
     </div>
     <br>
-    <button ngClass="btn btn-primary btn-sm" type="button" class="btn btn-default" (click)="newTodo()">New todo</button>
-    <button ngClass="btn btn-primary btn-sm" class="btn btn-default" (click)="editTodo()" name="{{ model._id }}" [disabled]="!model.length">Edit</button>
+    <button ngClass="ui button" type="button" (click)="newTodo()">New todo</button>
+    <button ngClass="ui button" (click)="editTodo()" name="{{ model._id }}" [disabled]="!model.length">Edit</button>
   </div>
 </div>
