@@ -5,7 +5,7 @@
 		<a *ngIf="!isAuth" [class.active]="location.search.indexOf('?loginForm=false') > -1" class="item" href="/login?loginForm=false">Sign up</a>
 		<a *ngIf="isAuth" [class.active]="location.pathname === '/todo'" class="item" href="/todo">Todo</a>
 		<a *ngIf="isAuth" (click)="logout()" class="item" href="#">Logout</a>
-		<div  class="ui right menu">
+		<div  class="ui right item" style="padding:0px;">
 			<div class="ui search item">
 				<div class="ui icon input">
 					<input class="prompt" type="text" placeholder="Search coming soon...">
