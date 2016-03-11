@@ -13,7 +13,7 @@
 				</div>
 				<div class="results"></div>
 			</div>
-			<a *ngIf="authName" [class.active]="location.pathname === '/profile'" class="ui item" href="/profile">Hello, {{authName}}</a>
+			<a style="min-height:46px;" *ngIf="authName" [class.active]="location.pathname === '/profile'" class="ui item" href="/profile">Hello, {{authName}}</a>
 		</div>
 	</div>
 </nav>
