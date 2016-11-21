@@ -10,40 +10,40 @@ gulp.task('default', ['build'], function(){
 });
 
 gulp.task('watch', ['stream'], function(){
-	console.log('watching .es6 from routes, and sass from src/app/components/**/*.scss');
+  console.log('watching .es6 from routes, and sass from src/app/components/**/*.scss');
 })
- 
+
 gulp.task('build', function(){
-	gulp.src('src/routes/**/*.es6')
-		.pipe(rename({extname:".js"}))
-		.pipe(babel({
-			presets: ['es2015']
-		}))
-		.pipe(gulp.dest('./dist/routes'));
+  gulp.src('src/routes/**/*.es6')
+    .pipe(rename({extname:".js"}))
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('./dist/routes'));
 });
 
 
 gulp.task('stream', function(){
-	return gulp.src('src/routes/**/*.es6')
-		.pipe(watch('src/routes/**/*.es6'))
-		.pipe(rename({extname:".js"}))
-		.pipe(babel({
-			presets: ['es2015']
-		}))
-		.pipe(gulp.dest('./dist/routes'))
+  return gulp.src('src/routes/**/*.es6')
+    .pipe(watch('src/routes/**/*.es6'))
+    .pipe(rename({extname:".js"}))
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('./dist/routes'))
 
-		
+    
 });
 
 
 
 gulp.task('callback', function(cb){
-	gulp.src('src/routes/**/*.es6')
-		.pipe(watch('src/routes/**/*.es6'))
-		.pipe(rename({extname:".js"}))
-		.pipe(babel({
-			presets: ['es2015']
-		}))
-		.pipe(gulp.dest('./dist/routes'))
-		.on('end', cb)
+  gulp.src('src/routes/**/*.es6')
+    .pipe(watch('src/routes/**/*.es6'))
+    .pipe(rename({extname:".js"}))
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('./dist/routes'))
+    .on('end', cb)
 });

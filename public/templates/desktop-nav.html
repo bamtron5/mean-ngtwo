@@ -1,19 +1,19 @@
 <nav class="ui pointing menu" style="margin-bottom:20px;">
-	<div class="ui container">
-		<a class="item" [class.active]="location.pathname === '/'" href="/">Home</a>
-		<a *ngIf="!isAuth" [class.active]="location.pathname === '/login' && location.search.indexOf('?loginForm') === -1 || location.search.indexOf('?loginForm=true') > -1" class="item" href="/login?loginForm=true">Login</a>
-		<a *ngIf="!isAuth" [class.active]="location.search.indexOf('?loginForm=false') > -1" class="item" href="/login?loginForm=false">Sign up</a>
-		<a *ngIf="isAuth" [class.active]="location.pathname === '/todo'" class="item" href="/todo">Todo</a>
-		<a *ngIf="isAuth" (click)="logout()" class="item" href="#">Logout</a>
-		<div  class="ui right item" style="padding:0px;">
-			<div class="ui search item">
-				<div class="ui icon input">
-					<input class="prompt" type="text" placeholder="Search coming soon...">
-					<i class="search icon"></i>
-				</div>
-				<div class="results"></div>
-			</div>
-			<a style="min-height:46px;" *ngIf="authName" [class.active]="location.pathname === '/profile'" class="ui item" href="/profile">Hello, {{authName}}</a>
-		</div>
-	</div>
+  <div class="ui container">
+    <a class="item" [class.active]="location.pathname === '/'" href="/">Home</a>
+    <a *ngIf="!isAuth" [class.active]="location.pathname === '/login' && location.search.indexOf('?loginForm') === -1 || location.search.indexOf('?loginForm=true') > -1" class="item" href="/login?loginForm=true">Login</a>
+    <a *ngIf="!isAuth" [class.active]="location.search.indexOf('?loginForm=false') > -1" class="item" href="/login?loginForm=false">Sign up</a>
+    <a *ngIf="isAuth" [class.active]="location.pathname === '/todo'" class="item" href="/todo">Todo</a>
+    <a *ngIf="isAuth" (click)="logout()" class="item" href="#">Logout</a>
+    <div  class="ui right item" style="padding:0px;">
+      <div class="ui search item">
+        <div class="ui icon input">
+          <input class="prompt" type="text" placeholder="Search coming soon...">
+          <i class="search icon"></i>
+        </div>
+        <div class="results"></div>
+      </div>
+      <a style="min-height:46px;" *ngIf="authName" [class.active]="location.pathname === '/profile'" class="ui item" href="/profile">Hello, {{authName}}</a>
+    </div>
+  </div>
 </nav>

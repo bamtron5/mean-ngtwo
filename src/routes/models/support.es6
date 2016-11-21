@@ -3,9 +3,9 @@ var mongoose = mongoConnect;
 var Schema = mongoose.Schema;
 
 var SupportSchema   = new Schema({
-	claimKey: {type: String, require: true},
-    name: {type: String, required: true},
-    supportOrDeny: {type: Boolean, required: true}
+  claimKey: {type: String, require: true},
+  name: {type: String, required: true},
+  supportOrDeny: {type: Boolean, required: true}
 });
 
 module.exports = mongoose.model('Support', SupportSchema);

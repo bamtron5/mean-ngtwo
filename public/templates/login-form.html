@@ -1,95 +1,95 @@
 <div class="ui container">
-    <button class="ui button" (click)="changeForm(true)">Login Form</button>
-    <button class="ui button" (click)="changeForm(false)">Sign up Form</button>
+  <button class="ui button" (click)="changeForm(true)">Login Form</button>
+  <button class="ui button" (click)="changeForm(false)">Sign up Form</button>
 
-    <!-- signupform -->
-    <form class="ui form" [hidden]="isLogin" (ngSubmit)="onSubmit('signup')" #signUpForm="ngForm" [ngFormModel]="signUpFormGroup" style="margin-top:20px;">
-        <h3>Sign up</h3>
+  <!-- signupform -->
+  <form class="ui form" [hidden]="isLogin" (ngSubmit)="onSubmit('signup')" #signUpForm="ngForm" [ngFormModel]="signUpFormGroup" style="margin-top:20px;">
+    <h3>Sign up</h3>
 
-        <label for="name">Username</label>
-        <input type="text" required [(ngModel)]="model.name" ngControl="nameCtrl" #nameVar="ngForm">
-        <div *ngIf="nameVar.dirty && !nameVar.valid">
-            <div ngClass="ui small message red">Username must be between 4 and 35 characters</div>
+    <label for="name">Username</label>
+    <input type="text" required [(ngModel)]="model.name" ngControl="nameCtrl" #nameVar="ngForm">
+    <div *ngIf="nameVar.dirty && !nameVar.valid">
+      <div ngClass="ui small message red">Username must be between 4 and 35 characters</div>
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" required [(ngModel)]="model.email" ngControl="emailCtrl" #emailVar="ngForm">
+
+        <div *ngIf="emailCtrl.dirty && !emailCtrl.valid">
+          <div ngClass="ui small message red" *ngIf="emailCtrl.errors.emailValidator">Must be a valid email.</div>
         </div>
-
-        <div class="two fields">
-            <div class="field">
-                <label for="email">Email</label>
-                <input type="email" required [(ngModel)]="model.email" ngControl="emailCtrl" #emailVar="ngForm">
-
-                <div *ngIf="emailCtrl.dirty && !emailCtrl.valid">
-                    <div ngClass="ui small message red" *ngIf="emailCtrl.errors.emailValidator">Must be a valid email.</div>
-                </div>
-                <div *ngIf="emailCtrl.dirty && emailVar.value !== confirmEmailVar.value">
-                    <div ngClass="ui small message red" *ngIf="emailVar.value !== confirmEmailVar.value">Email fields must match.</div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label for="email">Confirm Email</label>
-                <input type="email" required ngControl="confirmEmail" #confirmEmailVar="ngForm">
-                <div *ngIf="confirmEmail.dirty && !confirmEmail.valid">
-                    <div ngClass="ui small message red" *ngIf="confirmEmail.errors.emailValidator">Must be a valid email.</div>
-                </div>
-                <div *ngIf="confirmEmail.dirty && emailVar.value !== confirmEmailVar.value">
-                    <div ngClass="ui small message red" *ngIf="emailVar.value !== confirmEmailVar.value">Email fields must match.</div>
-                </div>
-            </div>
+        <div *ngIf="emailCtrl.dirty && emailVar.value !== confirmEmailVar.value">
+          <div ngClass="ui small message red" *ngIf="emailVar.value !== confirmEmailVar.value">Email fields must match.</div>
         </div>
+      </div>
 
-        <div ngControlGroup="matchingPassword" class="two fields">
-            <div class="field">
-                <label for="password">Password</label>
-                <input type="password" required [(ngModel)]="model.password" ngControl="password" #passwordVar="ngForm">
-                <div *ngIf="password.dirty && !password.valid">
-                    <div ngClass="ui small message red" *ngIf="password.errors.minlength">Password must be longer that 8 characters.</div>
-                    <div ngClass="ui small message red" *ngIf="password.errors.maxlength">Password cannot be longer than 35 characters.</div>
-                </div>
-                <div *ngIf="password.dirty && passwordVar.value !== confirmPasswordVar.value">
-                    <div ngClass="ui small message red" *ngIf="passwordVar.value !== confirmPasswordVar.value">Password fields must match.</div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label for="password">Confirm Password</label>
-                <input type="password" required ngControl="confirmPassword" #confirmPasswordVar="ngForm">
-                <div *ngIf="confirmPassword.dirty && !confirmPassword.valid">
-                    <div ngClass="ui small message red" *ngIf="confirmPassword.errors.minlength">Password must be longer that 8 characters.</div>
-                    <div ngClass="ui small message red" *ngIf="confirmPassword.errors.maxlength">Password cannot be longer than 35 characters.</div>
-                </div>
-                <div *ngIf="confirmPassword.dirty && passwordVar.value !== confirmPasswordVar.value">
-                    <div ngClass="ui small message red" *ngIf="passwordVar.value !== confirmPasswordVar.value">Password fields must match.</div>
-                </div>
-            </div>
-
+      <div class="field">
+        <label for="email">Confirm Email</label>
+        <input type="email" required ngControl="confirmEmail" #confirmEmailVar="ngForm">
+        <div *ngIf="confirmEmail.dirty && !confirmEmail.valid">
+          <div ngClass="ui small message red" *ngIf="confirmEmail.errors.emailValidator">Must be a valid email.</div>
         </div>
-
-        <div id="captcha_div">
-            <!-- appended by login.form.component on ngViewInit -->
+        <div *ngIf="confirmEmail.dirty && emailVar.value !== confirmEmailVar.value">
+          <div ngClass="ui small message red" *ngIf="emailVar.value !== confirmEmailVar.value">Email fields must match.</div>
         </div>
+      </div>
+    </div>
 
-        <button ngClass="ui button" type="submit" [disabled]="!signUpForm.form.valid">Sign up</button>
-        <p *ngIf="!acceptedLogin">{{signUpMessage}}</p>
-        <p *ngIf="!acceptedLogin && captchaResponse">{{captchaResponse.message}}</p>
-
-    </form>
-
-
-    <!-- loginform -->
-    <form class="ui form" (ngSubmit)="onSubmit('login')" #loginForm="ngForm" [hidden]="!isLogin" style="margin-top:20px;">
-        <h3>Login</h3>
-        <div class="two fields">
-            <div class="field">
-                <label for="name">User Name</label>
-                <input type="text" n required [(ngModel)]="model.name" ngControl="name" #name="ngForm">
-            </div>
-            <div class="field">
-                <label for="password">Password</label>
-                <input type="password" n required [(ngModel)]="model.password" ngControl="password" #name="ngForm">
-            </div>
+    <div ngControlGroup="matchingPassword" class="two fields">
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" required [(ngModel)]="model.password" ngControl="password" #passwordVar="ngForm">
+        <div *ngIf="password.dirty && !password.valid">
+          <div ngClass="ui small message red" *ngIf="password.errors.minlength">Password must be longer that 8 characters.</div>
+          <div ngClass="ui small message red" *ngIf="password.errors.maxlength">Password cannot be longer than 35 characters.</div>
         </div>
+        <div *ngIf="password.dirty && passwordVar.value !== confirmPasswordVar.value">
+          <div ngClass="ui small message red" *ngIf="passwordVar.value !== confirmPasswordVar.value">Password fields must match.</div>
+        </div>
+      </div>
 
-        <button type="submit" ngClass="ui button" [disabled]="!loginForm.form.valid">Login</button>
-        <p>{{loginMessage}}</p>
-    </form>
+      <div class="field">
+        <label for="password">Confirm Password</label>
+        <input type="password" required ngControl="confirmPassword" #confirmPasswordVar="ngForm">
+        <div *ngIf="confirmPassword.dirty && !confirmPassword.valid">
+          <div ngClass="ui small message red" *ngIf="confirmPassword.errors.minlength">Password must be longer that 8 characters.</div>
+          <div ngClass="ui small message red" *ngIf="confirmPassword.errors.maxlength">Password cannot be longer than 35 characters.</div>
+        </div>
+        <div *ngIf="confirmPassword.dirty && passwordVar.value !== confirmPasswordVar.value">
+          <div ngClass="ui small message red" *ngIf="passwordVar.value !== confirmPasswordVar.value">Password fields must match.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="captcha_div">
+      <!-- appended by login.form.component on ngViewInit -->
+    </div>
+
+    <button ngClass="ui button" type="submit" [disabled]="!signUpForm.form.valid">Sign up</button>
+    <p *ngIf="!acceptedLogin">{{signUpMessage}}</p>
+    <p *ngIf="!acceptedLogin && captchaResponse">{{captchaResponse.message}}</p>
+
+  </form>
+
+
+  <!-- loginform -->
+  <form class="ui form" (ngSubmit)="onSubmit('login')" #loginForm="ngForm" [hidden]="!isLogin" style="margin-top:20px;">
+    <h3>Login</h3>
+    <div class="two fields">
+      <div class="field">
+        <label for="name">User Name</label>
+        <input type="text" n required [(ngModel)]="model.name" ngControl="name" #name="ngForm">
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" n required [(ngModel)]="model.password" ngControl="password" #name="ngForm">
+      </div>
+    </div>
+
+    <button type="submit" ngClass="ui button" [disabled]="!loginForm.form.valid">Login</button>
+    <p>{{loginMessage}}</p>
+  </form>
 </div>

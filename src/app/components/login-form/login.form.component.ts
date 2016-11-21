@@ -14,122 +14,122 @@ import 'rxjs/Rx' //operators for es6 ... wtf
     selector: 'login-form',
     directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES],
     templateUrl: 'templates/login-form.html',
-	providers: [
-		HTTP_PROVIDERS,
-		userService
-	]
+  providers: [
+    HTTP_PROVIDERS,
+    userService
+  ]
 })
 
 export class LoginFormComponent {
 
-	model: User;
-	isLogin: Boolean;
-	isAccepted: Boolean;
-	signUpMessage: String;
-	loginMessage: String;
-	captchaResponse: Captcha;
+  model: User;
+  isLogin: Boolean;
+  isAccepted: Boolean;
+  signUpMessage: String;
+  loginMessage: String;
+  captchaResponse: Captcha;
 
-	//controls
-	nameCtrl: Control;
-	emailCtrl: Control;
-	confirmEmail: Control;
-	password: Control;
-	confirmPassword: Control;
+  //controls
+  nameCtrl: Control;
+  emailCtrl: Control;
+  confirmEmail: Control;
+  password: Control;
+  confirmPassword: Control;
 
-	//form control group
-	signUpFormGroup: ControlGroup;
+  //form control group
+  signUpFormGroup: ControlGroup;
 
-	constructor(public _userService: userService, params: RouteParams, fb: FormBuilder) {
-		this.model = new User();
+  constructor(public _userService: userService, params: RouteParams, fb: FormBuilder) {
+    this.model = new User();
 
-		if (params.get('loginForm') === "true" || params.get('loginForm') === null){
-			this.isLogin = true;
-		} else {
-			this.isLogin = false
-		}
+    if (params.get('loginForm') === "true" || params.get('loginForm') === null){
+      this.isLogin = true;
+    } else {
+      this.isLogin = false
+    }
 
-		(this._userService.acceptedLogin$.subscribe(updatedAccept => { this.isAccepted = updatedAccept})) ? undefined : false;
+    (this._userService.acceptedLogin$.subscribe(updatedAccept => { this.isAccepted = updatedAccept})) ? undefined : false;
 
-		this._userService.signUpMessage$.subscribe(updatedSignUpMessage => { this.signUpMessage = updatedSignUpMessage });
+    this._userService.signUpMessage$.subscribe(updatedSignUpMessage => { this.signUpMessage = updatedSignUpMessage });
 
-		this._userService.captchaResponse$.subscribe(updatedCaptchaResponse => { this.captchaResponse = updatedCaptchaResponse });
+    this._userService.captchaResponse$.subscribe(updatedCaptchaResponse => { this.captchaResponse = updatedCaptchaResponse });
 
-		this._userService.loginMessage$.subscribe(updatedLoginMessage => { this.loginMessage = updatedLoginMessage });
-		
-		//control instances and validators
-		this.nameCtrl = new Control('', Validators.compose([
-			Validators.required,
-			Validators.minLength(4),
-			Validators.maxLength(35)
-		]));
+    this._userService.loginMessage$.subscribe(updatedLoginMessage => { this.loginMessage = updatedLoginMessage });
 
-		this.emailCtrl = new Control('', Validators.compose([
-			Validators.required,
-			UserValidators.emailValidator
-		]));
+    //control instances and validators
+    this.nameCtrl = new Control('', Validators.compose([
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(35)
+    ]));
 
-		this.confirmEmail = new Control('', Validators.compose([
-			Validators.required,
-			UserValidators.emailValidator
-		]));
+    this.emailCtrl = new Control('', Validators.compose([
+      Validators.required,
+      UserValidators.emailValidator
+    ]));
 
-		this.password = new Control('', Validators.compose([
-			Validators.required,
-			Validators.minLength(8),
-			Validators.maxLength(35)
-		]));
+    this.confirmEmail = new Control('', Validators.compose([
+      Validators.required,
+      UserValidators.emailValidator
+    ]));
 
-		this.confirmPassword = new Control('', Validators.compose([
-			Validators.required,
-			Validators.minLength(8),
-			Validators.maxLength(35)
-		]));
+    this.password = new Control('', Validators.compose([
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(35)
+    ]));
 
-		this.signUpFormGroup = fb.group({
-			nameCtrl: this.nameCtrl,
-			emailCtrl: this.emailCtrl,
-			confirmEmail: this.confirmEmail,
-			matchingPassword: fb.group({
-				confirmPassword: this.confirmPassword,
-				password: this.password,
-			}, { validator: UserValidators.passwordMatch }),
-		}, { validator: UserValidators.emailMatch });
-	}
+    this.confirmPassword = new Control('', Validators.compose([
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(35)
+    ]));
 
-	ngAfterViewInit(){
-		var c = <HTMLDivElement>document.getElementById('recaptcha_widget_div');
-		var newC = <HTMLDivElement>document.getElementById('captcha_div');
-		newC.appendChild(c);
-	}
+    this.signUpFormGroup = fb.group({
+      nameCtrl: this.nameCtrl,
+      emailCtrl: this.emailCtrl,
+      confirmEmail: this.confirmEmail,
+      matchingPassword: fb.group({
+        confirmPassword: this.confirmPassword,
+        password: this.password,
+      }, { validator: UserValidators.passwordMatch }),
+    }, { validator: UserValidators.emailMatch });
+  }
 
-	changeForm(_bool: boolean) {
-		this.isLogin = _bool;
-	}
+  ngAfterViewInit(){
+    var c = <HTMLDivElement>document.getElementById('recaptcha_widget_div');
+    var newC = <HTMLDivElement>document.getElementById('captcha_div');
+    newC.appendChild(c);
+  }
 
-	onSubmit(form: string) {
-		if (form === "login"){
-			this._userService.login(this.model, false);
-		} else {
-			this.submitSignup();	
-		}
-		
-	}
+  changeForm(_bool: boolean) {
+    this.isLogin = _bool;
+  }
 
-	submitSignup(){
-		var captchaInput = <HTMLInputElement>document.getElementById('recaptcha_response_field');
-		var str = captchaInput.value;
-		var obj = { captcha: str, challenge: window['RecaptchaState'].challenge };
+  onSubmit(form: string) {
+    if (form === "login"){
+      this._userService.login(this.model, false);
+    } else {
+      this.submitSignup();
+    }
 
-		this._userService.verifyCaptcha(obj, () => {
-			if(this.captchaResponse.captcha){
-				this._userService.signup(this.model, false).then(() => {
-					null;
-				}).catch(() => {
-					window['Recaptcha'].reload();
-				});
-			} else {
-				window['Recaptcha'].reload();
-			}
-		});
-	}
+  }
+
+  submitSignup(){
+    var captchaInput = <HTMLInputElement>document.getElementById('recaptcha_response_field');
+    var str = captchaInput.value;
+    var obj = { captcha: str, challenge: window['RecaptchaState'].challenge };
+
+    this._userService.verifyCaptcha(obj, () => {
+      if(this.captchaResponse.captcha){
+        this._userService.signup(this.model, false).then(() => {
+          null;
+        }).catch(() => {
+          window['Recaptcha'].reload();
+        });
+      } else {
+        window['Recaptcha'].reload();
+      }
+    });
+  }
 }
