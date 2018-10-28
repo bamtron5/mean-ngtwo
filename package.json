@@ -16,7 +16,8 @@
     "test:build": "npm run testBuild && npm run test",
     "watch": "rm -rf dist/app && echo '\\033[0;32m Stand by for compilation:\\033[m' && node_modules/typescript/bin/tsc --outDir dist/app --noLib -w --noResolve & npm run serve",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm run snyk-protect",
+    "prepare": "npm run snyk-protect"
   },
   "engines": {
     "node": "5.6.0",
@@ -55,7 +56,7 @@
     "express": "~4.15.3",
     "express-jwt": "^5.3.0",
     "extend": "^3.0.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-babel": "^6.1.2",
     "gulp-chmod": "^1.3.0",
@@ -101,7 +102,7 @@
     "typings": "^0.6.8",
     "yamljs": "^0.2.6",
     "zone.js": "0.6.12",
-    "snyk": "^1.31.0"
+    "snyk": "^1.105.0"
   },
   "devDependencies": {
     "babel-cli": "^6.0.0",
