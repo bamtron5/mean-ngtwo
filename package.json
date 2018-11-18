@@ -85,7 +85,7 @@
     "microm": "^0.2.4",
     "mongoose": "^4.6.8",
     "mongoose-text-search": "0.0.2",
-    "morgan": "~1.8.2",
+    "morgan": "~1.9.1",
     "nodemailer": "^2.1.0",
     "passport": "^0.3.2",
     "re-captcha": "0.0.3",
