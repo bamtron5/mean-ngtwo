@@ -101,7 +101,7 @@
     "typings": "^0.6.8",
     "yamljs": "^0.2.6",
     "zone.js": "0.6.12",
-    "snyk": "^1.31.0"
+    "snyk": "^1.192.3"
   },
   "devDependencies": {
     "babel-cli": "^6.0.0",
