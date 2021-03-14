@@ -70,7 +70,7 @@
     "gulp-if": "^2.0.0",
     "gulp-less": "^3.0.5",
     "gulp-minify-css": "^1.2.4",
-    "gulp-notify": "^2.2.0",
+    "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-print": "^2.0.1",
     "gulp-rename": "^1.2.2",
