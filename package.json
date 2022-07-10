@@ -98,7 +98,7 @@
     "socket.io": "^2.0.0",
     "systemjs": "^0.19.18",
     "typescript": "1.7.5",
-    "typings": "^0.6.8",
+    "typings": "^2.1.1",
     "yamljs": "^0.2.6",
     "zone.js": "0.6.12",
     "snyk": "^1.31.0"
